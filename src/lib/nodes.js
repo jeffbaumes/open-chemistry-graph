@@ -14,6 +14,7 @@ for (const [path, raw] of Object.entries(tomls)) {
     title: data.title,
     summary: data.summary,
     unit: data.unit,
+    video: data.video ?? false,
     prerequisites: data.prerequisites ?? [],
     interactives: data.interactive ?? [],
     exercises: data.exercise ?? [],

@@ -33,6 +33,7 @@ Pushing to `main` validates, builds and publishes the site to GitHub Pages.
 | Physical constants | `conventions/constants.toml` | CI |
 | Units of the course and their order | `conventions/units.toml` | CI and templates |
 | How interactives look and behave | `INTERACTIVES.md`, `src/interactives/lib.js`, `src/styles/interactive.css` | shared toolkit |
+| How videos look and sound | `videos/README.md`, `videos/lib.py` | shared toolkit |
 | Tone, level, pedagogy | `STYLE.md` | reviewers |
 
 Rules are contributions too. Changing one must update every node it affects in the same pull request.

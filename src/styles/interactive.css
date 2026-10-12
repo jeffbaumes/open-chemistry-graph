@@ -19,7 +19,8 @@
 }
 
 /* Frame */
-.interactive {
+.video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; margin-top: 0.8rem; border-radius: 2px; background: var(--bg); }
+.interactive, .video {
   margin: 2.5rem 0;
   padding: 1rem;
   border: 1px solid var(--border);
@@ -28,7 +29,7 @@
   background: var(--surface);
   font: 0.95rem/1.4 var(--font-ui);
 }
-.interactive figcaption { font-size: 1.1rem; font-weight: 700; }
+.interactive figcaption, .video figcaption { font-size: 1.1rem; font-weight: 700; }
 .i-tag { display: block; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
 .i-caption { margin: 0.2rem 0 0; color: var(--muted); }
 .i-body { display: grid; gap: 1rem; margin-top: 1rem; min-width: 0; }
@@ -174,7 +175,7 @@
 .i-not-sig { color: var(--muted); }
 
 @media (max-width: 480px) {
-  .interactive { padding: 0.8rem; }
+  .interactive, .video { padding: 0.8rem; }
   .i-field .i-label { flex-basis: 100%; }
   .i-stepper .i-label { flex: 1 1 4rem; }
   .i-readout { grid-template-columns: 1fr; gap: 0; }

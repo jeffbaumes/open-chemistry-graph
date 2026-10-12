@@ -197,6 +197,10 @@ def check_node(path):
     else:
         text = lesson.read_text()
         errors += [f"lesson.md: {message}" for message, broken in LESSON_RULES if broken(text)]
+    if node.get("video"):
+        for needed in (ROOT / "videos" / f"{path.name}.py", ROOT / "public" / "videos" / f"{path.name}.mp4"):
+            if not needed.exists():
+                errors.append(f"video = true but {needed.relative_to(ROOT)} is missing; see videos/README.md")
     for i, interactive in enumerate(node.get("interactive", []), 1):
         kind = interactive.get("kind")
         if not kind or not (INTERACTIVES / f"{kind}.js").exists():

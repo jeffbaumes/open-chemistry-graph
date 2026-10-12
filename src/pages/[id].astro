@@ -26,6 +26,13 @@ const { previous, next } = neighbors(node.id);
 
   <article class="lesson"><Content /></article>
 
+  {node.video && (
+    <figure class="video">
+      <figcaption><span class="i-tag">Watch</span> {node.title}</figcaption>
+      <video controls playsinline preload="metadata" src={`${base}/videos/${node.id}.mp4`}></video>
+    </figure>
+  )}
+
   {node.interactives.map((interactive) => <Interactive {...interactive} />)}
 
   <section class="practice">
