@@ -46,8 +46,8 @@ export const nodes = [...byId.values()].sort(
 export const getNode = (id) => byId.get(id);
 export const wanted = [...new Set(nodes.flatMap((n) => n.prerequisites))].filter((p) => !byId.has(p)).sort();
 export const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-/** The current human review of a node, or undefined if there is none or it is out of date. */
-export const reviewOf = (id) => (queue.reviews[id]?.current ? queue.reviews[id] : undefined);
+/** Review standing of each part of a node, keyed by part: lesson, exercise-1, interactive-1, video. */
+export const trustOf = (id) => Object.fromEntries((queue.trust[id] ?? []).map((part) => [part.key, part]));
 export const titleOf = (id) => id.replaceAll('-', ' ');
 
 /** Units in teaching order, each with its lessons in prerequisite order. */

@@ -21,6 +21,8 @@ python3 tasks.py show <task-id>          # details, files and the playbook to fo
 
 If the person you are working with knows chemistry, prefer a `review` task. Human review is the scarcest thing this project has.
 
+Read `TRUST.md` before any review task. It explains what a review record is and what CI will reject.
+
 ## Do the task
 
 1. **Check nobody else has it.** `gh pr list --search "<task-id> in:title"`. If a pull request exists, pick another task.
@@ -37,7 +39,9 @@ If the person you are working with knows chemistry, prefer a `review` task. Huma
 
 ## Rules
 
-- **Never record a review yourself.** `python3 tasks.py review` states that a person checked a lesson. Run it only when a person has gone through that lesson with you and said, in their own words, that they approve it. Never run it for several lessons at once.
+- **Never record a human review on your own.** `python3 tasks.py review` states that a person checked a lesson. Run it only when a person has gone through it with you and said, in their own words, that they approve it. One lesson per pull request.
+- **Never review your own work.** `python3 tasks.py agent-review` is for parts you did not write or change. Solve exercises with `python3 tasks.py blind <id>` before looking at any answer, and if you disagree with a key, report it instead of recording a review.
+- **Do not touch the trust files** unless your task is about them and a maintainer asked: `.github/`, `ci/`, `validate.py`, `tasks.py`, `conventions/reviewers.toml`. CI rejects such changes from anyone who is not a maintainer.
 - **Never loosen a check to make your work pass.** If the validator rejects a correct answer, fix the validator in its own pull request and explain why.
 - **Do not guess at chemistry.** Give every numeric exercise a `derive` expression so its answer is recomputed. If you are unsure whether a statement is true, leave it out or flag it in the pull request.
 - **Do not rewrite what works.** Rephrasing a correct lesson is not a task. Change text only to fix an error, fill a gap, or respond to a reviewer.
@@ -49,10 +53,11 @@ If the person you are working with knows chemistry, prefer a `review` task. Huma
 | Path | What |
 |---|---|
 | `nodes/<id>/lesson.md`, `node.toml` | One lesson and its exercises |
-| `nodes/<id>/review.toml` | A person's sign-off, void when the lesson changes |
+| `nodes/<id>/reviews.toml` | Review records for each part, void when that part changes |
 | `conventions/` | Element data, constants and course units, shared by everything |
 | `validate.py` | The gate: structure, house rules, recomputed answers |
 | `tasks.py`, `tasks/backlog.toml` | The task queue |
+| `TRUST.md`, `ci/`, `conventions/reviewers.toml` | How reviews are recorded, checked and trusted |
 | `tasks/playbooks/` | How to do each kind of task |
 | `STYLE.md`, `INTERACTIVES.md`, `videos/README.md` | The guides for lessons, interactives and videos |
 | `src/` | The Astro site |

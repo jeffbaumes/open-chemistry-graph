@@ -9,27 +9,31 @@ and it disappears.
     python3 tasks.py list --mode ai       everything an agent can do alone
     python3 tasks.py list --kind review   everything of one kind
     python3 tasks.py show review:molar-mass
-    python3 tasks.py review molar-mass --by <github-handle>   record a human review
+    python3 tasks.py status molar-mass    reviews of each part of a lesson
+    python3 tasks.py blind molar-mass     the exercises without their answers
+    python3 tasks.py review molar-mass    record a person's review (see TRUST.md)
+    python3 tasks.py agent-review molar-mass --part exercise-1 --model <name> --answer 18.0
     python3 tasks.py --json               the whole queue, for tools
 """
 import argparse
-import datetime
-import hashlib
 import json
+import subprocess
 import sys
-import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).parent
-NODES = ROOT / "nodes"
+sys.path.insert(0, str(ROOT / "ci"))
+import trust  # noqa: E402
 
+NODES = ROOT / "nodes"
 TARGET_EXERCISES = 5  # the validator's minimum is 3; this is what a finished node has
 
 # kind: (mode, what it asks for, playbook)
-# mode "ai": an agent can finish it alone and the validator gates the result.
+# mode "ai": an agent can finish it alone and CI gates the result.
 # mode "human": a person must take part; an agent guides them.
 KINDS = {
     "review": ("human", "Review a lesson with a teacher", "tasks/playbooks/review.md"),
+    "agent-review": ("ai", "Check a lesson independently", "tasks/playbooks/agent-review.md"),
     "wanted": ("ai", "Write a missing prerequisite lesson", "tasks/playbooks/automated.md#write-a-lesson"),
     "derive": ("ai", "Make an answer recomputable", "tasks/playbooks/automated.md#make-an-answer-recomputable"),
     "variety": ("ai", "Add a different type of exercise", "tasks/playbooks/automated.md#add-exercises"),
@@ -43,22 +47,10 @@ KINDS = {
 }
 
 
-def load(path):
-    return tomllib.loads(path.read_text())
-
-
-def fingerprint(node_dir):
-    """Changes whenever the lesson or its exercises change, which voids a review."""
-    digest = hashlib.sha256()
-    for name in ("lesson.md", "node.toml"):
-        digest.update((node_dir / name).read_bytes())
-    return digest.hexdigest()[:12]
-
-
 def course():
     """Nodes in teaching order: by unit, then by depth in the prerequisite graph."""
-    nodes = {p.name: load(p / "node.toml") for p in sorted(NODES.iterdir()) if p.is_dir()}
-    unit_list = load(ROOT / "conventions" / "units.toml")["unit"]
+    nodes = {nid: trust.load(NODES / nid / "node.toml") for nid in trust.node_ids(ROOT)}
+    unit_list = trust.load(ROOT / "conventions" / "units.toml")["unit"]
     units = [u["id"] for u in unit_list]
     listed = {nid: i for u in unit_list for i, nid in enumerate(u.get("lessons", []))}
     depths = {}
@@ -71,15 +63,6 @@ def course():
     # A unit may list its lessons in order; any it leaves out follow, by depth.
     order = sorted(nodes, key=lambda n: (units.index(nodes[n]["unit"]), listed.get(n, len(nodes)), depth(n), nodes[n]["title"]))
     return {nid: nodes[nid] for nid in order}
-
-
-def review_of(nid):
-    """The recorded human review of a node, with whether it still applies."""
-    path = NODES / nid / "review.toml"
-    if not path.exists():
-        return None
-    record = load(path)
-    return {"by": record["by"], "on": str(record["on"]), "current": record["fingerprint"] == fingerprint(NODES / nid)}
 
 
 def task(kind, node, detail, title=None, mode=None, playbook=None):
@@ -97,14 +80,18 @@ def task(kind, node, detail, title=None, mode=None, playbook=None):
 
 def build():
     nodes = course()
+    standing = {nid: trust.standing(ROOT, nid) for nid in nodes}
     tasks = []
 
     for nid, node in nodes.items():
-        review = review_of(nid)
-        if review is None:
-            tasks.append(task("review", nid, f"\"{node['title']}\" has never been reviewed by a person."))
-        elif not review["current"]:
-            tasks.append(task("review", nid, f"\"{node['title']}\" changed after {review['by']} reviewed it on {review['on']}."))
+        missing = [p for p in standing[nid] if not p["human"]]
+        if missing:
+            tasks.append(task("review", nid, f"\"{node['title']}\": {len(missing)} of {len(standing[nid])} parts have no human review."))
+
+    for nid, node in nodes.items():
+        missing = [p for p in standing[nid] if not p["agent"]]
+        if missing:
+            tasks.append(task("agent-review", nid, f"\"{node['title']}\": {len(missing)} of {len(standing[nid])} parts have no independent AI review."))
 
     wanted = sorted({p for node in nodes.values() for p in node["prerequisites"]} - nodes.keys())
     tasks += [task("wanted", w, f"Lessons list \"{w}\" as a prerequisite but it does not exist.") for w in wanted]
@@ -134,22 +121,40 @@ def build():
         if not node.get("video"):
             tasks.append(task("video", nid, f"\"{node['title']}\" has no video. Add one only if motion helps."))
 
-    for item in load(ROOT / "tasks" / "backlog.toml")["task"]:
+    for item in trust.load(ROOT / "tasks" / "backlog.toml")["task"]:
         tasks.append(task(item["kind"], item["id"], item["detail"], title=item["title"], mode=item["mode"], playbook=item.get("playbook")))
 
-    reviews = {nid: r for nid in nodes if (r := review_of(nid))}
-    return {"tasks": tasks, "reviews": reviews, "kinds": {k: {"mode": v[0], "title": v[1], "playbook": v[2]} for k, v in KINDS.items()}}
+    # What the site shows: every part of every lesson and who has reviewed it.
+    public = {nid: [{k: v for k, v in part.items() if k != "exercise"} for part in parts] for nid, parts in standing.items()}
+    every = [part for parts in public.values() for part in parts]
+    exercises = [p for p in every if p["key"].startswith("exercise-")]
+    totals = {
+        "parts": len(every),
+        "human": sum(1 for p in every if p["human"]),
+        "agent": sum(1 for p in every if p["agent"]),
+        "exercises": len(exercises),
+        "recomputed": sum(1 for p in exercises if p["recomputed"]),
+    }
+    return {
+        "tasks": tasks,
+        "trust": public,
+        "totals": totals,
+        "kinds": {k: {"mode": v[0], "title": v[1], "playbook": v[2]} for k, v in KINDS.items()},
+    }
 
+
+# --- Commands ----------------------------------------------------------------
 
 def print_task(t):
     print(f"  {t['id']:<44} {t['detail']}")
 
 
 def cmd_summary(queue):
-    tasks = queue["tasks"]
-    print(f"{len(tasks)} open tasks. Modes: ai = an agent alone, human = an agent guiding a person.\n")
-    kinds = list(dict.fromkeys(t["kind"] for t in tasks))
-    for kind in kinds:
+    tasks, totals = queue["tasks"], queue["totals"]
+    print(f"{len(tasks)} open tasks. Modes: ai = an agent alone, human = an agent guiding a person.")
+    print(f"{totals['human']} of {totals['parts']} parts reviewed by a person, {totals['agent']} by an independent AI; "
+          f"{totals['recomputed']} of {totals['exercises']} exercise answers recomputed by CI.\n")
+    for kind in dict.fromkeys(t["kind"] for t in tasks):
         group = [t for t in tasks if t["kind"] == kind]
         modes = "/".join(sorted({t["mode"] for t in group}))
         print(f"{kind} ({len(group)}, {modes}) — {KINDS[kind][1]}")
@@ -180,16 +185,91 @@ def cmd_show(queue, task_id):
     print(f"  claim it: open a draft pull request whose title starts with \"{t['id']}\"")
 
 
-def cmd_review(nid, by):
-    node_dir = NODES / nid
-    if not node_dir.is_dir():
+def need_node(nid):
+    if not (NODES / nid / "node.toml").exists():
         sys.exit(f"No node {nid!r}.")
-    (node_dir / "review.toml").write_text(
-        "# A person's sign-off on this lesson and its exercises. Written by\n"
-        "# `python3 tasks.py review`; void as soon as the lesson changes.\n"
-        f"by = {json.dumps(by)}\non = {datetime.date.today().isoformat()}\nfingerprint = {json.dumps(fingerprint(node_dir))}\n"
-    )
-    print(f"Recorded: {by} reviewed {nid}. Commit nodes/{nid}/review.toml with the changes.")
+
+
+def cmd_status(nid):
+    need_node(nid)
+    for part in trust.standing(ROOT, nid):
+        human = ", ".join(part["human"]) or "none"
+        agent = ", ".join(f"{a['by']} ({a['model']})" for a in part["agent"]) or "none"
+        computed = "  answer recomputed by CI" if part.get("recomputed") else ""
+        print(f"{part['key']:<16} human: {human:<20} AI: {agent}{computed}")
+
+
+def cmd_blind(nid):
+    """Print the exercises without their answers, for working them independently."""
+    need_node(nid)
+    for part in trust.parts(ROOT, nid):
+        ex = part.get("exercise")
+        if not ex:
+            continue
+        print(f"{part['key']} ({ex['type']}): {ex['prompt']}")
+        if ex["type"] == "choice":
+            print("    options: " + " | ".join(ex["options"]))
+        elif ex["type"] == "balance":
+            print(f"    {' + '.join(ex['reactants'])} -> {' + '.join(ex['products'])}   (answer as coefficients in order, such as \"2 1 2\")")
+        elif ex["type"] == "numeric":
+            print(f"    answer in: {ex['unit']}")
+
+
+def login(given):
+    """The GitHub account recording the review. CI checks it against the pull request's author."""
+    if given:
+        return given
+    try:
+        return subprocess.run(["gh", "api", "user", "-q", ".login"], capture_output=True, text=True, check=True).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        sys.exit("Could not read your GitHub login from `gh`. Sign in with `gh auth login`, or pass --by <login>.")
+
+
+def append(nid, part, by, model=None, answer=None):
+    lines = ["", "[[review]]", f"part = {json.dumps(part['key'])}", f"fingerprint = {json.dumps(part['fingerprint'])}", f"by = {json.dumps(by)}"]
+    if model:
+        lines.append(f"model = {json.dumps(model)}")
+    if answer is not None:
+        lines.append(f"answer = {json.dumps(str(answer))}")
+    path = NODES / nid / "reviews.toml"
+    header = "" if path.exists() else "# Reviews of the parts of this lesson. Written by tasks.py and checked by CI.\n# A review stops counting when the part it names changes. See TRUST.md.\n"
+    with open(path, "a") as f:
+        f.write(header + "\n".join(lines) + "\n")
+
+
+def cmd_review(nid, wanted, by):
+    need_node(nid)
+    by = login(by)
+    if by.lower() not in trust.people(ROOT)["reviewers"]:
+        sys.exit(f"{by} is not on the reviewer list in conventions/reviewers.toml, so this review would not count and CI would reject it.\n"
+                 "Ask a maintainer to add you (in its own pull request), then record the review.")
+    standing = trust.standing(ROOT, nid)
+    chosen = [p for p in standing if not wanted or p["key"] in wanted]
+    if wanted and len(chosen) != len(set(wanted)):
+        sys.exit(f"Unknown part. This lesson has: {', '.join(p['key'] for p in standing)}")
+    added = [p for p in chosen if by not in p["human"]]
+    for part in added:
+        append(nid, part, by)
+    print(f"Recorded {by}'s review of {len(added)} part(s) of {nid}: {', '.join(p['key'] for p in added) or 'nothing new'}.")
+    print(f"Commit nodes/{nid}/reviews.toml and open the pull request from {by}'s own account.")
+
+
+def cmd_agent_review(nid, key, model, answer, by):
+    need_node(nid)
+    by = login(by)
+    part = next((p for p in trust.standing(ROOT, nid) if p["key"] == key), None)
+    if part is None:
+        sys.exit(f"Unknown part {key!r}. See: python3 tasks.py status {nid}")
+    if "exercise" in part:
+        if answer is None:
+            sys.exit("An AI review of an exercise needs --answer: the answer you worked out without looking at the key.")
+        if not trust.matches_key(part["exercise"], answer):
+            sys.exit(f"Your answer {answer!r} does not agree with the key for {key}.\n"
+                     "Nothing was recorded. Work out which is right and report it: a wrong key or an ambiguous question is worth more than a review.")
+    if any(a["by"] == by and a["model"] == model for a in part["agent"]):
+        sys.exit(f"{by} has already recorded a {model} review of {key}.")
+    append(nid, part, by, model=model, answer=answer if "exercise" in part else None)
+    print(f"Recorded an AI review of {nid} {key} by {by} using {model}.")
 
 
 def main():
@@ -200,13 +280,28 @@ def main():
     listing.add_argument("--kind")
     listing.add_argument("--mode", choices=["ai", "human"])
     commands.add_parser("show", help="describe one task").add_argument("task_id")
-    review = commands.add_parser("review", help="record that a person reviewed a node")
+    commands.add_parser("status", help="reviews of each part of a lesson").add_argument("node")
+    commands.add_parser("blind", help="a lesson's exercises without their answers").add_argument("node")
+    review = commands.add_parser("review", help="record a person's review of a lesson")
     review.add_argument("node")
-    review.add_argument("--by", required=True, help="the reviewer's GitHub handle")
+    review.add_argument("--part", action="append", help="review only this part; repeat for several (default: all)")
+    review.add_argument("--by", help="GitHub login (default: read from gh)")
+    agent = commands.add_parser("agent-review", help="record an AI's independent review of one part")
+    agent.add_argument("node")
+    agent.add_argument("--part", required=True)
+    agent.add_argument("--model", required=True, help="the model that did the review")
+    agent.add_argument("--answer", help="for an exercise: the answer worked out without the key")
+    agent.add_argument("--by", help="GitHub login (default: read from gh)")
     args = parser.parse_args()
 
     if args.command == "review":
-        return cmd_review(args.node, args.by)
+        return cmd_review(args.node, args.part, args.by)
+    if args.command == "agent-review":
+        return cmd_agent_review(args.node, args.part, args.model, args.answer, args.by)
+    if args.command == "status":
+        return cmd_status(args.node)
+    if args.command == "blind":
+        return cmd_blind(args.node)
     queue = build()
     if args.json:
         print(json.dumps(queue, indent=1))

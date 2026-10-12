@@ -14,15 +14,26 @@ const sections = [
   { mode: 'human', heading: 'With a person', blurb: 'These need someone who knows chemistry. An AI assistant guides you through, one step at a time.' },
   { mode: 'ai', heading: 'An AI agent alone', blurb: 'An agent can finish these by itself. The validator decides whether the work is accepted.' },
 ];
-const reviewed = Object.values(queue.reviews).filter((r) => r.current).length;
-const total = queue.tasks.filter((t) => t.kind === 'review').length + reviewed;
+const { totals } = queue;
 ---
 <Base title="Contribute">
   <p class="eyebrow">Contribute</p>
   <h1>Open tasks</h1>
   <p>
     This course is written by people and their AI assistants. Every lesson, exercise, interactive and video is open to improvement.
-    There are <strong>{queue.tasks.length} open tasks</strong>, and <strong>{reviewed} of {total} lessons</strong> have been reviewed by a person.
+    There are <strong>{queue.tasks.length} open tasks</strong>.
+  </p>
+
+  <h2>What has been checked</h2>
+  <p>The course has {totals.parts} separately reviewable parts: lesson texts, exercises, interactives and videos.</p>
+  <ul class="tasks">
+    <li><strong>{totals.recomputed} of {totals.exercises}</strong><span>exercise answers are recalculated by CI on every change</span></li>
+    <li><strong>{totals.human} of {totals.parts}</strong><span>parts have been reviewed by a listed person</span></li>
+    <li><strong>{totals.agent} of {totals.parts}</strong><span>parts have been checked by an independent AI run</span></li>
+  </ul>
+  <p class="muted more">
+    A review names the exact version it covers and stops counting when that part changes. Who signed it is checked against their GitHub account, not typed in.
+    <a href={`${REPO}/blob/main/TRUST.md`}>How trust works here</a>
   </p>
   <p>
     To help, point an AI coding assistant at the <a href={REPO}>repository</a> and ask it to pick up a task.

@@ -2,7 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Exercise from '../components/Exercise.astro';
 import Interactive from '../components/Interactive.astro';
-import { nodes, getNode, neighbors, reviewOf, base, titleOf } from '../lib/nodes.js';
+import Trust from '../components/Trust.astro';
+import { nodes, getNode, neighbors, trustOf, base, titleOf } from '../lib/nodes.js';
 
 export function getStaticPaths() {
   return nodes.map((node) => ({ params: { id: node.id } }));
@@ -11,7 +12,7 @@ export function getStaticPaths() {
 const node = getNode(Astro.params.id);
 const { Content } = node;
 const { previous, next } = neighbors(node.id);
-const review = reviewOf(node.id);
+const trust = trustOf(node.id);
 ---
 <Base title={node.title}>
   {node.prerequisites.length > 0 && (
@@ -27,24 +28,21 @@ const review = reviewOf(node.id);
 
   <article class="lesson"><Content /></article>
 
-  <p class="review-status">
-    {review
-      ? <>Reviewed by <a href={`https://github.com/${review.by}`}>{review.by}</a> on {review.on}.</>
-      : <>Written with AI and not yet reviewed by a teacher. <a href={`${base}/contribute/`}>Help review it.</a></>}
-  </p>
+  <Trust part={trust.lesson} invite />
 
   {node.video && (
     <figure class="video">
       <figcaption><span class="i-tag">Watch</span> {node.title}</figcaption>
       <video controls playsinline preload="metadata" src={`${base}/videos/${node.id}.mp4`}></video>
+      <Trust part={trust.video} />
     </figure>
   )}
 
-  {node.interactives.map((interactive) => <Interactive {...interactive} />)}
+  {node.interactives.map((interactive, i) => <Interactive {...interactive} trust={trust[`interactive-${i + 1}`]} />)}
 
   <section class="practice">
     <h2>Practice</h2>
-    {node.exercises.map((ex, i) => <Exercise ex={ex} n={i + 1} />)}
+    {node.exercises.map((ex, i) => <Exercise ex={ex} n={i + 1} trust={trust[`exercise-${i + 1}`]} />)}
   </section>
 
   <nav class="lesson-nav" aria-label="Lessons">

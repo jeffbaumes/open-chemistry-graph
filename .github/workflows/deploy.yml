@@ -20,6 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 validate.py
+      - run: python3 ci/test_review_guard.py
       - uses: actions/setup-node@v4
         with:
           node-version: 22

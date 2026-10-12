@@ -1,0 +1,7 @@
+# Files that decide who is trusted and what is checked. With branch protection
+# set to require code-owner review, changes to these need a maintainer.
+/.github/                    @jeffbaumes
+/ci/                         @jeffbaumes
+/validate.py                 @jeffbaumes
+/tasks.py                    @jeffbaumes
+/conventions/reviewers.toml  @jeffbaumes

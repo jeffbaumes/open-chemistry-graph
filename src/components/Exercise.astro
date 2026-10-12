@@ -1,7 +1,8 @@
 ---
 import Formula from './Formula.astro';
+import Trust from './Trust.astro';
 import { toHtml } from '../lib/chem.js';
-const { ex, n } = Astro.props;
+const { ex, n, trust } = Astro.props;
 ---
 <section class="exercise" data-type={ex.type}>
   <p class="prompt"><span class="number">{n}.</span> <Fragment set:html={toHtml(ex.prompt)} /></p>
@@ -45,6 +46,7 @@ const { ex, n } = Astro.props;
   )}
 
   <div class="actions"><button type="button">Check</button><span class="feedback" role="status"></span></div>
+  {trust && <Trust part={trust} />}
 </section>
 
 <script>

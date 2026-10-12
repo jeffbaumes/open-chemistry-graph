@@ -176,7 +176,12 @@ sup { vertical-align: 0.55em; }
 .exercise[data-state='wrong'] .feedback { color: var(--wrong); }
 
 /* Review status and the task list */
-.review-status { margin: 2rem 0 0; padding-top: 0.8rem; border-top: 1px solid var(--border); font: 0.85rem/1.5 var(--font-ui); color: var(--muted); }
+.trust { display: flex; flex-wrap: wrap; gap: 0.2rem 0.5rem; margin: 0.8rem 0 0; font: 0.75rem/1.5 var(--font-ui); color: var(--muted); }
+.trust span { padding: 0 0.5rem; border: 1px solid var(--border); border-radius: 1rem; white-space: nowrap; }
+.trust .t-yes { color: var(--correct); border-color: var(--correct); }
+.lesson + .trust { margin-top: 2rem; padding-top: 0.8rem; border-top: 1px solid var(--border); }
+.contents .reviewed { font: 0.75rem/1.6 var(--font-ui); color: var(--muted); }
+.contents .reviewed.t-yes { color: var(--correct); }
 .task-group h3 { margin: 1.6rem 0 0.3rem; font-size: 1.1rem; }
 .task-group h3 .muted { font: 600 0.85rem var(--font-ui); margin-left: 0.3rem; }
 .tasks { list-style: none; padding: 0; margin: 0; }

@@ -1,0 +1,21 @@
+---
+// The review standing of one part of a lesson: who and what has checked it.
+// Data comes from tasks.py, which reads the review records. See TRUST.md.
+import { base } from '../lib/nodes.js';
+const { part, invite = false } = Astro.props;
+const count = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+const people = part?.human.join(', ');
+const agents = part?.agent.map((a) => `${a.model} (run by ${a.by})`).join(', ');
+---
+{part && (
+  <p class="trust">
+    {part.recomputed && <span class="t-yes" title="CI recalculates this answer every time anything changes">Answer recomputed</span>}
+    <span class={part.human.length ? 't-yes' : 't-no'} title={people ? `Reviewed by ${people}` : 'No person has reviewed this yet'}>
+      {count(part.human.length, 'human review', 'human reviews')}
+    </span>
+    <span class={part.agent.length ? 't-yes' : 't-no'} title={agents ? `Checked by ${agents}` : 'No independent AI has checked this yet'}>
+      {count(part.agent.length, 'AI review', 'AI reviews')}
+    </span>
+    {invite && part.human.length === 0 && <a href={`${base}/contribute/`}>Help review it</a>}
+  </p>
+)}

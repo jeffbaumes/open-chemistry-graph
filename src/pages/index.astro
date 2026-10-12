@@ -1,12 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
-import { course, wanted, base, titleOf } from '../lib/nodes.js';
+import { course, wanted, trustOf, base, titleOf } from '../lib/nodes.js';
 import { toHtml } from '../lib/chem.js';
+
+// How many of a lesson's parts have at least one review of each kind.
+function standing(id) {
+  const parts = Object.values(trustOf(id));
+  return { parts: parts.length, human: parts.filter((p) => p.human.length).length, agent: parts.filter((p) => p.agent.length).length };
+}
 ---
 <Base title="Lessons">
   <p class="eyebrow">Contents</p>
   <h1>High school chemistry</h1>
   <p class="muted">Short lessons with interactive models and practice problems, ordered so each builds on the ones before it.</p>
+  <p class="muted">Written with AI. Each part shows how many people and independent AI runs have reviewed it. <a href={`${base}/contribute/`}>How review works</a></p>
 
   {course.map((unit, u) => (
     <section class="unit">
@@ -17,6 +24,9 @@ import { toHtml } from '../lib/chem.js';
             <span class="index">{u + 1}.{i + 1}</span>
             <a href={`${base}/${node.id}/`}>{node.title}</a>
             <p class="muted" set:html={toHtml(node.summary)} />
+            <p class={`reviewed ${standing(node.id).human === standing(node.id).parts ? 't-yes' : ''}`}>
+              Human-reviewed {standing(node.id).human}/{standing(node.id).parts} · AI-reviewed {standing(node.id).agent}/{standing(node.id).parts}
+            </p>
           </li>
         ))}
       </ol>

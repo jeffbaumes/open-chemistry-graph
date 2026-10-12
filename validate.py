@@ -13,6 +13,9 @@ import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).parent
+sys.path.insert(0, str(ROOT / "ci"))
+import trust  # noqa: E402
+
 NODES = ROOT / "nodes"
 CONVENTIONS = ROOT / "conventions"
 INTERACTIVES = ROOT / "src" / "interactives" / "kinds"
@@ -215,6 +218,26 @@ LESSON_RULES = [
 ]
 
 
+def check_reviews(nid):
+    """Review records must be well formed. Who may add them is the CI guard's job."""
+    errors = []
+    approved = trust.people(ROOT)["reviewers"]
+    seen = set()
+    for i, record in enumerate(trust.records(ROOT, nid), 1):
+        allowed = {"part", "fingerprint", "by"} | ({"model", "answer"} if trust.is_agent(record) else set())
+        if not all(isinstance(record.get(k), str) and record[k] for k in ("part", "fingerprint", "by")):
+            errors.append(f"reviews.toml record {i}: needs part, fingerprint and by")
+            continue
+        if extra := set(record) - allowed:
+            errors.append(f"reviews.toml record {i}: unexpected field {sorted(extra)[0]!r}; records hold only what CI can check")
+        if not trust.is_agent(record) and record["by"].lower() not in approved:
+            errors.append(f"reviews.toml record {i}: {record['by']} is not on the reviewer list, so this is not a human review")
+        if trust.identity(record) in seen:
+            errors.append(f"reviews.toml record {i}: duplicate review")
+        seen.add(trust.identity(record))
+    return errors
+
+
 def check_node(path):
     errors = []
     node = tomllib.loads((path / "node.toml").read_text())
@@ -239,6 +262,7 @@ def check_node(path):
             errors.append(f"interactive {i}: unknown kind {kind!r}; see INTERACTIVES.md")
         if not interactive.get("title"):
             errors.append(f"interactive {i}: missing title")
+    errors += check_reviews(path.name)
     exercises = node.get("exercise", [])
     if len(exercises) < MIN_EXERCISES:
         errors.append(f"needs at least {MIN_EXERCISES} exercises, has {len(exercises)}")

@@ -1,0 +1,33 @@
+name: Review guard
+
+# Runs the guard from the TARGET branch against the files of a pull request.
+# pull_request_target is used on purpose: the workflow and the guard script a
+# pull request is judged by are the ones already on main, not its own copies.
+# The pull request's files are checked out as data and never executed.
+on:
+  pull_request_target:
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the target branch (trusted rules)
+        uses: actions/checkout@v4
+        with:
+          path: base
+      - name: Check out the pull request (data only)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: head
+          persist-credentials: false
+      - name: Guard tests
+        run: python3 base/ci/test_review_guard.py
+      - name: Review guard
+        env:
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: python3 base/ci/review_guard.py --base base --head head --author "$AUTHOR"

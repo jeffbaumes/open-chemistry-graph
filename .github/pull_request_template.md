@@ -10,4 +10,5 @@
 
 - [ ] `python3 validate.py` passes
 - [ ] The task no longer appears in `python3 tasks.py list`
-- [ ] If this records a review, a person went through the whole lesson and approved it
+- [ ] If this records a human review: the reviewer went through those parts, and this pull request is from their own account
+- [ ] If this records an AI review: the exercises were solved before looking at the answers, and nothing else is changed here

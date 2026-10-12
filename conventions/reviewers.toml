@@ -1,0 +1,17 @@
+# Who is trusted with what. See TRUST.md.
+#
+# This file is the root of trust for human reviews: a review counts as a
+# person's only while its author is listed here. Remove someone and every
+# review they signed stops counting at the next build.
+#
+# Only a maintainer may change this file, and a pull request cannot add its
+# own author: the CI guard reads the list from the target branch.
+
+# May change the checks, the workflows and this list.
+maintainers = ["jeffbaumes"]
+
+# People whose reviews count as human reviews. Add someone when you have
+# reason to believe they are a real person who knows the chemistry.
+[[reviewer]]
+github = "jeffbaumes"
+note = "High school chemistry teacher; project maintainer"

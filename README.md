@@ -34,6 +34,7 @@ Pushing to `main` validates, builds and publishes the site to GitHub Pages.
 | Units of the course and their order | `conventions/units.toml` | CI and templates |
 | How interactives look and behave | `INTERACTIVES.md`, `src/interactives/lib.js`, `src/styles/interactive.css` | shared toolkit |
 | How videos look and sound | `videos/README.md`, `videos/lib.py` | shared toolkit |
+| Who is trusted, and what a review is | `TRUST.md`, `conventions/reviewers.toml`, `ci/review_guard.py` | CI guard |
 | Tone, level, pedagogy | `STYLE.md` | reviewers |
 
 Rules are contributions too. Changing one must update every node it affects in the same pull request.
@@ -59,7 +60,11 @@ Open tasks are computed from the repository itself, so the list is never stale:
 python3 tasks.py
 ```
 
-Each task is either for an AI agent alone or for an agent guiding a person. The most valuable kind is a teacher reviewing one lesson: `nodes/<id>/review.toml` records who signed off, and the sign-off is void as soon as the lesson changes. Agents start from [AGENTS.md](AGENTS.md); the same queue is published on the site's Contribute page.
+Each task is either for an AI agent alone or for an agent guiding a person. Agents start from [AGENTS.md](AGENTS.md); the same queue is published on the site's Contribute page.
+
+## Trust
+
+Every part of every lesson (the text, each exercise, each interactive, the video) shows how many people and how many independent AI runs have reviewed that exact version, and whether CI recomputes its answer. Reviews are small records in `nodes/<id>/reviews.toml`. A review stops counting when its part changes, its author is checked against the pull request's GitHub account, and a human review counts only from someone on the reviewer list. [TRUST.md](TRUST.md) explains the rules and what they do not prove.
 
 ## Contributing
 

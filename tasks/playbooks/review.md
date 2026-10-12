@@ -7,7 +7,7 @@ This is the most valuable task in the project. Everything else was written by AI
 ## Before you start
 
 1. Ask what the person teaches or knows well, and pick a `review` task in that area: `python3 tasks.py list --kind review`.
-2. Ask for their GitHub handle. It is recorded with the review.
+2. Check they are signed in to GitHub as themselves (`gh api user -q .login`). The review is recorded under that account, and CI checks it.
 3. Tell them what to expect: one lesson, about ten minutes, and they can stop at any point.
 4. Open the lesson's page for them if you can (`npm run dev`, then `/<node-id>/`), so they see it as a student would.
 
@@ -45,21 +45,29 @@ Go in this order. **Show one piece, ask, and wait for the answer before moving o
 
 ## Signing off
 
-Ask plainly: **"Are you satisfied that this lesson and all of its exercises are correct and suitable for students?"**
+A lesson has parts: the lesson text, each exercise, each interactive and the video. The person signs off on the parts they are satisfied with. It does not have to be all of them.
 
-Only if they say yes, in their own words, record it:
+Ask plainly, part by part or for the whole lesson: **"Are you satisfied that this is correct and suitable for students?"**
+
+Only for what they say yes to, in their own words, record it:
 
 ```bash
-python3 tasks.py review <node-id> --by <their-github-handle>
+python3 tasks.py review <node-id>                                  # every part
+python3 tasks.py review <node-id> --part lesson --part exercise-2  # only some
 ```
 
-Run this last, after every edit, because any later change to the lesson voids it.
+Run this last, after every edit, because changing a part voids its reviews. Check the result with `python3 tasks.py status <node-id>`.
+
+The command reads the person's GitHub login from `gh`. Two things must be true or CI rejects the pull request (see `TRUST.md`):
+
+- **The person is on the reviewer list** in `conventions/reviewers.toml`. If they are not, open the pull request with the fixes only, and ask a maintainer to add them. They can record the review afterwards.
+- **The pull request is opened from the person's own GitHub account.** A review signed by one account and submitted by another is rejected.
 
 Do not record a review if:
 
 - the person skipped the exercises or did not solve them,
-- they said "approve everything" or asked to sign off several lessons at once,
-- they have open doubts. Open the pull request with the fixes and leave the review unrecorded.
+- they said "approve everything" or asked to sign off several lessons at once (CI allows one lesson per pull request),
+- they have open doubts about that part. Leave it unrecorded and describe the doubt in the pull request.
 
 ## The pull request
 
@@ -70,4 +78,4 @@ Title: `review:<node-id>: <one line>`. In the body:
 - objections raised and how each was settled,
 - anything they were unsure about.
 
-Open it from the person's own GitHub account where possible, so the review is theirs.
+It must be opened from the person's own GitHub account.
