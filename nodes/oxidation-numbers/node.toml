@@ -26,3 +26,9 @@ type = "choice"
 prompt = "What is the oxidation number of iron in Fe2O3?"
 options = ["+2", "+3", "+6", "-3"]
 answer = 1
+
+[[exercise]]
+type = "text"
+prompt = "What is the oxidation number of sulfur in SO2? Include the sign."
+answer = "+4"
+accept = ["4"]

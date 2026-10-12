@@ -26,3 +26,9 @@ type = "choice"
 prompt = "An atom's oxidation number changes from +3 to +1. It has been:"
 options = ["oxidized", "reduced", "neutralized", "ionized"]
 answer = 1
+
+[[exercise]]
+type = "text"
+prompt = "In 2 Mg + O2 -> 2 MgO, which element is reduced? Give its name."
+answer = "oxygen"
+accept = ["O", "O2"]

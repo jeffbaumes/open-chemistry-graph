@@ -30,3 +30,9 @@ prompt = "Convert 45 cm to meters."
 answer = 0.45
 unit = "m"
 derive = "45 / 100"
+
+[[exercise]]
+type = "choice"
+prompt = "Which conversion factor cancels grams when converting grams to kilograms?"
+options = ["(1 kg / 1000 g)", "(1000 g / 1 kg)", "(1000 kg / 1 g)", "(1 g / 1000 kg)"]
+answer = 0

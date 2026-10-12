@@ -26,3 +26,9 @@ type = "choice"
 prompt = "Adding a catalyst to a system at equilibrium:"
 options = ["shifts it toward products", "shifts it toward reactants", "does not shift it", "stops the reaction"]
 answer = 2
+
+[[exercise]]
+type = "text"
+prompt = "Whose principle predicts how an equilibrium shifts when it is disturbed? Give the name."
+answer = "Le Chatelier"
+accept = ["Le Chatelier's principle", "Le Chatelier's", "Le Chateliers principle", "Le Chateliers"]

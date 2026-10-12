@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import queue from '../generated/tasks.json';
+import { base, getNode } from '../lib/nodes.js';
+
+const SHOWN = 6;
+const REPO = 'https://github.com/jeffbaumes/open-chemistry-graph';
+const kinds = [...new Set(queue.tasks.map((t) => t.kind))];
+const groups = kinds.map((kind) => {
+  const tasks = queue.tasks.filter((t) => t.kind === kind);
+  return { kind, tasks, title: queue.kinds[kind]?.title, playbook: queue.kinds[kind]?.playbook ?? tasks[0].playbook };
+});
+const sections = [
+  { mode: 'human', heading: 'With a person', blurb: 'These need someone who knows chemistry. An AI assistant guides you through, one step at a time.' },
+  { mode: 'ai', heading: 'An AI agent alone', blurb: 'An agent can finish these by itself. The validator decides whether the work is accepted.' },
+];
+const reviewed = Object.values(queue.reviews).filter((r) => r.current).length;
+const total = queue.tasks.filter((t) => t.kind === 'review').length + reviewed;
+---
+<Base title="Contribute">
+  <p class="eyebrow">Contribute</p>
+  <h1>Open tasks</h1>
+  <p>
+    This course is written by people and their AI assistants. Every lesson, exercise, interactive and video is open to improvement.
+    There are <strong>{queue.tasks.length} open tasks</strong>, and <strong>{reviewed} of {total} lessons</strong> have been reviewed by a person.
+  </p>
+  <p>
+    To help, point an AI coding assistant at the <a href={REPO}>repository</a> and ask it to pick up a task.
+    It will find <a href={`${REPO}/blob/main/AGENTS.md`}>the instructions</a> and run the queue itself.
+  </p>
+
+  {sections.map(({ mode, heading, blurb }) => (
+    <section class="unit">
+      <h2>{heading}</h2>
+      <p class="muted">{blurb}</p>
+      {groups.filter((g) => g.tasks.some((t) => t.mode === mode)).map((group) => {
+        const tasks = group.tasks.filter((t) => t.mode === mode);
+        return (
+          <div class="task-group">
+            <h3>{group.title ?? tasks[0].title} <span class="muted">{tasks.length}</span></h3>
+            <ul class="tasks">
+              {tasks.slice(0, SHOWN).map((t) => (
+                <li>
+                  <code>{t.id}</code>
+                  <span>{t.node && getNode(t.node) ? <a href={`${base}/${t.node}/`}>{getNode(t.node).title}</a> : t.title}{t.node ? '' : `. ${t.detail}`}</span>
+                </li>
+              ))}
+            </ul>
+            {tasks.length > SHOWN && <p class="muted more">and {tasks.length - SHOWN} more: <code>python3 tasks.py list --kind {group.kind}</code></p>}
+          </div>
+        );
+      })}
+    </section>
+  ))}
+</Base>

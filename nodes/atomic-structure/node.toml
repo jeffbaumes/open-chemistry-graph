@@ -14,18 +14,21 @@ type = "numeric"
 prompt = "An atom has 17 protons and 18 neutrons. What is its mass number?"
 answer = 35
 unit = "is the mass number"
+derive = "17 + 18"
 
 [[exercise]]
 type = "numeric"
 prompt = "How many neutrons are in an atom with atomic number 26 and mass number 56?"
 answer = 30
 unit = "neutrons"
+derive = "56 - 26"
 
 [[exercise]]
 type = "numeric"
 prompt = "How many electrons are in a neutral atom of phosphorus, atomic number 15?"
 answer = 15
 unit = "electrons"
+derive = "Z('P')"
 
 [[exercise]]
 type = "choice"

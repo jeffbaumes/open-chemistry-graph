@@ -1,0 +1,101 @@
+# Tasks the queue cannot work out from the repository on its own. Remove an
+# entry in the pull request that completes it.
+#
+# mode "ai": an agent can finish it alone.  mode "human": a person must take part.
+
+# --- Missing lessons ---------------------------------------------------------
+
+[[task]]
+kind = "lesson"
+id = "solubility-rules"
+mode = "ai"
+title = "Write a lesson on solubility rules and precipitates"
+detail = "Needed before net ionic equations. Unit: solutions."
+playbook = "tasks/playbooks/automated.md#write-a-lesson"
+
+[[task]]
+kind = "lesson"
+id = "net-ionic-equations"
+mode = "ai"
+title = "Write a lesson on net ionic equations"
+detail = "Depends on solubility-rules and types-of-reactions. Unit: reactions."
+playbook = "tasks/playbooks/automated.md#write-a-lesson"
+
+[[task]]
+kind = "lesson"
+id = "scientific-notation"
+mode = "ai"
+title = "Write a lesson on scientific notation"
+detail = "Used from the mole onward but never taught. Unit: matter, after significant-figures."
+playbook = "tasks/playbooks/automated.md#write-a-lesson"
+
+[[task]]
+kind = "lesson"
+id = "states-of-matter"
+mode = "ai"
+title = "Write a lesson on states of matter and phase changes"
+detail = "Solids, liquids, gases, and heating curves. Unit: matter."
+playbook = "tasks/playbooks/automated.md#write-a-lesson"
+
+[[task]]
+kind = "lesson"
+id = "electrochemical-cells"
+mode = "ai"
+title = "Write a lesson on electrochemical cells"
+detail = "Batteries as separated redox half-reactions. Unit: redox, after redox-reactions."
+playbook = "tasks/playbooks/automated.md#write-a-lesson"
+
+[[task]]
+kind = "lesson"
+id = "organic-chemistry-basics"
+mode = "ai"
+title = "Write a lesson on hydrocarbons"
+detail = "Alkanes, alkenes, alkynes and naming up to four carbons. Needs a new unit in conventions/units.toml."
+playbook = "tasks/playbooks/automated.md#write-a-lesson"
+
+[[task]]
+kind = "lesson"
+id = "lab-safety"
+mode = "human"
+title = "Write a lesson on lab safety and equipment"
+detail = "Safety rules differ between schools, so a teacher must decide what goes in."
+playbook = "tasks/playbooks/review.md"
+
+# --- Tooling -----------------------------------------------------------------
+
+[[task]]
+kind = "tooling"
+id = "blind-solve-check"
+mode = "ai"
+title = "Add a blind-solve check for exercises"
+detail = "A script that gives each exercise prompt to a model without the answer and reports disagreements with the key. Catches wrong keys and ambiguous wording."
+
+[[task]]
+kind = "tooling"
+id = "significant-figure-checking"
+mode = "ai"
+title = "Check significant figures in typed answers"
+detail = "Numeric exercises accept anything within 1%. Add an optional sig_figs field and have the page tell students when the digits are wrong."
+
+[[task]]
+kind = "tooling"
+id = "more-molecule-drawings"
+mode = "ai"
+title = "Add molecule layouts for videos"
+detail = "videos/lib.py can draw only seven molecules. Add layouts for NaCl, HCl, CO, C2H6 and others as videos need them."
+
+[[task]]
+kind = "tooling"
+id = "student-progress"
+mode = "ai"
+title = "Remember which exercises a student has answered"
+detail = "Keep per-exercise results in the browser's local storage and show progress on the contents page. No accounts."
+
+# --- Needs a classroom -------------------------------------------------------
+
+[[task]]
+kind = "classroom"
+id = "report-exercise-results"
+mode = "human"
+title = "Report how a class did on a lesson's exercises"
+detail = "Teach a lesson, note which exercises most students missed, and open an issue. High miss rates point to a bad question or a gap in the lesson."

@@ -3,6 +3,9 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "tasks": "mkdir -p src/generated && python3 tasks.py --json > src/generated/tasks.json",
+    "predev": "npm run tasks",
+    "prebuild": "npm run tasks",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

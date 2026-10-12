@@ -1,5 +1,6 @@
 import { parse } from 'smol-toml';
 import unitsRaw from '../../conventions/units.toml?raw';
+import queue from '../generated/tasks.json';
 
 const tomls = import.meta.glob('/nodes/*/node.toml', { query: '?raw', import: 'default', eager: true });
 const lessons = import.meta.glob('/nodes/*/lesson.md', { eager: true });
@@ -34,15 +35,24 @@ function depth(node) {
   return depths.get(node.id);
 }
 
-export const nodes = [...byId.values()].sort((a, b) => depth(a) - depth(b) || a.title.localeCompare(b.title));
+const units = parse(unitsRaw).unit;
+// A unit may list its lessons in order; any it leaves out follow, by depth.
+const listed = new Map(units.flatMap((unit) => (unit.lessons ?? []).map((id, i) => [id, i])));
+const place = (node) => listed.get(node.id) ?? Infinity;
+
+export const nodes = [...byId.values()].sort(
+  (a, b) => (place(a) - place(b) || 0) || depth(a) - depth(b) || a.title.localeCompare(b.title),
+);
 export const getNode = (id) => byId.get(id);
 export const wanted = [...new Set(nodes.flatMap((n) => n.prerequisites))].filter((p) => !byId.has(p)).sort();
 export const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+/** The current human review of a node, or undefined if there is none or it is out of date. */
+export const reviewOf = (id) => (queue.reviews[id]?.current ? queue.reviews[id] : undefined);
 export const titleOf = (id) => id.replaceAll('-', ' ');
 
 /** Units in teaching order, each with its lessons in prerequisite order. */
-export const course = parse(unitsRaw)
-  .unit.map((unit) => ({ ...unit, nodes: nodes.filter((n) => n.unit === unit.id) }))
+export const course = units
+  .map((unit) => ({ ...unit, nodes: nodes.filter((n) => n.unit === unit.id) }))
   .filter((unit) => unit.nodes.length > 0);
 
 const sequence = course.flatMap((unit) => unit.nodes);

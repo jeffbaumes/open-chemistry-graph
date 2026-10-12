@@ -8,21 +8,25 @@ type = "numeric"
 prompt = "How many oxygen atoms are in one formula unit of Al2(SO4)3?"
 answer = 12
 unit = "oxygen atoms"
+derive = "count('Al2(SO4)3', 'O')"
 
 [[exercise]]
 type = "numeric"
 prompt = "How many atoms in total are in one molecule of C6H12O6?"
 answer = 24
 unit = "atoms"
+derive = "atoms('C6H12O6')"
 
 [[exercise]]
 type = "numeric"
 prompt = "How many hydrogen atoms are in 2 NH3?"
 answer = 6
 unit = "hydrogen atoms"
+derive = "2 * count('NH3', 'H')"
 
 [[exercise]]
 type = "numeric"
 prompt = "How many different elements are in Mg(OH)2?"
 answer = 3
 unit = "elements"
+derive = "elements('Mg(OH)2')"

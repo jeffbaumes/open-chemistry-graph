@@ -29,3 +29,10 @@ type = "choice"
 prompt = "In Al2(SO4)3, how many oxygen atoms are in one formula unit?"
 options = ["3", "4", "7", "12"]
 answer = 3
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the molar mass of ammonium sulfate, (NH4)2SO4?"
+answer = 132.13
+unit = "g/mol"
+derive = "M('(NH4)2SO4')"

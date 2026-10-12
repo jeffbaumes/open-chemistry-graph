@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Exercise from '../components/Exercise.astro';
 import Interactive from '../components/Interactive.astro';
-import { nodes, getNode, neighbors, base, titleOf } from '../lib/nodes.js';
+import { nodes, getNode, neighbors, reviewOf, base, titleOf } from '../lib/nodes.js';
 
 export function getStaticPaths() {
   return nodes.map((node) => ({ params: { id: node.id } }));
@@ -11,6 +11,7 @@ export function getStaticPaths() {
 const node = getNode(Astro.params.id);
 const { Content } = node;
 const { previous, next } = neighbors(node.id);
+const review = reviewOf(node.id);
 ---
 <Base title={node.title}>
   {node.prerequisites.length > 0 && (
@@ -25,6 +26,12 @@ const { previous, next } = neighbors(node.id);
   )}
 
   <article class="lesson"><Content /></article>
+
+  <p class="review-status">
+    {review
+      ? <>Reviewed by <a href={`https://github.com/${review.by}`}>{review.by}</a> on {review.on}.</>
+      : <>Written with AI and not yet reviewed by a teacher. <a href={`${base}/contribute/`}>Help review it.</a></>}
+  </p>
 
   {node.video && (
     <figure class="video">

@@ -26,3 +26,9 @@ type = "choice"
 prompt = "Which of these is an element?"
 options = ["CO", "H2O", "NaCl", "Co"]
 answer = 3
+
+[[exercise]]
+type = "text"
+prompt = "What is the word for a pure substance made of only one kind of atom?"
+answer = "element"
+accept = ["an element"]

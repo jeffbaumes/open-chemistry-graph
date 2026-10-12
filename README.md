@@ -51,9 +51,19 @@ derive = "36.0 / M('H2O')"
 
 Expressions may use numbers, `+ - * / **`, `M(formula)` for molar mass, `log10`, `sqrt`, `min`, `max`, and the constants in `conventions/constants.toml`. Balancing exercises are checked for atom conservation and lowest terms.
 
+## Task queue
+
+Open tasks are computed from the repository itself, so the list is never stale:
+
+```bash
+python3 tasks.py
+```
+
+Each task is either for an AI agent alone or for an agent guiding a person. The most valuable kind is a teacher reviewing one lesson: `nodes/<id>/review.toml` records who signed off, and the sign-off is void as soon as the lesson changes. Agents start from [AGENTS.md](AGENTS.md); the same queue is published on the site's Contribute page.
+
 ## Contributing
 
-1. Run `python3 validate.py` and pick a node from the "Wanted nodes" list, or improve an existing one.
+1. Pick a task with `python3 tasks.py`, or improve any lesson you know well.
 2. Add `nodes/<id>/lesson.md` and `nodes/<id>/node.toml` with at least 3 exercises. Follow `STYLE.md`.
 3. Prefer exercises the validator can recompute. If it cannot check your kind of problem yet, adding a new `derive` kind or exercise type to `validate.py` is a welcome contribution.
 4. Make sure the validator passes, then open a pull request.

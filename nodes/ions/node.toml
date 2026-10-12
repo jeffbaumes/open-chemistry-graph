@@ -26,6 +26,7 @@ type = "numeric"
 prompt = "How many electrons are in a Ca^2+ ion? Calcium has atomic number 20."
 answer = 18
 unit = "electrons"
+derive = "Z('Ca') - 2"
 
 [[exercise]]
 type = "choice"

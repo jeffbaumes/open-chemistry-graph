@@ -13,12 +13,14 @@ type = "numeric"
 prompt = "How many significant figures are in 0.00420?"
 answer = 3
 unit = "significant figures"
+derive = "sigfigs('0.00420')"
 
 [[exercise]]
 type = "numeric"
 prompt = "How many significant figures are in 1002?"
 answer = 4
 unit = "significant figures"
+derive = "sigfigs('1002')"
 
 [[exercise]]
 type = "choice"

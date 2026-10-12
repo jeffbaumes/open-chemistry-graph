@@ -32,3 +32,9 @@ type = "choice"
 prompt = "Which has the higher ionization energy, magnesium or sulfur?"
 options = ["Magnesium, because it is a metal", "Sulfur, because it is farther right in the same period", "They are equal", "Magnesium, because it is larger"]
 answer = 1
+
+[[exercise]]
+type = "text"
+prompt = "Which element is the most electronegative? Give its name."
+answer = "fluorine"
+accept = ["F"]

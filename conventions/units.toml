@@ -1,9 +1,13 @@
 # The units of the course, in teaching order. Each node names one of these ids.
-# Within a unit, lessons are ordered by their prerequisites.
+# Within a unit, lessons are ordered by their prerequisites. Where that leaves
+# an odd order, a unit can list its lessons explicitly with `lessons = [...]`;
+# any it leaves out follow the listed ones. A lesson may not be listed before
+# one of its own prerequisites.
 
 [[unit]]
 id = "matter"
 title = "Matter and measurement"
+lessons = ["classifying-matter", "physical-and-chemical-changes", "significant-figures", "unit-conversions", "density"]
 
 [[unit]]
 id = "atoms"
@@ -16,6 +20,7 @@ title = "The periodic table"
 [[unit]]
 id = "bonding"
 title = "Bonding and compounds"
+lessons = ["ionic-bonding", "covalent-bonding", "chemical-formulas", "naming-ionic-compounds", "naming-covalent-compounds", "molecular-shape", "polarity-and-intermolecular-forces"]
 
 [[unit]]
 id = "reactions"

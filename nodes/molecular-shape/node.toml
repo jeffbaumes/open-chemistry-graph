@@ -25,6 +25,7 @@ type = "numeric"
 prompt = "How many electron groups surround the carbon atom in CO2?"
 answer = 2
 unit = "electron groups"
+recall = true
 
 [[exercise]]
 type = "choice"

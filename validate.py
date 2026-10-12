@@ -75,14 +75,46 @@ OPERATORS = {
     ast.Add: operator.add, ast.Sub: operator.sub, ast.Mult: operator.mul,
     ast.Div: operator.truediv, ast.Pow: operator.pow,
 }
-FUNCTIONS = {"M": molar_mass, "log10": math.log10, "sqrt": math.sqrt, "min": min, "max": max}
+PERIODIC = [row[0] for row in convention("periodic.toml")["elements"]]
+
+
+def atomic_number(symbol):
+    return PERIODIC.index(symbol) + 1
+
+
+def valence(symbol):
+    """Valence electrons of a main-group element in periods 1 to 4."""
+    z = atomic_number(symbol)
+    if z <= 2:
+        return z
+    if z <= 18:
+        return z - 2 if z <= 10 else z - 10
+    group = z - 18
+    if 3 <= group <= 12:
+        raise ValueError(f"valence() does not cover transition metals such as {symbol}")
+    return group if group <= 2 else group - 10
+
+
+def sigfigs(text):
+    """Significant figures in a number as written, such as '0.00420'."""
+    digits = text.lstrip("+-").replace(".", "").lstrip("0")
+    return len(digits) if "." in text else len(digits.rstrip("0"))
+
+
+FUNCTIONS = {
+    "M": molar_mass, "log10": math.log10, "sqrt": math.sqrt, "min": min, "max": max,
+    "atoms": lambda formula: sum(parse_formula(formula).values()),
+    "count": lambda formula, element: parse_formula(formula).get(element, 0),
+    "elements": lambda formula: len(parse_formula(formula)),
+    "Z": atomic_number, "valence": valence, "sigfigs": sigfigs,
+}
 
 
 def evaluate(expression):
     """Evaluate arithmetic such as "36.0 / M('H2O')".
 
     Allows numbers, + - * / **, the constants in conventions/constants.toml,
-    and M(formula), log10, sqrt, min and max. Nothing else.
+    and the functions in FUNCTIONS. Nothing else.
     """
     def ev(node):
         if isinstance(node, ast.Constant) and isinstance(node.value, (int, float, str)):
@@ -263,6 +295,16 @@ def main():
     if cycle := find_cycle(graph):
         print(f"FAIL prerequisite cycle: {' -> '.join(cycle)}")
         failed += 1
+
+    for unit in convention("units.toml")["unit"]:
+        lessons = unit.get("lessons", [])
+        for i, nid in enumerate(lessons):
+            if nid not in graph:
+                print(f"FAIL units.toml: {unit['id']} lists {nid!r}, which does not exist")
+                failed += 1
+            elif late := [p for p in graph[nid] if p in lessons[i + 1:]]:
+                print(f"FAIL units.toml: {unit['id']} lists {nid!r} before its prerequisite {late[0]!r}")
+                failed += 1
 
     print(f"{len(graph) - failed} of {len(graph)} nodes pass")
     wanted = sorted({p for prereqs in graph.values() for p in prereqs} - graph.keys())

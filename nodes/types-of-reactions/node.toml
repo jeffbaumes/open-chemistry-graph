@@ -26,3 +26,8 @@ type = "choice"
 prompt = "What are the products when propane, C3H8, burns completely in oxygen?"
 options = ["C and H2", "CO and H2", "CO2 and H2O", "C3H8O2"]
 answer = 2
+
+[[exercise]]
+type = "text"
+prompt = "What type of reaction is 2 H2O -> 2 H2 + O2? Answer with one word."
+answer = "decomposition"

@@ -7,9 +7,11 @@ Rules, applied in order:
 1. An atom in a pure element is 0: Na, O2, Cl2.
 2. A single-atom ion equals its charge: Na^+ is +1.
 3. Fluorine is always -1 in compounds.
-4. Oxygen is usually -2.
-5. Hydrogen is usually +1.
+4. Hydrogen is +1 when bonded to nonmetals.
+5. Oxygen is usually -2.
 6. The numbers add up to zero in a neutral compound, or to the charge of a polyatomic ion.
+
+The order matters. An earlier rule wins when two conflict. In hydrogen peroxide, H2O2, hydrogen is +1 by rule 4, so each oxygen must be -1 for the total to reach zero.
 
 ## Worked example: sulfur in H2SO4
 

@@ -13,6 +13,7 @@ type = "numeric"
 prompt = "How many neutrons are in carbon-14? Carbon has atomic number 6."
 answer = 8
 unit = "neutrons"
+derive = "14 - Z('C')"
 
 [[exercise]]
 type = "numeric"

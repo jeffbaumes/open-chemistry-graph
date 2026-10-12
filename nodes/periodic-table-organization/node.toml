@@ -31,3 +31,9 @@ type = "choice"
 prompt = "Which describes most metals?"
 options = ["Dull and brittle", "Shiny and good conductors", "Gases at room temperature", "Gain electrons easily"]
 answer = 1
+
+[[exercise]]
+type = "text"
+prompt = "What is the name of the group 18 elements?"
+answer = "noble gases"
+accept = ["the noble gases", "noble gas"]

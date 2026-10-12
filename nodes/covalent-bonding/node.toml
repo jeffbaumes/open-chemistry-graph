@@ -8,12 +8,14 @@ type = "numeric"
 prompt = "How many valence electrons are in one molecule of CH4 in total?"
 answer = 8
 unit = "valence electrons"
+derive = "valence('C') + 4 * valence('H')"
 
 [[exercise]]
 type = "numeric"
 prompt = "How many lone pairs are on the nitrogen atom in NH3?"
 answer = 1
 unit = "lone pair"
+derive = "(valence('N') - 3) / 2"
 
 [[exercise]]
 type = "choice"
@@ -26,3 +28,4 @@ type = "numeric"
 prompt = "How many electrons are shared in a triple bond?"
 answer = 6
 unit = "electrons"
+derive = "3 * 2"

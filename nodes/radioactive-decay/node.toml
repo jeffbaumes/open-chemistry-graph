@@ -26,3 +26,4 @@ type = "numeric"
 prompt = "Polonium-210 undergoes alpha decay. What is the mass number of the product?"
 answer = 206
 unit = "is the mass number"
+derive = "210 - 4"

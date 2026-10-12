@@ -8,18 +8,21 @@ type = "numeric"
 prompt = "How many valence electrons does carbon have? Its configuration is 1s^2 2s^2 2p^2."
 answer = 4
 unit = "valence electrons"
+derive = "valence('C')"
 
 [[exercise]]
 type = "numeric"
 prompt = "How many valence electrons does chlorine (group 17) have?"
 answer = 7
 unit = "valence electrons"
+derive = "valence('Cl')"
 
 [[exercise]]
 type = "numeric"
 prompt = "How many dots are in the Lewis dot diagram of magnesium (group 2)?"
 answer = 2
 unit = "dots"
+derive = "valence('Mg')"
 
 [[exercise]]
 type = "choice"

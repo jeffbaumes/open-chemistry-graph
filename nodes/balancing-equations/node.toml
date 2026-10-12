@@ -37,3 +37,16 @@ kind = "equation-balancer"
 title = "Balance by counting atoms"
 caption = "Change the coefficients until every element has the same count on both sides."
 params = { reactants = ["N2", "H2"], products = ["NH3"] }
+
+[[exercise]]
+type = "balance"
+prompt = "Balance the equation."
+reactants = ["C3H8", "O2"]
+products = ["CO2", "H2O"]
+answer = { reactants = [1, 5], products = [3, 4] }
+
+[[exercise]]
+type = "choice"
+prompt = "Which of these may you change to balance an equation?"
+options = ["Subscripts", "Coefficients", "Element symbols", "The direction of the arrow"]
+answer = 1

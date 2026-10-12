@@ -26,3 +26,9 @@ type = "choice"
 prompt = "Which ion do bases produce in water?"
 options = ["H^+", "H3O^+", "OH^-", "Cl^-"]
 answer = 2
+
+[[exercise]]
+type = "text"
+prompt = "What is the name of the H3O^+ ion?"
+answer = "hydronium"
+accept = ["hydronium ion", "the hydronium ion"]

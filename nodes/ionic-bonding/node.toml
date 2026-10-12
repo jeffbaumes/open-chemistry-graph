@@ -26,3 +26,8 @@ type = "choice"
 prompt = "Why does solid NaCl not conduct electricity, while melted NaCl does?"
 options = ["Solid NaCl has no ions", "In the solid the ions are locked in place", "Melting creates electrons", "Solid NaCl is a metal"]
 answer = 1
+
+[[exercise]]
+type = "text"
+prompt = "What is the formula of the compound formed by Ca^2+ and O^2-?"
+answer = "CaO"

@@ -19,6 +19,7 @@ type = "numeric"
 prompt = "What is the maximum number of electrons a p sublevel can hold?"
 answer = 6
 unit = "electrons"
+derive = "3 * 2"
 
 [[exercise]]
 type = "choice"

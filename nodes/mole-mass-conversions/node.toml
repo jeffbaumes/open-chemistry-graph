@@ -28,3 +28,16 @@ derive = { kind = "moles_from_mass", formula = "CaCO3", mass_g = 10.0 }
 kind = "mole-converter"
 title = "Grams, moles and particles"
 caption = "Pick a substance and a mass to see the same amount three ways."
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the mass of 2.00 mol of CO2?"
+answer = 88.0
+unit = "g"
+derive = "2.00 * M('CO2')"
+
+[[exercise]]
+type = "choice"
+prompt = "To convert moles of a substance to grams, you:"
+options = ["divide by its molar mass", "multiply by its molar mass", "multiply by Avogadro's number", "divide by Avogadro's number"]
+answer = 1

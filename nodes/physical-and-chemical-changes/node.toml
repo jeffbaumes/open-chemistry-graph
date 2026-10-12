@@ -20,3 +20,14 @@ type = "choice"
 prompt = "Which observation is the strongest evidence of a chemical change?"
 options = ["A liquid changes shape in a new container", "A solid is ground into powder", "Two clear solutions mix and a solid forms", "A solid melts when heated"]
 answer = 2
+
+[[exercise]]
+type = "text"
+prompt = "Sugar dissolves in water. Is this a physical or a chemical change? Answer with one word."
+answer = "physical"
+
+[[exercise]]
+type = "choice"
+prompt = "Which is a physical change?"
+options = ["Burning paper", "Melting butter", "Baking a cake", "Milk turning sour"]
+answer = 1
