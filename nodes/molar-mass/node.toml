@@ -1,5 +1,6 @@
 title = "Molar mass"
 summary = "Find the mass of one mole of a compound from its formula."
+unit = "moles"
 prerequisites = ["chemical-formulas", "the-mole"]
 
 [[exercise]]

@@ -1,0 +1,32 @@
+title = "Mass-to-mass stoichiometry"
+summary = "Calculate the mass of a product from the mass of a reactant."
+unit = "moles"
+prerequisites = ["mole-ratios"]
+
+[[exercise]]
+type = "numeric"
+prompt = "2 H2 + O2 -> 2 H2O. What mass of water forms from 16.0 g of O2?"
+answer = 18.0
+unit = "g"
+derive = "16.0 / M('O2') * 2 * M('H2O')"
+
+[[exercise]]
+type = "numeric"
+prompt = "2 Mg + O2 -> 2 MgO. What mass of MgO forms from 12.0 g of Mg?"
+answer = 19.9
+unit = "g"
+derive = "12.0 / M('Mg') * M('MgO')"
+
+[[exercise]]
+type = "numeric"
+prompt = "CaCO3 -> CaO + CO2. What mass of CO2 forms from 50.0 g of CaCO3?"
+answer = 22.0
+unit = "g"
+derive = "50.0 / M('CaCO3') * M('CO2')"
+
+[[exercise]]
+type = "numeric"
+prompt = "N2 + 3 H2 -> 2 NH3. What mass of H2 is needed to make 34.0 g of NH3?"
+answer = 6.04
+unit = "g"
+derive = "34.0 / M('NH3') * 3 / 2 * M('H2')"

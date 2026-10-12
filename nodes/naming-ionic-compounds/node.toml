@@ -1,0 +1,31 @@
+title = "Naming ionic compounds"
+summary = "Name compounds of metals and nonmetals, including polyatomic ions."
+unit = "bonding"
+prerequisites = ["chemical-formulas"]
+
+[[exercise]]
+type = "text"
+prompt = "Name the compound NaCl."
+answer = "sodium chloride"
+
+[[exercise]]
+type = "text"
+prompt = "Name the compound MgO."
+answer = "magnesium oxide"
+
+[[exercise]]
+type = "text"
+prompt = "Name the compound CuSO4. Copper can be 1+ or 2+."
+answer = "copper(II) sulfate"
+accept = ["copper (II) sulfate", "copper II sulfate"]
+
+[[exercise]]
+type = "choice"
+prompt = "What is the formula of ammonium phosphate?"
+options = ["NH4PO4", "(NH4)3PO4", "NH4(PO4)3", "(NH4)2PO4"]
+answer = 1
+
+[[exercise]]
+type = "text"
+prompt = "Name the compound K2CO3."
+answer = "potassium carbonate"

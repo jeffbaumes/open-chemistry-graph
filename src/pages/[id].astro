@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Exercise from '../components/Exercise.astro';
-import { nodes, getNode, base, titleOf } from '../lib/nodes.js';
+import Interactive from '../components/Interactive.astro';
+import { nodes, getNode, neighbors, base, titleOf } from '../lib/nodes.js';
 
 export function getStaticPaths() {
   return nodes.map((node) => ({ params: { id: node.id } }));
@@ -9,6 +10,7 @@ export function getStaticPaths() {
 
 const node = getNode(Astro.params.id);
 const { Content } = node;
+const { previous, next } = neighbors(node.id);
 ---
 <Base title={node.title}>
   {node.prerequisites.length > 0 && (
@@ -24,8 +26,15 @@ const { Content } = node;
 
   <article class="lesson"><Content /></article>
 
+  {node.interactives.map((interactive) => <Interactive {...interactive} />)}
+
   <section class="practice">
     <h2>Practice</h2>
     {node.exercises.map((ex, i) => <Exercise ex={ex} n={i + 1} />)}
   </section>
+
+  <nav class="lesson-nav" aria-label="Lessons">
+    {previous ? <a href={`${base}/${previous.id}/`}><span>Previous</span>{previous.title}</a> : <span />}
+    {next && <a class="next" href={`${base}/${next.id}/`}><span>Next</span>{next.title}</a>}
+  </nav>
 </Base>

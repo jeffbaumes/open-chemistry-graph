@@ -1,0 +1,13 @@
+---
+const { kind, title, caption, params = {} } = Astro.props;
+---
+<figure class="interactive" data-kind={kind} data-params={JSON.stringify(params)}>
+  <figcaption><span class="i-tag">Explore</span> {title}</figcaption>
+  {caption && <p class="i-caption">{caption}</p>}
+  <div class="i-body"><noscript>This interactive needs JavaScript.</noscript></div>
+</figure>
+
+<script>
+  import { mountAll } from '../interactives/index.js';
+  mountAll();
+</script>

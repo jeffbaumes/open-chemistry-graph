@@ -1,0 +1,35 @@
+title = "Isotopes and atomic mass"
+summary = "Explain why atomic masses on the periodic table are not whole numbers."
+unit = "atoms"
+prerequisites = ["atomic-structure"]
+
+[[interactive]]
+kind = "isotope-mix"
+title = "Average atomic mass"
+caption = "Change the mix of chlorine's two isotopes and watch the average mass move."
+
+[[exercise]]
+type = "numeric"
+prompt = "How many neutrons are in carbon-14? Carbon has atomic number 6."
+answer = 8
+unit = "neutrons"
+
+[[exercise]]
+type = "numeric"
+prompt = "Boron is 19.9% B-10 (10.01 amu) and 80.1% B-11 (11.01 amu). What is its average atomic mass?"
+answer = 10.81
+unit = "amu"
+derive = "10.01 * 0.199 + 11.01 * 0.801"
+
+[[exercise]]
+type = "choice"
+prompt = "Two atoms are isotopes of the same element. They must have the same:"
+options = ["number of neutrons", "number of protons", "mass number", "mass"]
+answer = 1
+
+[[exercise]]
+type = "numeric"
+prompt = "An element is 60.0% isotope A (63.0 amu) and 40.0% isotope B (65.0 amu). What is its average atomic mass?"
+answer = 63.8
+unit = "amu"
+derive = "63.0 * 0.600 + 65.0 * 0.400"

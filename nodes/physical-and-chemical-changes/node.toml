@@ -1,0 +1,22 @@
+title = "Physical and chemical changes"
+summary = "Tell a change of form from a change of substance."
+unit = "matter"
+prerequisites = ["classifying-matter"]
+
+[[exercise]]
+type = "choice"
+prompt = "Which is a chemical change?"
+options = ["Ice melting", "Sugar dissolving in tea", "Iron rusting", "Glass breaking"]
+answer = 2
+
+[[exercise]]
+type = "choice"
+prompt = "Water boils into steam. What happens to the water molecules?"
+options = ["They break into hydrogen and oxygen", "They stay H2O but move farther apart", "They become air", "They are destroyed"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "Which observation is the strongest evidence of a chemical change?"
+options = ["A liquid changes shape in a new container", "A solid is ground into powder", "Two clear solutions mix and a solid forms", "A solid melts when heated"]
+answer = 2

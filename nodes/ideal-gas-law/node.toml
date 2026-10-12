@@ -1,0 +1,38 @@
+title = "The ideal gas law"
+summary = "Relate pressure, volume, temperature and moles of a gas in one equation."
+unit = "gases"
+prerequisites = ["charles-law", "the-mole"]
+
+[[interactive]]
+kind = "gas-law"
+title = "An ideal gas"
+caption = "Change the amount, temperature and volume, and watch the pressure."
+params = { mode = "ideal" }
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the pressure of 2.00 mol of gas in a 10.0 L container at 300 K?"
+answer = 4.92
+unit = "atm"
+derive = "2.00 * R * 300 / 10.0"
+
+[[exercise]]
+type = "numeric"
+prompt = "How many moles of gas are in a 5.00 L container at 1.50 atm and 298 K?"
+answer = 0.307
+unit = "mol"
+derive = "1.50 * 5.00 / (R * 298)"
+
+[[exercise]]
+type = "numeric"
+prompt = "What volume does 0.500 mol of gas occupy at 1.00 atm and 273 K?"
+answer = 11.2
+unit = "L"
+derive = "0.500 * R * 273 / 1.00"
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the temperature of 1.00 mol of gas at 2.00 atm in a 12.3 L container?"
+answer = 300.0
+unit = "K"
+derive = "2.00 * 12.3 / (1.00 * R)"

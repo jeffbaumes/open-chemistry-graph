@@ -1,0 +1,36 @@
+title = "Specific heat"
+summary = "Calculate the heat needed to change the temperature of a substance."
+unit = "energy"
+prerequisites = ["unit-conversions"]
+
+[[interactive]]
+kind = "specific-heat"
+title = "Heating different materials"
+caption = "Compare how much heat different substances need for the same temperature change."
+
+[[exercise]]
+type = "numeric"
+prompt = "How much heat is needed to raise the temperature of 100.0 g of water by 10.0 °C?"
+answer = 4180.0
+unit = "J"
+derive = "100.0 * c_water * 10.0"
+
+[[exercise]]
+type = "numeric"
+prompt = "How much heat warms 25.0 g of iron, with c = 0.449 J/(g·°C), from 20.0 °C to 100.0 °C?"
+answer = 898.0
+unit = "J"
+derive = "25.0 * 0.449 * 80.0"
+
+[[exercise]]
+type = "numeric"
+prompt = "1794 J of heat warms a 50.0 g sample by 40.0 °C. What is its specific heat?"
+answer = 0.897
+unit = "J/(g·°C)"
+derive = "1794 / (50.0 * 40.0)"
+
+[[exercise]]
+type = "choice"
+prompt = "Equal masses of water and copper absorb the same amount of heat. Which warms up more?"
+options = ["Water", "Copper", "They warm equally", "Neither changes temperature"]
+answer = 1

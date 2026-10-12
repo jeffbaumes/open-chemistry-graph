@@ -1,0 +1,33 @@
+title = "Electron configuration"
+summary = "Write how an atom's electrons fill its energy levels and sublevels."
+unit = "atoms"
+prerequisites = ["atomic-structure"]
+
+[[interactive]]
+kind = "electron-config"
+title = "Fill the orbitals"
+caption = "Slide through the elements to see electrons fill the orbitals in order."
+
+[[exercise]]
+type = "choice"
+prompt = "What is the electron configuration of oxygen (8 electrons)?"
+options = ["1s^2 2s^2 2p^6", "1s^2 2s^2 2p^4", "1s^2 2s^4 2p^2", "1s^2 2p^6"]
+answer = 1
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the maximum number of electrons a p sublevel can hold?"
+answer = 6
+unit = "electrons"
+
+[[exercise]]
+type = "choice"
+prompt = "Which element has the configuration 1s^2 2s^2 2p^6 3s^2 3p^5?"
+options = ["Sulfur", "Chlorine", "Argon", "Fluorine"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "Which sublevel fills immediately after 3p?"
+options = ["3d", "4s", "4p", "3f"]
+answer = 1

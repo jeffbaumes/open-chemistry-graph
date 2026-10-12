@@ -1,0 +1,28 @@
+title = "Classifying matter"
+summary = "Sort matter into elements, compounds and mixtures."
+unit = "matter"
+prerequisites = []
+
+[[exercise]]
+type = "choice"
+prompt = "Which of these is a compound?"
+options = ["Oxygen gas, O2", "Water, H2O", "Salt water", "Bronze"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "Salt dissolved evenly in water is best described as:"
+options = ["an element", "a compound", "a homogeneous mixture", "a heterogeneous mixture"]
+answer = 2
+
+[[exercise]]
+type = "choice"
+prompt = "Which can be separated by physical means such as filtering?"
+options = ["Water into hydrogen and oxygen", "Sand from water", "Table salt into sodium and chlorine", "Carbon dioxide into carbon and oxygen"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "Which of these is an element?"
+options = ["CO", "H2O", "NaCl", "Co"]
+answer = 3

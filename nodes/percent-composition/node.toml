@@ -1,0 +1,32 @@
+title = "Percent composition"
+summary = "Find what percentage of a compound's mass comes from each element."
+unit = "moles"
+prerequisites = ["molar-mass"]
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the percent by mass of carbon in CO2?"
+answer = 27.29
+unit = "%"
+derive = "100 * M('C') / M('CO2')"
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the percent by mass of sodium in NaCl?"
+answer = 39.34
+unit = "%"
+derive = "100 * M('Na') / M('NaCl')"
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the percent by mass of oxygen in CaCO3?"
+answer = 47.96
+unit = "%"
+derive = "100 * 3 * M('O') / M('CaCO3')"
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the percent by mass of hydrogen in CH4?"
+answer = 25.13
+unit = "%"
+derive = "100 * 4 * M('H') / M('CH4')"

@@ -1,0 +1,28 @@
+title = "Redox reactions"
+summary = "Identify what is oxidized and what is reduced when electrons transfer."
+unit = "redox"
+prerequisites = ["oxidation-numbers", "types-of-reactions"]
+
+[[exercise]]
+type = "choice"
+prompt = "In Zn + Cu^2+ -> Zn^2+ + Cu, which species is oxidized?"
+options = ["Zn", "Cu^2+", "Zn^2+", "Cu"]
+answer = 0
+
+[[exercise]]
+type = "choice"
+prompt = "Reduction is:"
+options = ["the loss of electrons", "the gain of electrons", "the loss of protons", "the gain of oxygen only"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "In 2 Na + Cl2 -> 2 NaCl, what is the oxidizing agent?"
+options = ["Na", "Cl2", "NaCl", "Na^+"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "An atom's oxidation number changes from +3 to +1. It has been:"
+options = ["oxidized", "reduced", "neutralized", "ionized"]
+answer = 1

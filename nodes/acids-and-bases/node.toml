@@ -1,0 +1,28 @@
+title = "Acids and bases"
+summary = "Define acids and bases by what they do in water."
+unit = "acids"
+prerequisites = ["solutions-and-solubility", "ions"]
+
+[[exercise]]
+type = "choice"
+prompt = "Which substance is an acid?"
+options = ["NaOH", "HNO3", "NaCl", "NH3"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "A base is a substance that:"
+options = ["donates protons", "accepts protons", "donates electrons", "has a pH below 7"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "What makes an acid strong?"
+options = ["It is very concentrated", "It ionizes completely in water", "It is dangerous", "It contains many hydrogen atoms"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "Which ion do bases produce in water?"
+options = ["H^+", "H3O^+", "OH^-", "Cl^-"]
+answer = 2

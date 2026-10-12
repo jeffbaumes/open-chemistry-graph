@@ -1,0 +1,34 @@
+title = "Reaction rates"
+summary = "Explain what makes a reaction go faster or slower."
+unit = "energy"
+prerequisites = ["endothermic-and-exothermic"]
+
+[[interactive]]
+kind = "energy-diagram"
+title = "Activation energy and catalysts"
+caption = "Change the activation energy, then add a catalyst."
+params = { catalyst = true }
+
+[[exercise]]
+type = "choice"
+prompt = "Why does raising the temperature speed up a reaction?"
+options = ["It lowers the activation energy", "More collisions have enough energy to react", "It adds a catalyst", "It increases the mass of the particles"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "A catalyst speeds up a reaction by:"
+options = ["raising the temperature", "lowering the activation energy", "increasing ΔH", "being consumed"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "Which will react fastest with acid?"
+options = ["A solid block of zinc", "Zinc pellets", "Zinc powder", "They react equally fast"]
+answer = 2
+
+[[exercise]]
+type = "choice"
+prompt = "Food is kept in a refrigerator because a lower temperature:"
+options = ["kills all bacteria", "slows the reactions that spoil food", "removes oxygen", "acts as a catalyst"]
+answer = 1

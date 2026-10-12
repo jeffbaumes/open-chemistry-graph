@@ -16,6 +16,7 @@
   --font-body: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
   --font-ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --measure: 40rem;
+  --touch: 2.75rem; /* smallest comfortable tap target */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,6 +45,7 @@ body {
   color: var(--text);
   font: 1.125rem/1.65 var(--font-body);
   font-variant-numeric: lining-nums;
+  overflow-wrap: break-word;
 }
 
 main, header.site {
@@ -65,7 +67,7 @@ a { color: var(--accent); }
 .muted { color: var(--muted); }
 
 h1 {
-  font-size: 2.1rem;
+  font-size: clamp(1.6rem, 6vw, 2.1rem);
   line-height: 1.15;
   margin: 1.5rem 0 1.25rem;
   padding-bottom: 0.6rem;
@@ -81,18 +83,20 @@ h2 { font-size: 1.3rem; line-height: 1.25; margin: 2.2rem 0 0.6rem; }
 .eyebrow { font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
 
 /* Chemistry */
-sub { font-size: 0.7em; line-height: 0; vertical-align: -0.3em; }
+sub, sup { font-size: 0.7em; line-height: 0; }
+sub { vertical-align: -0.3em; }
+sup { vertical-align: 0.55em; }
 .formula { white-space: nowrap; }
 
 /* Lesson body */
+.lesson .table-wrap { overflow-x: auto; margin: 1rem 0; }
 .lesson table {
   border-collapse: collapse;
-  margin: 1rem 0;
   border-top: 2px solid var(--rule);
   border-bottom: 2px solid var(--rule);
   font-variant-numeric: lining-nums tabular-nums;
 }
-.lesson th, .lesson td { padding: 0.3rem 1.2rem 0.3rem 0; text-align: left; }
+.lesson th, .lesson td { padding: 0.3rem 1.2rem 0.3rem 0; text-align: left; vertical-align: top; }
 .lesson th:last-child, .lesson td:last-child { padding-right: 0; }
 .lesson thead th { border-bottom: 1px solid var(--rule); font-weight: 600; }
 
@@ -103,7 +107,6 @@ sub { font-size: 0.7em; line-height: 0; vertical-align: -0.3em; }
   padding: 0.9rem 1.2rem 0.5rem;
   border-left: 4px solid var(--example-edge);
   background: var(--example-bg);
-  overflow-x: auto;
 }
 .lesson section.mistake { border-left-color: var(--mistake-edge); background: var(--mistake-bg); }
 .lesson section h2 {
@@ -117,18 +120,19 @@ sub { font-size: 0.7em; line-height: 0; vertical-align: -0.3em; }
 .lesson section h2 .formula { text-transform: none; }
 
 /* Contents page */
-.contents { list-style: none; padding: 0; counter-reset: lesson; }
+.unit h2 { margin-top: 2.6rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--rule); }
+.unit h2 .muted { display: block; font: 600 0.8rem/1.6 var(--font-ui); letter-spacing: 0.08em; text-transform: uppercase; }
+.contents { list-style: none; padding: 0; margin: 0; }
 .contents li {
-  counter-increment: lesson;
   display: grid;
-  grid-template-columns: 2rem 1fr;
-  padding: 0.8rem 0;
+  grid-template-columns: 2.6rem 1fr;
+  padding: 0.7rem 0;
   border-bottom: 1px solid var(--border);
 }
-.contents li::before { content: counter(lesson); color: var(--muted); font-variant-numeric: lining-nums tabular-nums; }
-.contents a { grid-column: 2; font-size: 1.2rem; text-decoration: none; }
+.contents .index { color: var(--muted); font-variant-numeric: lining-nums tabular-nums; }
+.contents a { grid-column: 2; font-size: 1.15rem; text-decoration: none; }
 .contents a:hover { text-decoration: underline; }
-.contents p { grid-column: 2; margin: 0.1rem 0 0; font-size: 1rem; }
+.contents p { grid-column: 2; margin: 0.1rem 0 0; font-size: 1rem; line-height: 1.45; }
 .wanted { color: var(--muted); }
 .wanted li::first-letter { text-transform: uppercase; }
 
@@ -138,7 +142,7 @@ sub { font-size: 0.7em; line-height: 0; vertical-align: -0.3em; }
 .exercise { padding: 1rem 0 1.1rem; border-bottom: 1px solid var(--border); }
 .exercise .prompt { margin: 0 0 0.6rem; }
 .exercise .number { font-weight: 700; margin-right: 0.2rem; }
-.exercise .options label { display: block; padding: 0.1rem 0; }
+.exercise .options label { display: block; padding: 0.3rem 0; }
 .exercise .equation { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; font-size: 1.2rem; margin: 0.4rem 0 0.2rem; }
 .exercise .term { white-space: nowrap; }
 .exercise .op { color: var(--muted); }
@@ -148,15 +152,18 @@ sub { font-size: 0.7em; line-height: 0; vertical-align: -0.3em; }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 3px;
-  padding: 0.15rem 0.4rem;
-  width: 7rem;
+  padding: 0.3rem 0.5rem;
+  width: 8rem;
+  max-width: 100%;
 }
-.exercise .term input[type='text'] { width: 2.4rem; text-align: center; margin-right: 0.3rem; }
+.exercise input.wide { width: 18rem; }
+.exercise .term input[type='text'] { width: 2.6rem; text-align: center; margin-right: 0.3rem; }
 .exercise .actions { margin-top: 0.7rem; font: 0.9rem/1 var(--font-ui); }
 .exercise button {
   font: inherit;
   font-weight: 600;
-  padding: 0.4rem 1rem;
+  min-height: var(--touch);
+  padding: 0 1.2rem;
   border: 1px solid var(--accent);
   border-radius: 3px;
   background: transparent;
@@ -166,3 +173,15 @@ sub { font-size: 0.7em; line-height: 0; vertical-align: -0.3em; }
 .feedback { margin-left: 0.8rem; font-weight: 600; }
 .exercise[data-state='correct'] .feedback { color: var(--correct); }
 .exercise[data-state='wrong'] .feedback { color: var(--wrong); }
+
+/* Previous and next lesson */
+.lesson-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2.5rem; }
+.lesson-nav a { flex: 1 1 0; text-decoration: none; line-height: 1.3; }
+.lesson-nav a.next { text-align: right; }
+.lesson-nav a span { display: block; font: 600 0.75rem/1.8 var(--font-ui); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+@media (max-width: 480px) {
+  body { font-size: 1.0625rem; }
+  .lesson section.example, .lesson section.mistake { padding: 0.8rem 0.9rem 0.4rem; }
+  .lesson th, .lesson td { padding-right: 0.8rem; }
+}

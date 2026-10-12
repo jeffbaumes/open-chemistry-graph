@@ -1,5 +1,6 @@
 title = "Balancing chemical equations"
 summary = "Choose coefficients so every element has the same number of atoms on both sides."
+unit = "reactions"
 prerequisites = ["chemical-formulas", "conservation-of-mass"]
 
 [[exercise]]
@@ -29,3 +30,9 @@ prompt = "Balance the equation."
 reactants = ["Al", "HCl"]
 products = ["AlCl3", "H2"]
 answer = { reactants = [2, 6], products = [2, 3] }
+
+[[interactive]]
+kind = "equation-balancer"
+title = "Balance by counting atoms"
+caption = "Change the coefficients until every element has the same count on both sides."
+params = { reactants = ["N2", "H2"], products = ["NH3"] }

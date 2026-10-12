@@ -1,0 +1,33 @@
+title = "Polarity and intermolecular forces"
+summary = "Use electronegativity to predict polar bonds and how molecules attract each other."
+unit = "bonding"
+prerequisites = ["molecular-shape", "periodic-trends"]
+
+[[interactive]]
+kind = "bond-type"
+title = "Bond polarity"
+caption = "Pick two elements to compare their electronegativity and see what kind of bond they form."
+
+[[exercise]]
+type = "choice"
+prompt = "The electronegativity difference between H (2.20) and Cl (3.16) is 0.96. The bond is:"
+options = ["nonpolar covalent", "polar covalent", "ionic", "metallic"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "Why is CO2 a nonpolar molecule?"
+options = ["Its bonds are nonpolar", "Its two polar bonds point in opposite directions and cancel", "It contains no hydrogen", "It is a gas"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "Which substance has hydrogen bonding between its molecules?"
+options = ["CH4", "CO2", "NH3", "Cl2"]
+answer = 2
+
+[[exercise]]
+type = "choice"
+prompt = "Which has the highest boiling point?"
+options = ["CH4", "H2O", "O2", "N2"]
+answer = 1

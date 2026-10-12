@@ -1,0 +1,28 @@
+title = "Oxidation numbers"
+summary = "Assign each atom a number that tracks its share of electrons."
+unit = "redox"
+prerequisites = ["ions", "chemical-formulas"]
+
+[[exercise]]
+type = "choice"
+prompt = "What is the oxidation number of each atom in O2?"
+options = ["-2", "0", "+2", "-1"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "What is the oxidation number of carbon in CO2?"
+options = ["+2", "+4", "-4", "0"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "What is the oxidation number of nitrogen in NO3^-?"
+options = ["+3", "+5", "-1", "+6"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "What is the oxidation number of iron in Fe2O3?"
+options = ["+2", "+3", "+6", "-3"]
+answer = 1

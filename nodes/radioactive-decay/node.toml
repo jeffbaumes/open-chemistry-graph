@@ -1,0 +1,28 @@
+title = "Radioactive decay"
+summary = "Describe how unstable nuclei change by emitting radiation."
+unit = "nuclear"
+prerequisites = ["isotopes-and-atomic-mass"]
+
+[[exercise]]
+type = "choice"
+prompt = "Radium-226 (atomic number 88) undergoes alpha decay. What is the product?"
+options = ["Radium-222", "Radon-222", "Thorium-230", "Radon-226"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "In beta decay, the atomic number:"
+options = ["decreases by 2", "decreases by 1", "increases by 1", "does not change"]
+answer = 2
+
+[[exercise]]
+type = "choice"
+prompt = "Which radiation is the most penetrating?"
+options = ["Alpha", "Beta", "Gamma", "They are equal"]
+answer = 2
+
+[[exercise]]
+type = "numeric"
+prompt = "Polonium-210 undergoes alpha decay. What is the mass number of the product?"
+answer = 206
+unit = "is the mass number"

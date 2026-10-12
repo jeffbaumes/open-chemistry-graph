@@ -1,0 +1,36 @@
+title = "Density"
+summary = "Relate the mass of a substance to the space it takes up."
+unit = "matter"
+prerequisites = ["unit-conversions"]
+
+[[interactive]]
+kind = "density"
+title = "Sink or float"
+caption = "Change the mass and volume of a block and see whether it floats in water."
+
+[[exercise]]
+type = "numeric"
+prompt = "A sample has a mass of 46.8 g and a volume of 6.00 cm^3. What is its density?"
+answer = 7.8
+unit = "g/cm^3"
+derive = "46.8 / 6.00"
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the mass of 25.0 mL of mercury, density 13.6 g/mL?"
+answer = 340.0
+unit = "g"
+derive = "13.6 * 25.0"
+
+[[exercise]]
+type = "numeric"
+prompt = "What volume does 100.0 g of ethanol occupy? Its density is 0.789 g/mL."
+answer = 127.0
+unit = "mL"
+derive = "100.0 / 0.789"
+
+[[exercise]]
+type = "choice"
+prompt = "A block has a density of 0.92 g/cm^3. In water it will:"
+options = ["sink, because it is a solid", "float, because it is less dense than water", "sink, because it is heavy", "dissolve"]
+answer = 1

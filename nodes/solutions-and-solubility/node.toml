@@ -1,0 +1,29 @@
+title = "Solutions and solubility"
+summary = "Describe how substances dissolve and what limits how much dissolves."
+unit = "solutions"
+prerequisites = ["polarity-and-intermolecular-forces"]
+
+[[exercise]]
+type = "choice"
+prompt = "In a sugar-water solution, the sugar is the:"
+options = ["solvent", "solute", "precipitate", "solution"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "Why does oil not dissolve in water?"
+options = ["Oil is too dense", "Oil is nonpolar and water is polar", "Oil molecules are too small", "Water is saturated"]
+answer = 1
+
+[[exercise]]
+type = "numeric"
+prompt = "The solubility of a salt is 36 g per 100 g of water. How much dissolves in 250 g of water?"
+answer = 90
+unit = "g"
+derive = "36 * 250 / 100"
+
+[[exercise]]
+type = "choice"
+prompt = "How does raising the temperature affect the solubility of a gas in water?"
+options = ["It increases", "It decreases", "It does not change", "It doubles"]
+answer = 1

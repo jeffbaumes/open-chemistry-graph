@@ -1,0 +1,32 @@
+title = "The mole"
+summary = "Count atoms and molecules using the chemist's counting unit."
+unit = "moles"
+prerequisites = ["chemical-formulas"]
+
+[[exercise]]
+type = "numeric"
+prompt = "How many atoms are in 3.00 mol of helium?"
+answer = 1.81e+24
+unit = "atoms"
+derive = "3.00 * NA"
+
+[[exercise]]
+type = "numeric"
+prompt = "How many moles is 1.204 × 10^24 molecules of CO2?"
+answer = 2.0
+unit = "mol"
+derive = "1.204e24 / NA"
+
+[[exercise]]
+type = "numeric"
+prompt = "How many moles of oxygen atoms are in 2.0 mol of CO2?"
+answer = 4.0
+unit = "mol"
+derive = "2.0 * 2"
+
+[[exercise]]
+type = "numeric"
+prompt = "How many molecules are in 0.250 mol of O2?"
+answer = 1.51e+23
+unit = "molecules"
+derive = "0.250 * NA"

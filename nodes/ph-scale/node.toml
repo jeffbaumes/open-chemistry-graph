@@ -1,0 +1,43 @@
+title = "The pH scale"
+summary = "Measure acidity from the concentration of hydrogen ions."
+unit = "acids"
+prerequisites = ["acids-and-bases", "molarity"]
+
+[[interactive]]
+kind = "ph-scale"
+title = "The pH scale"
+caption = "Slide along the scale to see how the ion concentrations change."
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the pH of a solution with [H^+] = 1.0 × 10^-5 M?"
+answer = 5.0
+unit = "on the pH scale"
+derive = "-log10(1.0e-5)"
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the pH of a solution with [H^+] = 2.5 × 10^-4 M?"
+answer = 3.6
+unit = "on the pH scale"
+derive = "-log10(2.5e-4)"
+
+[[exercise]]
+type = "numeric"
+prompt = "A solution has pH 2. What is [H^+]?"
+answer = 0.01
+unit = "M"
+derive = "10 ** -2"
+
+[[exercise]]
+type = "choice"
+prompt = "Solution A has pH 2 and solution B has pH 5. Compared with B, the [H^+] in A is:"
+options = ["3 times higher", "30 times higher", "1000 times higher", "1000 times lower"]
+answer = 2
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the pH of a solution with a pOH of 4?"
+answer = 10
+unit = "on the pH scale"
+derive = "14 - 4"

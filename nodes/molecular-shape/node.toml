@@ -1,0 +1,33 @@
+title = "Molecular shape"
+summary = "Predict the shape of a molecule from the electron groups around its central atom."
+unit = "bonding"
+prerequisites = ["covalent-bonding"]
+
+[[interactive]]
+kind = "vsepr"
+title = "Shapes from electron groups"
+caption = "Choose how many bonded atoms and lone pairs surround the central atom."
+
+[[exercise]]
+type = "choice"
+prompt = "What is the shape of CH4?"
+options = ["Linear", "Trigonal planar", "Tetrahedral", "Bent"]
+answer = 2
+
+[[exercise]]
+type = "choice"
+prompt = "Water has 2 bonded atoms and 2 lone pairs on oxygen. What is its shape?"
+options = ["Linear", "Bent", "Tetrahedral", "Trigonal pyramidal"]
+answer = 1
+
+[[exercise]]
+type = "numeric"
+prompt = "How many electron groups surround the carbon atom in CO2?"
+answer = 2
+unit = "electron groups"
+
+[[exercise]]
+type = "choice"
+prompt = "Why is the bond angle in NH3 smaller than in CH4?"
+options = ["Nitrogen is a larger atom", "The lone pair on nitrogen pushes the bonds closer together", "Hydrogen atoms attract each other", "NH3 has fewer electrons"]
+answer = 1

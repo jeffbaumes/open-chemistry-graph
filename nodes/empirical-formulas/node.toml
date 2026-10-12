@@ -1,0 +1,28 @@
+title = "Empirical formulas"
+summary = "Find the simplest whole-number ratio of atoms in a compound from mass data."
+unit = "moles"
+prerequisites = ["percent-composition", "mole-mass-conversions"]
+
+[[exercise]]
+type = "choice"
+prompt = "What is the empirical formula of C2H6?"
+options = ["C2H6", "CH3", "CH", "C3H9"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "A compound is 27.3% C and 72.7% O by mass. What is its empirical formula?"
+options = ["CO", "CO2", "C2O", "C2O3"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "A compound has the empirical formula CH2 and a molar mass of 56.1 g/mol. What is its molecular formula?"
+options = ["CH2", "C2H4", "C3H6", "C4H8"]
+answer = 3
+
+[[exercise]]
+type = "choice"
+prompt = "A compound contains 0.50 mol of Fe and 0.75 mol of O. What is its empirical formula?"
+options = ["FeO", "FeO2", "Fe2O3", "Fe3O4"]
+answer = 2

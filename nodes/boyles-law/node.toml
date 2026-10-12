@@ -1,0 +1,37 @@
+title = "Boyle's law"
+summary = "Relate the pressure and volume of a gas at constant temperature."
+unit = "gases"
+prerequisites = ["gas-pressure-and-temperature"]
+
+[[interactive]]
+kind = "gas-law"
+title = "Squeeze a gas"
+caption = "Change the volume and watch the pressure. The temperature stays constant."
+params = { mode = "boyle" }
+
+[[exercise]]
+type = "numeric"
+prompt = "A gas has a volume of 6.00 L at 1.00 atm. What is its volume at 3.00 atm, at constant temperature?"
+answer = 2.0
+unit = "L"
+derive = "1.00 * 6.00 / 3.00"
+
+[[exercise]]
+type = "numeric"
+prompt = "A gas at 2.00 atm occupies 5.00 L. What pressure is needed to compress it to 2.50 L?"
+answer = 4.0
+unit = "atm"
+derive = "2.00 * 5.00 / 2.50"
+
+[[exercise]]
+type = "numeric"
+prompt = "A balloon holds 1.50 L at 760 mmHg. What is its volume at 570 mmHg, at constant temperature?"
+answer = 2.0
+unit = "L"
+derive = "1.50 * 760 / 570"
+
+[[exercise]]
+type = "choice"
+prompt = "The volume of a gas is doubled at constant temperature. Its pressure:"
+options = ["doubles", "halves", "stays the same", "quadruples"]
+answer = 1

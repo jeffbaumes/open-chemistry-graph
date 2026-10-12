@@ -1,0 +1,28 @@
+title = "Covalent bonding"
+summary = "Show how nonmetals bond by sharing electrons, using Lewis structures."
+unit = "bonding"
+prerequisites = ["ionic-bonding"]
+
+[[exercise]]
+type = "numeric"
+prompt = "How many valence electrons are in one molecule of CH4 in total?"
+answer = 8
+unit = "valence electrons"
+
+[[exercise]]
+type = "numeric"
+prompt = "How many lone pairs are on the nitrogen atom in NH3?"
+answer = 1
+unit = "lone pair"
+
+[[exercise]]
+type = "choice"
+prompt = "Which pair of elements will form a covalent bond?"
+options = ["Na and Cl", "Mg and O", "C and O", "K and Br"]
+answer = 2
+
+[[exercise]]
+type = "numeric"
+prompt = "How many electrons are shared in a triple bond?"
+answer = 6
+unit = "electrons"

@@ -1,0 +1,28 @@
+title = "Types of reactions"
+summary = "Recognize five common patterns of chemical reactions."
+unit = "reactions"
+prerequisites = ["balancing-equations"]
+
+[[exercise]]
+type = "choice"
+prompt = "Classify: 2 Na + Cl2 -> 2 NaCl"
+options = ["Synthesis", "Decomposition", "Single replacement", "Combustion"]
+answer = 0
+
+[[exercise]]
+type = "choice"
+prompt = "Classify: CaCO3 -> CaO + CO2"
+options = ["Synthesis", "Decomposition", "Double replacement", "Combustion"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "Classify: Cu + 2 AgNO3 -> Cu(NO3)2 + 2 Ag"
+options = ["Synthesis", "Decomposition", "Single replacement", "Double replacement"]
+answer = 2
+
+[[exercise]]
+type = "choice"
+prompt = "What are the products when propane, C3H8, burns completely in oxygen?"
+options = ["C and H2", "CO and H2", "CO2 and H2O", "C3H8O2"]
+answer = 2

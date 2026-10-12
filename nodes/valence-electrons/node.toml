@@ -1,0 +1,28 @@
+title = "Valence electrons"
+summary = "Find the outer electrons that control how an atom bonds."
+unit = "atoms"
+prerequisites = ["electron-configuration"]
+
+[[exercise]]
+type = "numeric"
+prompt = "How many valence electrons does carbon have? Its configuration is 1s^2 2s^2 2p^2."
+answer = 4
+unit = "valence electrons"
+
+[[exercise]]
+type = "numeric"
+prompt = "How many valence electrons does chlorine (group 17) have?"
+answer = 7
+unit = "valence electrons"
+
+[[exercise]]
+type = "numeric"
+prompt = "How many dots are in the Lewis dot diagram of magnesium (group 2)?"
+answer = 2
+unit = "dots"
+
+[[exercise]]
+type = "choice"
+prompt = "Why are noble gases unreactive?"
+options = ["They have no electrons", "Their outer energy level is full", "They have no protons", "They are all radioactive"]
+answer = 1

@@ -1,0 +1,30 @@
+title = "Conservation of mass"
+summary = "Explain why the mass of the products equals the mass of the reactants."
+unit = "reactions"
+prerequisites = ["physical-and-chemical-changes", "chemical-formulas"]
+
+[[exercise]]
+type = "numeric"
+prompt = "12.0 g of carbon reacts completely with 32.0 g of oxygen. What mass of carbon dioxide forms?"
+answer = 44.0
+unit = "g"
+derive = "12.0 + 32.0"
+
+[[exercise]]
+type = "numeric"
+prompt = "100.0 g of calcium carbonate breaks down into 56.0 g of calcium oxide and carbon dioxide. What mass of carbon dioxide forms?"
+answer = 44.0
+unit = "g"
+derive = "100.0 - 56.0"
+
+[[exercise]]
+type = "choice"
+prompt = "During a chemical reaction, atoms are:"
+options = ["created", "destroyed", "rearranged", "changed into other elements"]
+answer = 2
+
+[[exercise]]
+type = "choice"
+prompt = "Steel wool is burned in open air and its mass increases. Why?"
+options = ["Mass was created", "Oxygen from the air combined with the iron", "The steel absorbed heat", "The law does not apply to metals"]
+answer = 1

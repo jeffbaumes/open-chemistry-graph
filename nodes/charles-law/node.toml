@@ -1,0 +1,37 @@
+title = "Charles's law"
+summary = "Relate the volume and temperature of a gas at constant pressure."
+unit = "gases"
+prerequisites = ["boyles-law"]
+
+[[interactive]]
+kind = "gas-law"
+title = "Heat a gas"
+caption = "Change the temperature and watch the volume. The pressure stays constant."
+params = { mode = "charles" }
+
+[[exercise]]
+type = "numeric"
+prompt = "A gas occupies 3.00 L at 200 K. What is its volume at 400 K, at constant pressure?"
+answer = 6.0
+unit = "L"
+derive = "3.00 * 400 / 200"
+
+[[exercise]]
+type = "numeric"
+prompt = "A gas occupies 5.00 L at 27 °C. What is its volume at 127 °C, at constant pressure?"
+answer = 6.67
+unit = "L"
+derive = "5.00 * (127 + 273) / (27 + 273)"
+
+[[exercise]]
+type = "numeric"
+prompt = "A gas has a volume of 2.00 L at 1.00 atm and 300 K. What is its volume at 2.00 atm and 600 K?"
+answer = 2.0
+unit = "L"
+derive = "2.00 * 1.00 * 600 / (300 * 2.00)"
+
+[[exercise]]
+type = "choice"
+prompt = "A sealed balloon is moved from a warm room into a freezer. Its volume:"
+options = ["increases", "decreases", "stays the same", "doubles"]
+answer = 1

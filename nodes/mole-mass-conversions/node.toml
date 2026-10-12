@@ -1,5 +1,6 @@
 title = "Converting between mass and moles"
 summary = "Use molar mass as a conversion factor between grams and moles."
+unit = "moles"
 prerequisites = ["molar-mass"]
 
 [[exercise]]
@@ -22,3 +23,8 @@ prompt = "How many moles are in 10.0 g of calcium carbonate, CaCO3?"
 answer = 0.0999
 unit = "mol"
 derive = { kind = "moles_from_mass", formula = "CaCO3", mass_g = 10.0 }
+
+[[interactive]]
+kind = "mole-converter"
+title = "Grams, moles and particles"
+caption = "Pick a substance and a mass to see the same amount three ways."

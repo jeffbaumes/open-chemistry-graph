@@ -1,0 +1,37 @@
+title = "Dilution"
+summary = "Calculate the concentration after adding solvent to a solution."
+unit = "solutions"
+prerequisites = ["molarity"]
+
+[[interactive]]
+kind = "molarity"
+title = "Dilute a solution"
+caption = "Add water and watch the concentration fall. The amount of solute does not change."
+params = { mode = "dilution" }
+
+[[exercise]]
+type = "numeric"
+prompt = "50.0 mL of 2.00 M NaCl is diluted to 200.0 mL. What is the new concentration?"
+answer = 0.5
+unit = "M"
+derive = "2.00 * 50.0 / 200.0"
+
+[[exercise]]
+type = "numeric"
+prompt = "What volume of 6.00 M HCl is needed to make 300 mL of 1.00 M HCl?"
+answer = 50.0
+unit = "mL"
+derive = "1.00 * 300 / 6.00"
+
+[[exercise]]
+type = "numeric"
+prompt = "25.0 mL of 4.00 M solution is diluted to 0.500 M. What is the final volume?"
+answer = 200
+unit = "mL"
+derive = "4.00 * 25.0 / 0.500"
+
+[[exercise]]
+type = "choice"
+prompt = "When a solution is diluted, the number of moles of solute:"
+options = ["increases", "decreases", "stays the same", "becomes zero"]
+answer = 2

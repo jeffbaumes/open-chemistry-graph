@@ -1,0 +1,34 @@
+title = "Endothermic and exothermic reactions"
+summary = "Track whether a reaction absorbs or releases heat."
+unit = "energy"
+prerequisites = ["specific-heat", "balancing-equations"]
+
+[[interactive]]
+kind = "energy-diagram"
+title = "Energy diagram"
+caption = "Switch between a reaction that releases heat and one that absorbs it."
+
+[[exercise]]
+type = "choice"
+prompt = "A reaction has ΔH = -250 kJ. It is:"
+options = ["endothermic and absorbs heat", "exothermic and releases heat", "endothermic and releases heat", "at equilibrium"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "A cold pack gets cold when activated. The process inside is:"
+options = ["exothermic", "endothermic", "neither", "combustion"]
+answer = 1
+
+[[exercise]]
+type = "numeric"
+prompt = "2 H2 + O2 -> 2 H2O has ΔH = -572 kJ. How much heat is released when 4.00 mol of H2 burns?"
+answer = 1144
+unit = "kJ"
+derive = "4.00 / 2 * 572"
+
+[[exercise]]
+type = "choice"
+prompt = "In an exothermic reaction, the products have:"
+options = ["more energy than the reactants", "less energy than the reactants", "the same energy as the reactants", "no energy"]
+answer = 1

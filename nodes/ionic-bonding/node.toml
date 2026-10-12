@@ -1,0 +1,28 @@
+title = "Ionic bonding"
+summary = "Explain how metals and nonmetals bond by transferring electrons."
+unit = "bonding"
+prerequisites = ["ions", "periodic-table-organization"]
+
+[[exercise]]
+type = "choice"
+prompt = "What is the formula of the compound formed by Mg^2+ and Cl^-?"
+options = ["MgCl", "MgCl2", "Mg2Cl", "Mg2Cl2"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "What is the formula of aluminum oxide, from Al^3+ and O^2-?"
+options = ["AlO", "Al3O2", "Al2O3", "AlO3"]
+answer = 2
+
+[[exercise]]
+type = "choice"
+prompt = "In an ionic bond, electrons are:"
+options = ["shared equally", "transferred from the metal to the nonmetal", "transferred from the nonmetal to the metal", "destroyed"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "Why does solid NaCl not conduct electricity, while melted NaCl does?"
+options = ["Solid NaCl has no ions", "In the solid the ions are locked in place", "Melting creates electrons", "Solid NaCl is a metal"]
+answer = 1

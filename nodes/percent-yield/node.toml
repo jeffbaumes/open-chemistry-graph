@@ -1,0 +1,31 @@
+title = "Percent yield"
+summary = "Compare the product actually obtained with the amount the equation predicts."
+unit = "moles"
+prerequisites = ["limiting-reactant"]
+
+[[exercise]]
+type = "numeric"
+prompt = "The theoretical yield is 40.0 g and the actual yield is 34.0 g. What is the percent yield?"
+answer = 85.0
+unit = "%"
+derive = "100 * 34.0 / 40.0"
+
+[[exercise]]
+type = "numeric"
+prompt = "A reaction has a theoretical yield of 12.5 g and a percent yield of 80.0%. What is the actual yield?"
+answer = 10.0
+unit = "g"
+derive = "12.5 * 0.800"
+
+[[exercise]]
+type = "numeric"
+prompt = "CaCO3 -> CaO + CO2. Heating 100.0 g of CaCO3 produces 50.4 g of CaO. What is the percent yield?"
+answer = 90.0
+unit = "%"
+derive = "100 * 50.4 / (100.0 / M('CaCO3') * M('CaO'))"
+
+[[exercise]]
+type = "choice"
+prompt = "Which is a reasonable cause of a percent yield below 100%?"
+options = ["Atoms were destroyed", "Some product was lost when transferring it", "The balance read too high", "The equation was balanced"]
+answer = 1

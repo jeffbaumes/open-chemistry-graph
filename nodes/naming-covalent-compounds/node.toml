@@ -1,0 +1,31 @@
+title = "Naming covalent compounds"
+summary = "Name compounds of two nonmetals using prefixes."
+unit = "bonding"
+prerequisites = ["naming-ionic-compounds"]
+
+[[exercise]]
+type = "text"
+prompt = "Name the compound CO2."
+answer = "carbon dioxide"
+
+[[exercise]]
+type = "text"
+prompt = "Name the compound PCl3."
+answer = "phosphorus trichloride"
+
+[[exercise]]
+type = "choice"
+prompt = "What is the formula of dinitrogen pentoxide?"
+options = ["NO5", "N2O4", "N2O5", "N5O2"]
+answer = 2
+
+[[exercise]]
+type = "text"
+prompt = "Name the compound CO."
+answer = "carbon monoxide"
+
+[[exercise]]
+type = "choice"
+prompt = "Which compound should be named with prefixes?"
+options = ["NaCl", "CaO", "SO3", "K2S"]
+answer = 2

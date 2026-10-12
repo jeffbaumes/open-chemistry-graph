@@ -1,0 +1,8 @@
+# Physical constants. These names can be used in an exercise's `derive`
+# expression, so answers are recomputed from the same values everywhere.
+
+[value]
+NA = 6.022e23     # Avogadro's number, particles per mole
+R = 0.08206       # gas constant, L·atm/(mol·K)
+c_water = 4.184   # specific heat of liquid water, J/(g·°C)
+Kw = 1.0e-14      # ion product of water at 25 °C

@@ -1,0 +1,34 @@
+title = "Ions"
+summary = "Predict the charge an atom takes when it gains or loses electrons."
+unit = "atoms"
+prerequisites = ["valence-electrons"]
+
+[[interactive]]
+kind = "atom-builder"
+title = "Make an ion"
+caption = "Remove or add electrons and watch the charge change. The protons stay the same."
+params = { protons = 11, neutrons = 12, electrons = 10 }
+
+[[exercise]]
+type = "choice"
+prompt = "What ion does oxygen (group 16) typically form?"
+options = ["O^2+", "O^-", "O^2-", "O^6+"]
+answer = 2
+
+[[exercise]]
+type = "choice"
+prompt = "An ion has 13 protons and 10 electrons. What is its charge?"
+options = ["3-", "3+", "13+", "10-"]
+answer = 1
+
+[[exercise]]
+type = "numeric"
+prompt = "How many electrons are in a Ca^2+ ion? Calcium has atomic number 20."
+answer = 18
+unit = "electrons"
+
+[[exercise]]
+type = "choice"
+prompt = "Which element forms a 1- ion?"
+options = ["Sodium", "Calcium", "Bromine", "Neon"]
+answer = 2

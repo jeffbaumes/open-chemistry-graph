@@ -8,9 +8,13 @@ const { ex, n } = Astro.props;
 
   {ex.type === 'numeric' && (
     <label>
-      <input type="text" inputmode="decimal" data-answer={ex.answer} data-tolerance={ex.tolerance ?? 0.01} aria-label="Your answer" />
-      {ex.unit}
+      <input type="text" inputmode="decimal" autocomplete="off" data-answer={ex.answer} data-tolerance={ex.tolerance ?? 0.01} aria-label="Your answer" />
+      <Fragment set:html={toHtml(ex.unit)} />
     </label>
+  )}
+
+  {ex.type === 'text' && (
+    <input type="text" class="wide" autocomplete="off" autocapitalize="off" data-answers={JSON.stringify([ex.answer, ...(ex.accept ?? [])])} aria-label="Your answer" />
   )}
 
   {ex.type === 'choice' && (
@@ -30,7 +34,7 @@ const { ex, n } = Astro.props;
             <>
               {i > 0 && <span class="op">+</span>}
               <span class="term">
-                <input type="text" inputmode="numeric" data-answer={ex.answer[side][i]} aria-label={`Coefficient for ${formula}`} />
+                <input type="text" inputmode="numeric" autocomplete="off" data-answer={ex.answer[side][i]} aria-label={`Coefficient for ${formula}`} />
                 <Formula formula={formula} />
               </span>
             </>
@@ -44,6 +48,11 @@ const { ex, n } = Astro.props;
 </section>
 
 <script>
+  // Accepts 6.02e23 and 6.02 x 10^23 as well as plain decimals.
+  const parseNumber = (s) =>
+    parseFloat(s.trim().replace(/,/g, '').replace('−', '-').replace(/\s*[x×*]\s*10\s*\^?\s*/i, 'e'));
+  const normalize = (s) => s.toLowerCase().replace(/\s+/g, ' ').trim();
+
   const checkers = {
     choice: (ex) => ex.querySelector('input:checked')?.dataset.correct === 'true',
     // A blank coefficient means 1, as it does when written by hand.
@@ -51,15 +60,23 @@ const { ex, n } = Astro.props;
     numeric: (ex) => {
       const input = ex.querySelector('input');
       const answer = Number(input.dataset.answer);
-      return Math.abs(parseFloat(input.value) - answer) <= Number(input.dataset.tolerance) * Math.abs(answer);
+      return Math.abs(parseNumber(input.value) - answer) <= Number(input.dataset.tolerance) * Math.abs(answer);
+    },
+    text: (ex) => {
+      const input = ex.querySelector('input');
+      return JSON.parse(input.dataset.answers).some((a) => normalize(a) === normalize(input.value));
     },
   };
 
   for (const ex of document.querySelectorAll('.exercise')) {
-    ex.querySelector('button').addEventListener('click', () => {
+    const check = () => {
       const ok = checkers[ex.dataset.type](ex);
       ex.dataset.state = ok ? 'correct' : 'wrong';
       ex.querySelector('.feedback').textContent = ok ? 'Correct' : 'Not yet, try again';
+    };
+    ex.querySelector('button').addEventListener('click', check);
+    ex.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && event.target.matches('input[type="text"]')) check();
     });
   }
 </script>

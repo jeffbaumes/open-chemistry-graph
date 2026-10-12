@@ -1,21 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
-import { nodes, wanted, base, titleOf } from '../lib/nodes.js';
+import { course, wanted, base, titleOf } from '../lib/nodes.js';
 import { toHtml } from '../lib/chem.js';
 ---
 <Base title="Lessons">
   <p class="eyebrow">Contents</p>
   <h1>High school chemistry</h1>
-  <p class="muted">Short lessons with practice problems, ordered so each builds on the ones before it.</p>
+  <p class="muted">Short lessons with interactive models and practice problems, ordered so each builds on the ones before it.</p>
 
-  <ol class="contents">
-    {nodes.map((node) => (
-      <li>
-        <a href={`${base}/${node.id}/`}>{node.title}</a>
-        <p class="muted" set:html={toHtml(node.summary)} />
-      </li>
-    ))}
-  </ol>
+  {course.map((unit, u) => (
+    <section class="unit">
+      <h2><span class="muted">Unit {u + 1}</span> {unit.title}</h2>
+      <ol class="contents">
+        {unit.nodes.map((node, i) => (
+          <li>
+            <span class="index">{u + 1}.{i + 1}</span>
+            <a href={`${base}/${node.id}/`}>{node.title}</a>
+            <p class="muted" set:html={toHtml(node.summary)} />
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
 
   {wanted.length > 0 && (
     <>

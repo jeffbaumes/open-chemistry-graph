@@ -1,0 +1,34 @@
+title = "Atomic structure"
+summary = "Describe an atom by its protons, neutrons and electrons."
+unit = "atoms"
+prerequisites = ["classifying-matter"]
+
+[[interactive]]
+kind = "atom-builder"
+title = "Build an atom"
+caption = "Add or remove particles and watch the element, mass number and charge change."
+params = { protons = 6, neutrons = 6, electrons = 6 }
+
+[[exercise]]
+type = "numeric"
+prompt = "An atom has 17 protons and 18 neutrons. What is its mass number?"
+answer = 35
+unit = "is the mass number"
+
+[[exercise]]
+type = "numeric"
+prompt = "How many neutrons are in an atom with atomic number 26 and mass number 56?"
+answer = 30
+unit = "neutrons"
+
+[[exercise]]
+type = "numeric"
+prompt = "How many electrons are in a neutral atom of phosphorus, atomic number 15?"
+answer = 15
+unit = "electrons"
+
+[[exercise]]
+type = "choice"
+prompt = "What determines which element an atom is?"
+options = ["The number of neutrons", "The number of protons", "The number of electrons", "The mass number"]
+answer = 1

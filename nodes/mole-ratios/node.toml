@@ -1,0 +1,32 @@
+title = "Mole ratios in reactions"
+summary = "Use the coefficients of a balanced equation to relate amounts of reactants and products."
+unit = "moles"
+prerequisites = ["balancing-equations", "mole-mass-conversions"]
+
+[[exercise]]
+type = "numeric"
+prompt = "For 2 H2 + O2 -> 2 H2O, how many moles of water form from 3.0 mol of O2?"
+answer = 6.0
+unit = "mol"
+derive = "3.0 * 2 / 1"
+
+[[exercise]]
+type = "numeric"
+prompt = "For N2 + 3 H2 -> 2 NH3, how many moles of H2 are needed to make 10.0 mol of NH3?"
+answer = 15.0
+unit = "mol"
+derive = "10.0 * 3 / 2"
+
+[[exercise]]
+type = "numeric"
+prompt = "For 4 Fe + 3 O2 -> 2 Fe2O3, how many moles of Fe2O3 form from 6.0 mol of Fe?"
+answer = 3.0
+unit = "mol"
+derive = "6.0 * 2 / 4"
+
+[[exercise]]
+type = "numeric"
+prompt = "For CH4 + 2 O2 -> CO2 + 2 H2O, how many moles of O2 react with 2.5 mol of CH4?"
+answer = 5.0
+unit = "mol"
+derive = "2.5 * 2"

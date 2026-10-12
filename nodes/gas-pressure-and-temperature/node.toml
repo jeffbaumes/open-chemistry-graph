@@ -1,0 +1,31 @@
+title = "Pressure and temperature"
+summary = "Describe gases with pressure units and the Kelvin temperature scale."
+unit = "gases"
+prerequisites = ["unit-conversions"]
+
+[[exercise]]
+type = "numeric"
+prompt = "Convert 100 °C to kelvins."
+answer = 373
+unit = "K"
+derive = "100 + 273"
+
+[[exercise]]
+type = "numeric"
+prompt = "Convert 0.500 atm to mmHg."
+answer = 380
+unit = "mmHg"
+derive = "0.500 * 760"
+
+[[exercise]]
+type = "numeric"
+prompt = "Convert 202.6 kPa to atm."
+answer = 2.0
+unit = "atm"
+derive = "202.6 / 101.3"
+
+[[exercise]]
+type = "choice"
+prompt = "What happens to the particles of a gas when its temperature rises?"
+options = ["They get larger", "They move faster on average", "They stop colliding", "They gain mass"]
+answer = 1

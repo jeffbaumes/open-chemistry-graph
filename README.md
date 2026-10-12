@@ -1,13 +1,13 @@
 # Open chemistry graph
 
-An open chemistry curriculum built as a graph of small lessons, written by people and their AI assistants, and checked by machine.
+An open high school chemistry course built as a graph of small lessons, written by people and their AI assistants, and checked by machine. It currently has 49 lessons in 12 units, with 17 kinds of interactive model.
 
 ## How it works
 
 Each folder in `nodes/` is one concept:
 
 - `lesson.md` — a short explanation with a worked example and a common mistake
-- `node.toml` — title, summary, prerequisites, and exercises with machine-checkable answers
+- `node.toml` — title, summary, unit, prerequisites, any interactives, and exercises with machine-checkable answers
 
 Run the checks, then the site:
 
@@ -30,16 +30,30 @@ Pushing to `main` validates, builds and publishes the site to GitHub Pages.
 | Atomic masses, element colors | `conventions/elements.toml` | CI and templates |
 | Formula typesetting, example boxes | `src/lib/chem.js`, `src/lib/rehype-lesson.js` | templates |
 | Page look and layout | `src/styles/site.css`, `src/` | templates |
+| Physical constants | `conventions/constants.toml` | CI |
+| Units of the course and their order | `conventions/units.toml` | CI and templates |
+| How interactives look and behave | `INTERACTIVES.md`, `src/interactives/lib.js`, `src/styles/interactive.css` | shared toolkit |
 | Tone, level, pedagogy | `STYLE.md` | reviewers |
 
 Rules are contributions too. Changing one must update every node it affects in the same pull request.
 
-The validator recomputes chemistry where it can. A numeric exercise may declare how its answer is derived (`derive = { kind = "molar_mass", formula = "H2O" }`) and the stated answer must match. Balancing exercises are checked for atom conservation and lowest terms.
+The validator recomputes chemistry where it can. A numeric exercise may declare how its answer is derived, as an arithmetic expression, and the stated answer must match:
+
+```toml
+[[exercise]]
+type = "numeric"
+prompt = "How many moles are in 36.0 g of H2O?"
+answer = 2.0
+unit = "mol"
+derive = "36.0 / M('H2O')"
+```
+
+Expressions may use numbers, `+ - * / **`, `M(formula)` for molar mass, `log10`, `sqrt`, `min`, `max`, and the constants in `conventions/constants.toml`. Balancing exercises are checked for atom conservation and lowest terms.
 
 ## Contributing
 
 1. Run `python3 validate.py` and pick a node from the "Wanted nodes" list, or improve an existing one.
-2. Add `nodes/<id>/lesson.md` and `nodes/<id>/node.toml` with at least 3 exercises.
+2. Add `nodes/<id>/lesson.md` and `nodes/<id>/node.toml` with at least 3 exercises. Follow `STYLE.md`.
 3. Prefer exercises the validator can recompute. If it cannot check your kind of problem yet, adding a new `derive` kind or exercise type to `validate.py` is a welcome contribution.
 4. Make sure the validator passes, then open a pull request.
 
@@ -50,3 +64,4 @@ The validator recomputes chemistry where it can. A numeric exercise may declare 
 | `numeric` | number + unit | recomputed when `derive` is given |
 | `balance` | coefficients per side | atom conservation, lowest terms |
 | `choice` | index of the correct option | structure only |
+| `text` | a word or name, with optional `accept` alternatives | structure only |

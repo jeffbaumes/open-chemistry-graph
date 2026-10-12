@@ -1,0 +1,28 @@
+title = "Chemical equilibrium"
+summary = "Describe reversible reactions and predict how they respond to change."
+unit = "energy"
+prerequisites = ["reaction-rates"]
+
+[[exercise]]
+type = "choice"
+prompt = "At equilibrium, which is true?"
+options = ["The reaction has stopped", "The amounts of reactants and products are equal", "The forward and reverse rates are equal", "All reactants are used up"]
+answer = 2
+
+[[exercise]]
+type = "choice"
+prompt = "For N2 + 3 H2 <-> 2 NH3, more N2 is added. The equilibrium shifts:"
+options = ["toward reactants", "toward products", "not at all", "in both directions equally"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "The forward reaction is exothermic. Raising the temperature shifts equilibrium:"
+options = ["toward reactants", "toward products", "not at all", "toward the catalyst"]
+answer = 0
+
+[[exercise]]
+type = "choice"
+prompt = "Adding a catalyst to a system at equilibrium:"
+options = ["shifts it toward products", "shifts it toward reactants", "does not shift it", "stops the reaction"]
+answer = 2

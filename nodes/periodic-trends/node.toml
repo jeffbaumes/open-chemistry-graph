@@ -1,0 +1,34 @@
+title = "Periodic trends"
+summary = "Predict atomic size, ionization energy and electronegativity from position."
+unit = "periodic"
+prerequisites = ["periodic-table-organization"]
+
+[[interactive]]
+kind = "periodic-table"
+title = "Trends across the table"
+caption = "Choose a property to shade the table, then look across a period and down a group."
+params = { property = "radius" }
+
+[[exercise]]
+type = "choice"
+prompt = "Which atom has the largest radius?"
+options = ["Li", "Na", "K", "H"]
+answer = 2
+
+[[exercise]]
+type = "choice"
+prompt = "Which element has the highest electronegativity?"
+options = ["Na", "C", "O", "F"]
+answer = 3
+
+[[exercise]]
+type = "choice"
+prompt = "Ionization energy decreases down a group because the outer electrons are:"
+options = ["closer to the nucleus", "farther from the nucleus and more shielded", "more numerous", "positively charged"]
+answer = 1
+
+[[exercise]]
+type = "choice"
+prompt = "Which has the higher ionization energy, magnesium or sulfur?"
+options = ["Magnesium, because it is a metal", "Sulfur, because it is farther right in the same period", "They are equal", "Magnesium, because it is larger"]
+answer = 1

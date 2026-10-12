@@ -1,0 +1,36 @@
+title = "Limiting reactant"
+summary = "Find which reactant runs out first and how much product it allows."
+unit = "moles"
+prerequisites = ["mass-stoichiometry"]
+
+[[interactive]]
+kind = "limiting-reactant"
+title = "What runs out first?"
+caption = "Change how many molecules of each reactant you start with."
+
+[[exercise]]
+type = "choice"
+prompt = "For 2 H2 + O2 -> 2 H2O, 4.0 mol of H2 is mixed with 1.0 mol of O2. Which is limiting?"
+options = ["H2", "O2", "Neither", "H2O"]
+answer = 1
+
+[[exercise]]
+type = "numeric"
+prompt = "For 2 H2 + O2 -> 2 H2O, 4.0 mol of H2 is mixed with 1.0 mol of O2. How many moles of water form?"
+answer = 2.0
+unit = "mol"
+derive = "min(4.0 * 2 / 2, 1.0 * 2 / 1)"
+
+[[exercise]]
+type = "numeric"
+prompt = "For N2 + 3 H2 -> 2 NH3, 2.0 mol of N2 is mixed with 3.0 mol of H2. How many moles of NH3 form?"
+answer = 2.0
+unit = "mol"
+derive = "min(2.0 * 2, 3.0 * 2 / 3)"
+
+[[exercise]]
+type = "numeric"
+prompt = "For N2 + 3 H2 -> 2 NH3, 2.0 mol of N2 is mixed with 3.0 mol of H2. How many moles of N2 are left over?"
+answer = 1.0
+unit = "mol"
+derive = "2.0 - 3.0 / 3"

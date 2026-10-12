@@ -1,0 +1,36 @@
+title = "Half-life"
+summary = "Calculate how much of a radioactive sample remains over time."
+unit = "nuclear"
+prerequisites = ["radioactive-decay"]
+
+[[interactive]]
+kind = "half-life"
+title = "Watch a sample decay"
+caption = "Step through half-lives of carbon-14 and count the atoms that remain."
+
+[[exercise]]
+type = "numeric"
+prompt = "A 100.0 g sample has a half-life of 5 years. How much remains after 15 years?"
+answer = 12.5
+unit = "g"
+derive = "100.0 * 0.5 ** 3"
+
+[[exercise]]
+type = "numeric"
+prompt = "What fraction of a sample remains after 4 half-lives? Give a decimal."
+answer = 0.0625
+unit = "of the sample"
+derive = "0.5 ** 4"
+
+[[exercise]]
+type = "numeric"
+prompt = "A sample decays from 64 g to 8 g in 30 minutes. What is its half-life?"
+answer = 10
+unit = "minutes"
+derive = "30 / 3"
+
+[[exercise]]
+type = "choice"
+prompt = "A bone has one quarter of its original carbon-14. The half-life is 5730 years. About how old is it?"
+options = ["2865 years", "5730 years", "11 460 years", "22 920 years"]
+answer = 2

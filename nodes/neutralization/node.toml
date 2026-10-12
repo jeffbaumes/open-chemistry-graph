@@ -1,0 +1,31 @@
+title = "Neutralization and titration"
+summary = "Predict the products when an acid and a base react, and find an unknown concentration."
+unit = "acids"
+prerequisites = ["ph-scale", "mole-ratios"]
+
+[[exercise]]
+type = "choice"
+prompt = "What are the products of HNO3 + KOH?"
+options = ["KH + NO3OH", "KNO3 + H2O", "K2O + HNO2", "KNO3 + H2"]
+answer = 1
+
+[[exercise]]
+type = "numeric"
+prompt = "30.0 mL of HCl is neutralized by 15.0 mL of 0.200 M NaOH. What is the concentration of the HCl?"
+answer = 0.1
+unit = "M"
+derive = "0.200 * 15.0 / 30.0"
+
+[[exercise]]
+type = "numeric"
+prompt = "What volume of 0.100 M NaOH neutralizes 25.0 mL of 0.200 M HCl?"
+answer = 50.0
+unit = "mL"
+derive = "0.200 * 25.0 / 0.100"
+
+[[exercise]]
+type = "numeric"
+prompt = "How many moles of NaOH are needed to neutralize 0.50 mol of H2SO4?"
+answer = 1.0
+unit = "mol"
+derive = "0.50 * 2"

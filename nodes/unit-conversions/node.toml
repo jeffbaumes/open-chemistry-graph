@@ -1,0 +1,32 @@
+title = "Unit conversions"
+summary = "Convert between units by multiplying by conversion factors."
+unit = "matter"
+prerequisites = ["significant-figures"]
+
+[[exercise]]
+type = "numeric"
+prompt = "Convert 3.50 kg to grams."
+answer = 3500
+unit = "g"
+derive = "3.50 * 1000"
+
+[[exercise]]
+type = "numeric"
+prompt = "Convert 250 mL to liters."
+answer = 0.25
+unit = "L"
+derive = "250 / 1000"
+
+[[exercise]]
+type = "numeric"
+prompt = "Convert 1.2 hours to seconds."
+answer = 4320
+unit = "s"
+derive = "1.2 * 60 * 60"
+
+[[exercise]]
+type = "numeric"
+prompt = "Convert 45 cm to meters."
+answer = 0.45
+unit = "m"
+derive = "45 / 100"

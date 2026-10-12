@@ -1,0 +1,50 @@
+# The units of the course, in teaching order. Each node names one of these ids.
+# Within a unit, lessons are ordered by their prerequisites.
+
+[[unit]]
+id = "matter"
+title = "Matter and measurement"
+
+[[unit]]
+id = "atoms"
+title = "Atomic structure"
+
+[[unit]]
+id = "periodic"
+title = "The periodic table"
+
+[[unit]]
+id = "bonding"
+title = "Bonding and compounds"
+
+[[unit]]
+id = "reactions"
+title = "Chemical reactions"
+
+[[unit]]
+id = "moles"
+title = "The mole and stoichiometry"
+
+[[unit]]
+id = "gases"
+title = "Gases"
+
+[[unit]]
+id = "solutions"
+title = "Solutions"
+
+[[unit]]
+id = "energy"
+title = "Energy, rates and equilibrium"
+
+[[unit]]
+id = "acids"
+title = "Acids and bases"
+
+[[unit]]
+id = "redox"
+title = "Oxidation and reduction"
+
+[[unit]]
+id = "nuclear"
+title = "Nuclear chemistry"
