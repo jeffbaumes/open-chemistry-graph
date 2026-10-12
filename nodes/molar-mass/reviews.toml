@@ -1,0 +1,14 @@
+# Reviews of the parts of this lesson. Written by tasks.py and checked by CI.
+# A review stops counting when the part it names changes. See TRUST.md.
+
+[[review]]
+part = "exercise-1"
+fingerprint = "1c521f17e665"
+by = "someone-else"
+model = "demo"
+answer = "18.015"
+
+[[review]]
+part = "lesson"
+fingerprint = "b44270425278"
+by = "someone-else"
