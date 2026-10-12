@@ -28,7 +28,6 @@ export default {
         }
       }
     }
-    const balanced = Object.values(totals).every((t) => t.left === t.right);
 
     const term = (sp) => `${sp.coeff > 1 ? `<b class="a-coefficient">${sp.coeff}</b> ` : ''}${ui.chem(sp.formula)}`;
     const header = `${sides.left.map(term).join(' + ')} → ${sides.right.map(term).join(' + ')}`;
@@ -58,8 +57,12 @@ export default {
       });
     }
 
-    // Values a caption can use, such as {left.O}, so the numbers are never typed by hand.
-    const vars = Object.fromEntries(Object.entries(totals).flatMap(([el, t]) => [[`left.${el}`, t.left], [`right.${el}`, t.right]]));
-    return { header, footer, sprites, vars, done: balanced };
+    // Values a caption can use, so the numbers are never typed by hand:
+    // {left.O} and {right.O} for atom counts, {c1}, {c2}, ... for coefficients.
+    const vars = Object.fromEntries([
+      ...Object.entries(totals).flatMap(([el, t]) => [[`left.${el}`, t.left], [`right.${el}`, t.right]]),
+      ...species.map((sp, i) => [`c${i + 1}`, sp.coeff]),
+    ]);
+    return { header, footer, sprites, vars };
   },
 };

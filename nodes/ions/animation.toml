@@ -1,0 +1,26 @@
+kind = "atom"
+title = "How atoms become ions"
+
+[[step]]
+symbol = "Mg"
+caption = "A magnesium atom has {protons} protons and {electrons} electrons, so its charge is {charge}."
+
+[[step]]
+symbol = "Mg"
+focus = "valence"
+caption = "Its outer level holds only {valence} electrons. Losing them is easier than gaining six more."
+
+[[step]]
+symbol = "Mg"
+electrons = 10
+caption = "It loses both. Now {protons} protons and {electrons} electrons: a charge of {charge}. The protons did not change."
+
+[[step]]
+symbol = "O"
+focus = "valence"
+caption = "An oxygen atom has {valence} electrons in its outer level, two short of a full 8."
+
+[[step]]
+symbol = "O"
+electrons = 10
+caption = "It gains two. Now {protons} protons and {electrons} electrons: a charge of {charge}."

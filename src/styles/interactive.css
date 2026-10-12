@@ -98,6 +98,7 @@
 .i-glass { fill: none; stroke: var(--text); stroke-width: 3; stroke-linejoin: round; }
 .i-gas { fill: var(--example-bg); }
 .i-piston { fill: var(--muted); }
+.i-wall { fill: var(--text); }
 .i-water { fill: var(--i-water); }
 .i-solution { fill: var(--accent); }
 .i-block { fill: var(--mistake-edge); stroke: var(--text); stroke-width: 1.5; }

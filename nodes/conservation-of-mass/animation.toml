@@ -1,0 +1,22 @@
+kind = "equation"
+title = "Atoms are rearranged, not created"
+reactants = ["Mg", "O2"]
+products = ["MgO"]
+
+[[step]]
+coefficients = [2, 1, 2]
+caption = "Magnesium burns in oxygen and forms magnesium oxide."
+
+[[step]]
+coefficients = [2, 1, 2]
+focus = "Mg"
+caption = "Follow the magnesium: {left.Mg} atoms before the reaction, {right.Mg} after."
+
+[[step]]
+coefficients = [2, 1, 2]
+focus = "O"
+caption = "Follow the oxygen: {left.O} atoms before, {right.O} after."
+
+[[step]]
+coefficients = [2, 1, 2]
+caption = "No atom was created or destroyed. The same atoms, so the same total mass."

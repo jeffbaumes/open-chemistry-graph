@@ -1,0 +1,22 @@
+kind = "decay"
+title = "Three half-lives of iodine-131"
+isotope = "Iodine-131"
+half_life = 8
+unit = "days"
+amount = 80.0
+
+[[step]]
+half_lives = 0
+caption = "Start with {mass} g of iodine-131, drawn as {total} atoms."
+
+[[step]]
+half_lives = 1
+caption = "After one half-life, {elapsed} days, half the atoms have decayed. {mass} g remains."
+
+[[step]]
+half_lives = 2
+caption = "After {elapsed} days, half of what was left has decayed: {fraction} of the original, {mass} g."
+
+[[step]]
+half_lives = 3
+caption = "After {elapsed} days, {fraction} remains: {mass} g. Each half-life removes half of what is left, never all of it."

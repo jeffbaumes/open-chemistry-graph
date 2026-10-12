@@ -96,7 +96,7 @@ kind = "tooling"
 id = "animation-kinds"
 mode = "ai"
 title = "Add animation kinds"
-detail = "Only the equation kind exists. Good next ones: particles (states of matter, gas laws), a number line (pH, half-life) and a step-by-step calculation."
+detail = "The kinds so far are equation, gas, atom and decay. Good next ones: a number line (pH), a beaker (molarity and dilution), an energy curve, and a step-by-step calculation."
 playbook = "ANIMATIONS.md"
 
 [[task]]

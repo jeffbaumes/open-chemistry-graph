@@ -1,0 +1,26 @@
+kind = "atom"
+title = "Counting the outer electrons"
+
+[[step]]
+symbol = "P"
+caption = "Phosphorus has {electrons} electrons in {levels} energy levels."
+
+[[step]]
+symbol = "P"
+focus = "valence"
+caption = "Only the outer level counts: {valence} valence electrons, matching group 15."
+
+[[step]]
+symbol = "Na"
+focus = "valence"
+caption = "Sodium, in group 1, has {valence} valence electron."
+
+[[step]]
+symbol = "Cl"
+focus = "valence"
+caption = "Chlorine, in group 17, has {valence}."
+
+[[step]]
+symbol = "Ar"
+focus = "valence"
+caption = "Argon, in group 18, has {valence}: a full outer level, which is why it does not react."

@@ -1,0 +1,21 @@
+kind = "equation"
+title = "What the coefficients mean"
+reactants = ["N2", "H2"]
+products = ["NH3"]
+
+[[step]]
+coefficients = [1, 3, 2]
+caption = "{c1} N2 reacts with {c2} H2 to make {c3} NH3."
+
+[[step]]
+coefficients = [2, 6, 4]
+caption = "Start with twice as much N2 and everything doubles: {c1} N2, {c2} H2 and {c3} NH3."
+
+[[step]]
+coefficients = [2, 6, 4]
+focus = "H"
+caption = "The amounts changed but the ratio did not: {c2} H2 to {c3} NH3 is still 3 to 2."
+
+[[step]]
+coefficients = [2, 6, 4]
+caption = "Count in moles instead of molecules and it is the worked example: {c2} mol of H2 makes {c3} mol of NH3."

@@ -1,0 +1,21 @@
+kind = "gas"
+title = "Heating a gas at constant pressure"
+pressure = 1.0
+moles = 0.08124
+max_volume = 3.3
+
+[[step]]
+temperature = 300
+caption = "A balloon's worth of gas: {V} L at {T} K. The pressure stays at {P} atm throughout."
+
+[[step]]
+temperature = 375
+caption = "Warm it to {T} K. The particles hit harder, the piston rises, and the volume grows to {V} L."
+
+[[step]]
+temperature = 450
+caption = "At {T} K the volume is {V} L, the answer to the worked example."
+
+[[step]]
+temperature = 450
+caption = "At every step, V ÷ T came to the same value: {VT} L/K."

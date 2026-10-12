@@ -1,0 +1,21 @@
+kind = "gas"
+title = "Squeezing a gas at constant temperature"
+temperature = 300
+moles = 0.1625
+max_volume = 4.4
+
+[[step]]
+pressure = 1.0
+caption = "A gas fills {V} L at {P} atm. The temperature stays at {T} K throughout."
+
+[[step]]
+pressure = 2.0
+caption = "Double the pressure to {P} atm. The volume halves, to {V} L."
+
+[[step]]
+pressure = 2.5
+caption = "At {P} atm the volume is {V} L, the answer to the worked example."
+
+[[step]]
+pressure = 2.5
+caption = "At every step, P × V came to the same value: {PV} L·atm."

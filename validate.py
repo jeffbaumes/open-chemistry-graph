@@ -227,31 +227,76 @@ def check_equation_animation(scene):
     species = scene["reactants"] + scene["products"]
     atoms = [parse_formula(f) for f in species]
     known = {el for a in atoms for el in a}
+    names = {f"{side}.{el}" for side in ("left", "right") for el in known} | {f"c{i}" for i in range(1, len(species) + 1)}
     errors = []
     for i, step in enumerate(scene["step"], 1):
         coefficients = step.get("coefficients", [])
         if len(coefficients) != len(species) or not all(isinstance(c, int) and 1 <= c <= 6 for c in coefficients):
             errors.append(f"step {i}: needs one coefficient from 1 to 6 for each of {species}")
-            continue
         if "focus" in step and step["focus"] not in known:
             errors.append(f"step {i}: focus {step['focus']!r} is not an element in this equation")
-        for side, el in re.findall(r"\{(\w+)\.(\w+)\}", step.get("caption", "")):
-            if side not in ("left", "right") or el not in known:
-                errors.append(f"step {i}: caption uses {{{side}.{el}}}, which this equation cannot supply")
     if errors:
-        return errors
-    last = scene["step"][-1]["coefficients"]
+        return errors, names
     n = len(scene["reactants"])
     totals = [{}, {}]
-    for j, (a, c) in enumerate(zip(atoms, last)):
+    for j, (a, c) in enumerate(zip(atoms, scene["step"][-1]["coefficients"])):
         for el, count in a.items():
             totals[j >= n][el] = totals[j >= n].get(el, 0) + count * c
     if totals[0] != totals[1]:
         errors.append(f"the last step is not balanced: {totals[0]} vs {totals[1]}")
-    return errors
+    return errors, names
 
 
-ANIMATION_CHECKS = {"equation": check_equation_animation}
+def check_gas_animation(scene):
+    """Each step must fix exactly three of pressure, volume, temperature and moles."""
+    quantities = ("pressure", "volume", "temperature", "moles")
+    limit = scene.get("max_volume")
+    errors = [] if isinstance(limit, (int, float)) and limit > 0 else ["needs max_volume, the largest volume shown, in liters"]
+    for i, step in enumerate(scene["step"], 1):
+        state = {**scene, **step}
+        given = {q: state[q] for q in quantities if q in state}
+        if len(given) != 3 or not all(isinstance(v, (int, float)) and v > 0 for v in given.values()):
+            errors.append(f"step {i}: give exactly three positive values out of {', '.join(quantities)}; the fourth is worked out")
+            continue
+        volume = given.get("volume") or given["moles"] * CONSTANTS["R"] * given["temperature"] / given["pressure"]
+        if not errors and volume > limit:
+            errors.append(f"step {i}: the volume is {volume:.3g} L, more than max_volume")
+    return errors, {"P", "V", "T", "n", "PV", "VT"}
+
+
+def check_atom_animation(scene):
+    """Atoms up to calcium, with a sensible number of electrons."""
+    errors = []
+    for i, step in enumerate(scene["step"], 1):
+        symbol = step.get("symbol")
+        if symbol not in PERIODIC[:20]:
+            errors.append(f"step {i}: symbol must be one of the first 20 elements")
+        elif not isinstance(step.get("electrons", 1), int) or not 0 <= step.get("electrons", 1) <= 20:
+            errors.append(f"step {i}: electrons must be a whole number from 0 to 20")
+        if step.get("focus", "valence") != "valence":
+            errors.append(f"step {i}: the only focus is \"valence\"")
+    return errors, {"name", "symbol", "protons", "electrons", "charge", "valence", "levels"}
+
+
+def check_decay_animation(scene):
+    """Half-lives must be whole numbers that never go backwards."""
+    errors = []
+    for field in ("isotope", "half_life", "unit"):
+        if not scene.get(field):
+            errors.append(f"needs {field}")
+    passed = [step.get("half_lives") for step in scene["step"]]
+    if not all(isinstance(n, int) and 0 <= n <= 6 for n in passed) or passed != sorted(passed):
+        errors.append("each step needs half_lives, a whole number from 0 to 6 that does not decrease")
+    names = {"half_lives", "elapsed", "fraction", "remaining", "total"} | ({"mass"} if "amount" in scene else set())
+    return errors, names
+
+
+ANIMATION_CHECKS = {
+    "equation": check_equation_animation,
+    "gas": check_gas_animation,
+    "atom": check_atom_animation,
+    "decay": check_decay_animation,
+}
 
 
 def check_animation(path):
@@ -261,21 +306,27 @@ def check_animation(path):
         return []
     scene = tomllib.loads(file.read_text())
     kind = scene.get("kind")
-    if not kind or not (ANIMATIONS / f"{kind}.js").exists():
+    if kind not in ANIMATION_CHECKS or not (ANIMATIONS / f"{kind}.js").exists():
         return [f"animation: unknown kind {kind!r}; see ANIMATIONS.md"]
     errors = [] if scene.get("title") else ["animation: missing title"]
     steps = scene.get("step", [])
-    if len(steps) < 2:
-        errors.append("animation: needs at least 2 steps")
+    if not 2 <= len(steps) <= 10:
+        errors.append("animation: needs 2 to 10 steps")
     for i, step in enumerate(steps, 1):
         caption = step.get("caption", "")
         if not caption or len(caption) > MAX_CAPTION or "<" in caption:
             errors.append(f"animation step {i}: needs a plain caption of at most {MAX_CAPTION} characters")
-    if not errors and kind in ANIMATION_CHECKS:
-        try:
-            errors += [f"animation: {e}" for e in ANIMATION_CHECKS[kind](scene)]
-        except (KeyError, ValueError, TypeError) as e:
-            errors.append(f"animation: {e!r}")
+    if errors:
+        return errors
+    try:
+        problems, names = ANIMATION_CHECKS[kind](scene)
+    except (KeyError, ValueError, TypeError) as e:
+        return [f"animation: {e!r}"]
+    errors += [f"animation: {problem}" for problem in problems]
+    for i, step in enumerate(steps, 1):
+        for name in re.findall(r"\{([\w.]+)\}", step["caption"]):
+            if name not in names:
+                errors.append(f"animation step {i}: caption uses {{{name}}}, which a {kind} scene cannot supply")
     return errors
 
 
