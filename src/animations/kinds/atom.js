@@ -2,7 +2,7 @@
 // element and, for an ion, how many electrons it has; the proton count,
 // charge and outer-level count are worked out.
 //
-// state: { symbol, electrons? (defaults to neutral), focus?: "valence" }
+// state: { symbol, electrons? (defaults to neutral), mass_number?, focus?: "valence" }
 
 import { elementOf } from '../../interactives/data.js';
 
@@ -35,6 +35,7 @@ export function describe({ symbol, electrons }) {
 export default {
   render(state) {
     const { element, electrons, shells, net, charge, superscript } = describe(state);
+    const mass = state.mass_number;
     const sprites = [];
     shells.forEach((count, i) => {
       const r = 40 + i * 23;
@@ -49,10 +50,13 @@ export default {
 
     const row = (label, value) => `<tr><th>${label}</th><td><span class="i-count">${value}</span></td></tr>`;
     return {
-      header: `${element.name}: ${element.symbol}${superscript ? `<sup>${superscript}</sup>` : ''}`,
-      footer: `<table class="i-tally a-tally">${row('Protons', element.z)}${row('Electrons', electrons)}${row('Charge', net === 0 ? '0 (neutral)' : charge)}</table>`,
+      header: `${element.name}${mass ? `-${mass}` : ''}: ${element.symbol}${superscript ? `<sup>${superscript}</sup>` : ''}`,
+      footer: `<table class="i-tally a-tally">${row('Protons', element.z)}${mass ? row('Neutrons', mass - element.z) : ''}${row('Electrons', electrons)}${row('Charge', net === 0 ? '0 (neutral)' : charge)}</table>`,
       sprites,
-      vars: { name: element.name.toLowerCase(), symbol: element.symbol, protons: element.z, electrons, charge, valence: shells.at(-1) ?? 0, levels: shells.length },
+      vars: {
+        name: element.name.toLowerCase(), symbol: element.symbol, protons: element.z, electrons, charge, valence: shells.at(-1) ?? 0, levels: shells.length,
+        ...(mass ? { mass_number: mass, neutrons: mass - element.z } : {}),
+      },
     };
   },
 };

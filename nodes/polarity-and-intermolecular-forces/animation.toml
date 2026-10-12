@@ -1,0 +1,14 @@
+kind = "sort"
+title = "Shape decides polarity"
+bins = ["Polar molecule", "Nonpolar molecule"]
+items = [
+  { text = "H2O, bent", bin = 0 },
+  { text = "CO2, linear", bin = 1 },
+  { text = "NH3, pyramid", bin = 0 },
+  { text = "CH4, symmetrical", bin = 1 },
+]
+step = [
+  { placed = 1, caption = "Water is bent, so its two polar bonds add up. One end is slightly negative: polar." },
+  { placed = 2, caption = "Carbon dioxide is linear. Its two polar bonds point opposite ways and cancel: nonpolar." },
+  { placed = 4, caption = "Ammonia is a pyramid, so it is polar. Methane is symmetrical, so it is nonpolar." },
+]

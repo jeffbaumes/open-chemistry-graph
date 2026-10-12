@@ -30,3 +30,9 @@ export const elements = parse(periodicRaw).elements.map(
 );
 
 export const elementOf = (symbol) => elements.find((el) => el.symbol === symbol);
+
+/** Valence electrons of a main-group element. */
+export function valenceOf(symbol) {
+  const { z, group } = elementOf(symbol);
+  return z <= 2 ? z : group <= 2 ? group : group - 10;
+}

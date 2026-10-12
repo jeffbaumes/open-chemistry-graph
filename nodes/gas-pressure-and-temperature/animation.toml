@@ -1,0 +1,11 @@
+kind = "gas"
+title = "Why heating raises the pressure"
+volume = 10.0
+moles = 0.4062
+max_volume = 11.0
+step = [
+  { temperature = 300, caption = "Gas particles hit the walls. That is pressure: {P} atm at {T} K." },
+  { temperature = 450, caption = "Heat the gas to {T} K with the piston locked. Faster particles hit harder: {P} atm." },
+  { temperature = 600, caption = "At {T} K, twice the starting temperature in kelvins, the pressure has doubled to {P} atm." },
+  { temperature = 600, caption = "That only works in kelvins. 300 K is 27 \u00b0C and 600 K is 327 \u00b0C, which is not double." },
+]

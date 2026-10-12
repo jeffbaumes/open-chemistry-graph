@@ -1,0 +1,11 @@
+kind = "calculation"
+title = "Finding iron's charge in FeCl3"
+quantity = [
+  { name = "cl", label = "from 3 chloride ions", expr = "3 * -1", unit = "", sig = 1, signed = true },
+  { name = "fe", label = "charge on iron", expr = "0 - cl", unit = "", sig = 1, signed = true },
+]
+step = [
+  { show = 1, caption = "In FeCl3 each chloride ion is 1\u2212, and there are three: {cl} in total." },
+  { show = 2, caption = "The compound is neutral, so the one iron ion must be {fe}." },
+  { show = 2, caption = "Iron can be 2+ or 3+, so the name has to say which: iron(III) chloride." },
+]

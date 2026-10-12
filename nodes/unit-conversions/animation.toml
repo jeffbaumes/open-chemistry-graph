@@ -1,0 +1,12 @@
+kind = "calculation"
+title = "Converting 2.5 km to centimeters"
+quantity = [
+  { name = "km", label = "distance", expr = "2.5", unit = "km" },
+  { name = "m", label = "in meters", expr = "km * 1000", unit = "m", sig = 2 },
+  { name = "cm", label = "in centimeters", expr = "m * 100", unit = "cm", sig = 2 },
+]
+step = [
+  { show = 1, caption = "Start with what you know: {km} km." },
+  { show = 2, caption = "Multiply by 1000 m per km. Kilometers cancel, leaving {m} m." },
+  { show = 3, caption = "Multiply by 100 cm per m. Meters cancel, leaving {cm} cm." },
+]

@@ -1,0 +1,15 @@
+kind = "calculation"
+title = "How much stock solution to use"
+quantity = [
+  { name = "m2", label = "concentration wanted", expr = "3.00", unit = "M" },
+  { name = "v2", label = "volume wanted", expr = "500", unit = "mL" },
+  { name = "m1", label = "stock concentration", expr = "12.0", unit = "M" },
+  { name = "v1", label = "stock needed", expr = "m2 * v2 / m1", unit = "mL" },
+  { name = "water", label = "water to add", expr = "v2 - v1", unit = "mL" },
+]
+step = [
+  { show = 2, caption = "The goal is {v2} mL of {m2} M HCl." },
+  { show = 3, caption = "The stock bottle is {m1} M." },
+  { show = 4, caption = "The moles of HCl do not change, so M_1 \u00d7 V_1 = M_2 \u00d7 V_2. Solve for the stock volume: {v1} mL." },
+  { show = 5, caption = "Add water up to the final volume. That takes {water} mL, not 500." },
+]

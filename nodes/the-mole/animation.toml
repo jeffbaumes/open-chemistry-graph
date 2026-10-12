@@ -1,0 +1,10 @@
+kind = "calculation"
+title = "From moles to molecules"
+quantity = [
+  { name = "moles", label = "amount of water", expr = "2.50", unit = "mol" },
+  { name = "particles", label = "molecules", expr = "moles * NA", unit = "" },
+]
+step = [
+  { show = 1, caption = "Start with {moles} mol of water." },
+  { show = 2, caption = "Each mole is 6.022 \u00d7 10^23 molecules, so multiply: {particles} molecules." },
+]

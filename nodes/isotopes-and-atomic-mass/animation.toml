@@ -1,0 +1,7 @@
+kind = "atom"
+title = "Same element, different neutrons"
+step = [
+  { symbol = "C", mass_number = 12, caption = "Carbon-12 has {protons} protons and {neutrons} neutrons." },
+  { symbol = "C", mass_number = 14, caption = "Carbon-14 still has {protons} protons, so it is still carbon, but it has {neutrons} neutrons." },
+  { symbol = "C", mass_number = 14, focus = "valence", caption = "The electrons are the same in both, so the two isotopes react almost identically." },
+]

@@ -1,0 +1,12 @@
+kind = "calculation"
+title = "The oxidation number of sulfur in H2SO4"
+quantity = [
+  { name = "h", label = "from 2 H at +1", expr = "2 * 1", unit = "", sig = 1, signed = true },
+  { name = "o", label = "from 4 O at \u22122", expr = "4 * -2", unit = "", sig = 1, signed = true },
+  { name = "s", label = "sulfur", expr = "0 - h - o", unit = "", sig = 1, signed = true },
+]
+step = [
+  { show = 1, caption = "Hydrogen is +1 and there are two: {h}." },
+  { show = 2, caption = "Oxygen is \u22122 and there are four: {o}." },
+  { show = 3, caption = "The total must be zero, so sulfur makes up the difference: {s}." },
+]

@@ -1,0 +1,7 @@
+kind = "energy"
+title = "Where the products end up"
+step = [
+  { reactants = 60, products = 20, barrier = 70, caption = "Exothermic: the products are lower in energy than the reactants. \u0394H is {dH} kJ and heat is {heat}." },
+  { reactants = 20, products = 60, barrier = 90, caption = "Endothermic: the products are higher. \u0394H is {dH} kJ and heat is {heat} from the surroundings." },
+  { reactants = 20, products = 60, barrier = 90, caption = "Either way the reaction first has to climb the activation energy, here {Ea} kJ." },
+]

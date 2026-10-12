@@ -1,0 +1,16 @@
+kind = "sort"
+title = "What does it release in water?"
+bins = ["Acid", "Base"]
+items = [
+  { text = "HCl", bin = 0 },
+  { text = "NaOH", bin = 1 },
+  { text = "HNO3", bin = 0 },
+  { text = "KOH", bin = 1 },
+  { text = "H2SO4", bin = 0 },
+  { text = "NH3", bin = 1 },
+]
+step = [
+  { placed = 2, caption = "HCl releases H^+ in water, so it is an acid. NaOH releases OH^-, so it is a base." },
+  { placed = 4, caption = "HNO3 and KOH follow the same pattern: H at the front of an acid, OH at the end of a base." },
+  { placed = 6, caption = "H2SO4 can release two H^+. NH3 has no OH, but it accepts H^+ from water, which makes it a base too." },
+]

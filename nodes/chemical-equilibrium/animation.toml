@@ -1,0 +1,13 @@
+kind = "equilibrium"
+title = "Equal rates, not equal amounts"
+forward = 0.2
+reverse = 0.1
+reactants = 90
+disturb = 30
+step = [
+  { rounds = 0, caption = "At the start there are only reactants. Forward rate {forward}, reverse rate {reverse}." },
+  { rounds = 3, caption = "Products build up, so the reverse reaction speeds up while the forward one slows: {forward} and {reverse}." },
+  { rounds = 30, caption = "The rates are now equal, {forward} and {reverse}, so the amounts stop changing at {A} and {B}. Equal rates, not equal amounts." },
+  { rounds = 30, added = true, caption = "Add more reactant. The forward rate jumps to {forward} and the system is no longer at equilibrium." },
+  { rounds = 30, added = true, more = 30, caption = "It shifts toward products until the rates match again, at {forward}. That is Le Chatelier's principle." },
+]

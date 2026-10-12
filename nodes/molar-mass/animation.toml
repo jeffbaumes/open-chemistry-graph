@@ -1,0 +1,14 @@
+kind = "calculation"
+title = "The molar mass of Ca(OH)2"
+quantity = [
+  { name = "ca", label = "from 1 Ca", expr = "1 * M('Ca')", unit = "g/mol", sig = 5 },
+  { name = "o", label = "from 2 O", expr = "2 * M('O')", unit = "g/mol", sig = 5 },
+  { name = "h", label = "from 2 H", expr = "2 * M('H')", unit = "g/mol", sig = 4 },
+  { name = "total", label = "molar mass", expr = "ca + o + h", unit = "g/mol", sig = 4 },
+]
+step = [
+  { show = 1, caption = "Ca(OH)2 has 1 calcium atom: {ca} g/mol." },
+  { show = 2, caption = "The subscript outside the parentheses makes it 2 oxygen atoms: {o} g/mol." },
+  { show = 3, caption = "And 2 hydrogen atoms: {h} g/mol." },
+  { show = 4, caption = "Add them up: {total} g/mol." },
+]

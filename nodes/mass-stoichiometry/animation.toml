@@ -1,0 +1,14 @@
+kind = "calculation"
+title = "Grams of H2 to grams of H2O"
+quantity = [
+  { name = "mass", label = "mass of H2", expr = "8.00", unit = "g" },
+  { name = "h2", label = "moles of H2", expr = "mass / M('H2')", unit = "mol" },
+  { name = "water", label = "moles of H2O", expr = "h2 * 2 / 2", unit = "mol" },
+  { name = "grams", label = "mass of H2O", expr = "water * M('H2O')", unit = "g" },
+]
+step = [
+  { show = 1, caption = "For 2 H2 + O2 -> 2 H2O, start with {mass} g of hydrogen." },
+  { show = 2, caption = "Grams to moles, using the molar mass of H2: {h2} mol." },
+  { show = 3, caption = "Moles to moles, using the equation: 2 mol of H2O for every 2 mol of H2, so {water} mol." },
+  { show = 4, caption = "Moles to grams, using the molar mass of H2O: {grams} g." },
+]

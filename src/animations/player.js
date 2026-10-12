@@ -5,7 +5,7 @@
 // get from one step to the next. It compares the sprites by key and moves
 // what stayed, fades in what is new and fades out what is gone.
 //
-// Animations are silent.
+// Animations are silent, and the viewer steps through them at their own pace.
 
 import { h, s, colorOf, chem } from '../interactives/lib.js';
 
@@ -50,38 +50,48 @@ const TYPES = {
       el.setAttribute('height', Math.max(0, at.h));
     },
   },
-  // A symbol such as + or an arrow.
+  // A symbol or short label.
   text: {
-    create: (sprite) => s('text', { class: 'i-text a-symbol', style: `font-size:${sprite.size ?? 20}px`, 'dominant-baseline': 'central' }, sprite.text),
+    create: (sprite) => s('text', { class: `i-text ${sprite.class ?? 'a-symbol'}`, style: `font-size:${sprite.size ?? 20}px`, 'dominant-baseline': 'central' }, sprite.text),
     place: translate,
     rises: true,
   },
+  // An energy curve from level a, over a peak at b, down to level c (all in y pixels).
+  curve: {
+    create: () => s('path', { class: 'i-curve' }),
+    place: (el, at) => {
+      translate(el, { x: at.x, y: 0 });
+      el.setAttribute('d', `M0 ${at.a} H80 C130 ${at.a} 140 ${at.b} 190 ${at.b} C240 ${at.b} 250 ${at.c} 300 ${at.c} H380`);
+    },
+  },
 };
 
-const KEYS = ['x', 'y', 'r', 'w', 'h', 'opacity'];
-const target = (sprite) => ({ x: sprite.x, y: sprite.y, r: sprite.r ?? 0, w: sprite.w ?? 0, h: sprite.h ?? 0, opacity: sprite.dim ? DIM : 1 });
+const KEYS = ['x', 'y', 'r', 'w', 'h', 'a', 'b', 'c', 'opacity'];
+const target = (sprite) => ({
+  x: sprite.x, y: sprite.y ?? 0, r: sprite.r ?? 0, w: sprite.w ?? 0, h: sprite.h ?? 0,
+  a: sprite.a ?? 0, b: sprite.b ?? 0, c: sprite.c ?? 0, opacity: sprite.dim ? DIM : 1,
+});
 
 // --- Player
 
 function createPlayer(figure, kind, scene) {
   const { step: steps, ...shared } = scene;
-  const ui = { chem: chem.toHtml, parseFormula: chem.parseFormula, colorOf };
+  const ui = { chem: chem.toHtml, parseFormula: chem.parseFormula, molarMass: chem.molarMass, colorOf };
   const header = h('p', { class: 'a-header' });
   const svg = s('svg', { viewBox: '0 0 640 240', role: 'img', 'aria-label': scene.title });
   const footer = h('div', { class: 'a-footer' });
   const caption = h('p', { class: 'a-caption', 'aria-live': 'polite' });
   const counter = h('span', { class: 'a-counter' });
   const button = (label, onclick) => h('button', { type: 'button', onclick }, label);
-  const back = button('Back', () => { stop(); show(index - 1, true); });
-  const play = button('Play', () => (playing ? stop() : start()));
-  const next = button('Next', () => { stop(); show(index + 1, true); });
+  const previous = button('Previous', () => show(index - 1));
+  const next = button('Next', () => show(index + 1));
+  const restart = button('Restart', () => show(0));
   figure.querySelector('.a-body').replaceChildren(header, svg, footer, caption,
-    h('div', { class: 'a-controls' }, back, play, next, counter));
+    h('div', { class: 'a-controls' }, previous, next, counter, restart));
 
   const shown = new Map(); // sprite id -> { el, type, at }
+  let keys = new Set(); // data-key values in the text of the step before
   let index = 0;
-  let playing = false;
-  let timer;
   let frame;
   let settle; // finishes the transition in progress
 
@@ -119,6 +129,7 @@ function createPlayer(figure, kind, scene) {
       }
     };
     if (!animate || still) return settle();
+    apply(0); // place new sprites at once, before the first frame
     const began = performance.now();
     const tick = (now) => {
       const t = Math.min(1, (now - began) / MOVE_MS);
@@ -129,40 +140,21 @@ function createPlayer(figure, kind, scene) {
     frame = requestAnimationFrame(tick);
   }
 
-  function show(to, animate) {
+  function show(to, animate = true) {
     index = Math.max(0, Math.min(steps.length - 1, to));
     const view = kind.render({ ...shared, ...steps[index] }, ui);
     header.innerHTML = view.header ?? '';
     footer.innerHTML = view.footer ?? '';
     caption.innerHTML = chem.toHtml(fill(steps[index].caption, view.vars));
+    // The same idea as for sprites: anything keyed that was not there before fades in.
+    const keyed = [...figure.querySelectorAll('[data-key]')];
+    if (animate) keyed.filter((el) => !keys.has(el.dataset.key)).forEach((el) => el.classList.add('a-new'));
+    keys = new Set(keyed.map((el) => el.dataset.key));
+    svg.style.display = view.sprites?.length ? '' : 'none';
     move(view.sprites ?? [], animate);
     counter.textContent = `${index + 1} / ${steps.length}`;
-    back.disabled = index === 0;
+    previous.disabled = restart.disabled = index === 0;
     next.disabled = index === steps.length - 1;
-  }
-
-  // Long enough to read the caption twice.
-  const dwell = () => MOVE_MS + Math.max(2600, caption.textContent.length * 60);
-
-  function schedule() {
-    timer = setTimeout(() => {
-      if (index === steps.length - 1) return stop();
-      show(index + 1, true);
-      schedule();
-    }, dwell());
-  }
-
-  function start() {
-    playing = true;
-    play.textContent = 'Pause';
-    if (index === steps.length - 1) show(0, true);
-    schedule();
-  }
-
-  function stop() {
-    playing = false;
-    play.textContent = 'Play';
-    clearTimeout(timer);
   }
 
   show(0, false);

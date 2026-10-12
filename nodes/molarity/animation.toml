@@ -1,0 +1,14 @@
+kind = "calculation"
+title = "Molarity from grams"
+quantity = [
+  { name = "mass", label = "mass of NaOH", expr = "10.0", unit = "g" },
+  { name = "moles", label = "moles of NaOH", expr = "mass / M('NaOH')", unit = "mol" },
+  { name = "volume", label = "volume of solution", expr = "0.500", unit = "L" },
+  { name = "conc", label = "molarity", expr = "moles / volume", unit = "M" },
+]
+step = [
+  { show = 1, caption = "Dissolve {mass} g of NaOH." },
+  { show = 2, caption = "Convert to moles with the molar mass: {moles} mol." },
+  { show = 3, caption = "The finished solution has a volume of 500 mL, which is {volume} L." },
+  { show = 4, caption = "Moles divided by liters: {conc} M." },
+]

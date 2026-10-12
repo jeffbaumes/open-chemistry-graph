@@ -1,0 +1,10 @@
+kind = "equation"
+title = "Acid plus base gives salt plus water"
+reactants = ["HCl", "NaOH"]
+products = ["NaCl", "H2O"]
+step = [
+  { coefficients = [1, 1, 1, 1], caption = "Hydrochloric acid and sodium hydroxide react to form a salt and water." },
+  { coefficients = [1, 1, 1, 1], focus = "H", caption = "The acid's hydrogen and the hydrogen in the base's OH both end up in water: {right.H} hydrogen atoms." },
+  { coefficients = [1, 1, 1, 1], focus = "Na", caption = "The ions left over, sodium and chloride, make the salt." },
+  { coefficients = [1, 1, 1, 1], caption = "It balances 1 to 1. That is why M_a \u00d7 V_a = M_b \u00d7 V_b works for this acid and base." },
+]

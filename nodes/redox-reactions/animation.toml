@@ -1,0 +1,8 @@
+kind = "atom"
+title = "Loss and gain of electrons"
+step = [
+  { symbol = "Mg", caption = "In 2 Mg + O2 -> 2 MgO, a magnesium atom starts neutral: {protons} protons and {electrons} electrons." },
+  { symbol = "Mg", electrons = 10, caption = "It loses 2 electrons. Loss is oxidation, and its charge rises to {charge}." },
+  { symbol = "O", caption = "An oxygen atom also starts neutral, with {electrons} electrons." },
+  { symbol = "O", electrons = 10, caption = "It gains those 2 electrons. Gain is reduction, and its charge falls to {charge}." },
+]

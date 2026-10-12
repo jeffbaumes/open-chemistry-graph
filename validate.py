@@ -80,6 +80,7 @@ OPERATORS = {
     ast.Div: operator.truediv, ast.Pow: operator.pow,
 }
 PERIODIC = [row[0] for row in convention("periodic.toml")["elements"]]
+ELEMENT_KIND = {row[0]: row[2] for row in convention("periodic.toml")["elements"]}
 
 
 def atomic_number(symbol):
@@ -114,8 +115,9 @@ FUNCTIONS = {
 }
 
 
-def evaluate(expression):
-    """Evaluate arithmetic such as "36.0 / M('H2O')".
+def evaluate(expression, names=None):
+    """Evaluate arithmetic such as "36.0 / M('H2O')". `names` adds values an
+    expression may use, such as earlier steps of a calculation.
 
     Allows numbers, + - * / **, the constants in conventions/constants.toml,
     and the functions in FUNCTIONS. Nothing else.
@@ -127,6 +129,8 @@ def evaluate(expression):
             return OPERATORS[type(node.op)](ev(node.left), ev(node.right))
         if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub):
             return -ev(node.operand)
+        if isinstance(node, ast.Name) and node.id in (names or {}):
+            return names[node.id]
         if isinstance(node, ast.Name) and node.id in CONSTANTS:
             return CONSTANTS[node.id]
         if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id in FUNCTIONS:
@@ -271,11 +275,16 @@ def check_atom_animation(scene):
         symbol = step.get("symbol")
         if symbol not in PERIODIC[:20]:
             errors.append(f"step {i}: symbol must be one of the first 20 elements")
-        elif not isinstance(step.get("electrons", 1), int) or not 0 <= step.get("electrons", 1) <= 20:
+            continue
+        if not isinstance(step.get("electrons", 1), int) or not 0 <= step.get("electrons", 1) <= 20:
             errors.append(f"step {i}: electrons must be a whole number from 0 to 20")
         if step.get("focus", "valence") != "valence":
             errors.append(f"step {i}: the only focus is \"valence\"")
-    return errors, {"name", "symbol", "protons", "electrons", "charge", "valence", "levels"}
+        mass = step.get("mass_number", atomic_number(symbol))
+        if not isinstance(mass, int) or mass < atomic_number(symbol):
+            errors.append(f"step {i}: mass_number cannot be less than the number of protons")
+    names = {"name", "symbol", "protons", "electrons", "charge", "valence", "levels"}
+    return errors, lambda step: names | ({"mass_number", "neutrons"} if "mass_number" in step else set())
 
 
 def check_decay_animation(scene):
@@ -291,11 +300,130 @@ def check_decay_animation(scene):
     return errors, names
 
 
+def check_calculation_animation(scene):
+    """Every quantity's expression must evaluate, using only the ones before it."""
+    errors, values = [], {}
+    quantities = scene.get("quantity", [])
+    if not 1 <= len(quantities) <= 6:
+        errors.append("needs 1 to 6 quantities")
+    for q in quantities:
+        name = q.get("name", "")
+        if not re.fullmatch(r"[a-z]\w*", name) or name in values or name in CONSTANTS or not q.get("label") or "expr" not in q:
+            errors.append(f"quantity {name!r}: needs a unique lower-case name, a label and an expr")
+            continue
+        try:
+            values[name] = evaluate(q["expr"], values)
+        except (ValueError, SyntaxError, TypeError, KeyError, ZeroDivisionError) as e:
+            errors.append(f"quantity {name!r}: {e}")
+    shown = [step.get("show") for step in scene["step"]]
+    if not all(isinstance(n, int) and 1 <= n <= len(quantities) for n in shown) or shown != sorted(shown):
+        errors.append("each step needs show, how many quantities are revealed, never decreasing")
+    return errors, set(values)
+
+
+def check_sort_animation(scene):
+    bins, items = scene.get("bins", []), scene.get("items", [])
+    errors = [] if 2 <= len(bins) <= 5 and all(isinstance(b, str) for b in bins) else ["needs 2 to 5 bins"]
+    if not items or not all(i.get("text") and isinstance(i.get("bin"), int) and 0 <= i["bin"] < len(bins) for i in items):
+        errors.append("each item needs text and the index of its bin")
+    placed = [step.get("placed") for step in scene["step"]]
+    if not all(isinstance(n, int) and 0 <= n <= len(items) for n in placed) or placed != sorted(placed):
+        errors.append("each step needs placed, how many items are shown, never decreasing")
+    return errors, {"placed", "total"}
+
+
+def check_sigfigs_animation(scene):
+    errors = [f"step {i}: number must be a string of digits such as \"0.0052\""
+              for i, step in enumerate(scene["step"], 1) if not re.fullmatch(r"\d+\.?\d*|\.\d+", str(step.get("number", "")))
+              or not isinstance(step.get("number"), str)]
+    return errors, {"number", "count", "point"}
+
+
+def check_orbitals_animation(scene):
+    errors = [f"step {i}: z must be a whole number from 1 to 36" for i, step in enumerate(scene["step"], 1)
+              if not isinstance(step.get("z"), int) or not 1 <= step["z"] <= 36]
+    return errors, {"name", "symbol", "z", "config", "last", "valence"}
+
+
+def check_sizes_animation(scene):
+    errors = [f"step {i}: elements must list 2 to 8 of the first 36 elements" for i, step in enumerate(scene["step"], 1)
+              if not 2 <= len(step.get("elements", [])) <= 8 or not all(el in PERIODIC for el in step["elements"])]
+    return errors, lambda step: {"smallest", "largest"} | {f"{p}.{el}" for p in ("r", "ie", "en") for el in step.get("elements", [])}
+
+
+def check_ionic_animation(scene):
+    """A main-group metal and nonmetal; the last step must be neutral."""
+    errors, net = [], None
+    for i, step in enumerate(scene["step"], 1):
+        metal, nonmetal = step.get("metal"), step.get("nonmetal")
+        try:
+            ok = ELEMENT_KIND[metal] == "m" and valence(metal) <= 3 and ELEMENT_KIND[nonmetal] == "n" and 5 <= valence(nonmetal) <= 7
+        except (KeyError, ValueError):
+            ok = False
+        counts = [step.get("metals", 1), step.get("nonmetals", 1)]
+        if not ok or not all(isinstance(c, int) and 1 <= c <= 4 for c in counts):
+            errors.append(f"step {i}: needs a main-group metal, a nonmetal from groups 15 to 17, and 1 to 4 of each")
+            continue
+        net = valence(metal) * counts[0] - (8 - valence(nonmetal)) * counts[1]
+    if not errors and net != 0:
+        errors.append("the last step is not neutral")
+    return errors, {"formula", "plus", "minus", "metals", "nonmetals", "net", "metal_charge", "nonmetal_charge", "metal", "nonmetal"}
+
+
+def check_formula_animation(scene):
+    errors = []
+    for i, step in enumerate(scene["step"], 1):
+        parse_formula(step["formula"])
+        if not isinstance(step.get("coefficient", 1), int) or not 1 <= step.get("coefficient", 1) <= 4:
+            errors.append(f"step {i}: coefficient must be a whole number from 1 to 4")
+    return errors, lambda step: {"total", "elements", "mass"} | {f"{p}.{el}" for p in ("count", "each", "prefix") for el in parse_formula(step["formula"])}
+
+
+def check_energy_animation(scene):
+    errors = []
+    for i, step in enumerate(scene["step"], 1):
+        state = {**scene, **step}
+        levels = [state.get(k) for k in ("reactants", "products", "barrier")]
+        if not all(isinstance(v, (int, float)) and v >= 0 for v in levels):
+            errors.append(f"step {i}: needs reactants, products and barrier, in kJ")
+            continue
+        barrier = levels[2] * (0.6 if state.get("catalyst") else 1)
+        if barrier <= max(0, levels[1] - levels[0]) or levels[0] + levels[2] > 200:
+            errors.append(f"step {i}: the barrier must rise above both the reactants and the products, and peak at 200 kJ or less")
+    return errors, {"Ea", "dH", "heat", "type", "size"}
+
+
+def check_equilibrium_animation(scene):
+    errors = []
+    if not all(isinstance(scene.get(k), (int, float)) and 0 < scene[k] < 1 for k in ("forward", "reverse")) or not scene.get("reactants", 0) > 0:
+        errors.append("needs forward and reverse fractions between 0 and 1, and a starting amount of reactants")
+    for i, step in enumerate(scene["step"], 1):
+        if not isinstance(step.get("rounds"), int) or step["rounds"] < 0 or (step.get("added") and "disturb" not in scene):
+            errors.append(f"step {i}: needs rounds; a step with added needs disturb in the scene")
+    return errors, {"A", "B", "forward", "reverse"}
+
+
+def check_ph_animation(scene):
+    errors = [f"step {i}: ph must be a number from 0 to 14" for i, step in enumerate(scene["step"], 1)
+              if not isinstance(step.get("ph"), (int, float)) or not 0 <= step["ph"] <= 14]
+    return errors, {"ph", "H", "OH", "kind"}
+
+
 ANIMATION_CHECKS = {
     "equation": check_equation_animation,
     "gas": check_gas_animation,
     "atom": check_atom_animation,
     "decay": check_decay_animation,
+    "calculation": check_calculation_animation,
+    "sort": check_sort_animation,
+    "sigfigs": check_sigfigs_animation,
+    "orbitals": check_orbitals_animation,
+    "sizes": check_sizes_animation,
+    "ionic": check_ionic_animation,
+    "formula": check_formula_animation,
+    "energy": check_energy_animation,
+    "equilibrium": check_equilibrium_animation,
+    "ph": check_ph_animation,
 }
 
 
@@ -323,9 +451,12 @@ def check_animation(path):
     except (KeyError, ValueError, TypeError) as e:
         return [f"animation: {e!r}"]
     errors += [f"animation: {problem}" for problem in problems]
+    names_for = names if callable(names) else (lambda step: names)
     for i, step in enumerate(steps, 1):
+        if problems:
+            break
         for name in re.findall(r"\{([\w.]+)\}", step["caption"]):
-            if name not in names:
+            if name not in names_for(step):
                 errors.append(f"animation step {i}: caption uses {{{name}}}, which a {kind} scene cannot supply")
     return errors
 

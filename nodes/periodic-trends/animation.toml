@@ -1,0 +1,8 @@
+kind = "sizes"
+title = "Atomic radius across and down"
+step = [
+  { elements = ["Li", "Na", "K"], caption = "Down group 1 each atom adds an energy level: {r.Li}, {r.Na}, then {r.K} pm." },
+  { elements = ["Na", "Mg", "Al", "Si", "P", "S", "Cl"], caption = "Across period 3 the atoms shrink, from {r.Na} pm for sodium to {r.Cl} pm for chlorine." },
+  { elements = ["Na", "Cl"], caption = "Same energy level, but chlorine has 6 more protons pulling its electrons in. The larger atom is {largest}." },
+  { elements = ["Na", "Cl"], caption = "Smaller atoms hold electrons more tightly. Ionization energy: {ie.Na} kJ/mol for Na, {ie.Cl} for Cl." },
+]

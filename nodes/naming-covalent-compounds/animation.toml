@@ -1,0 +1,8 @@
+kind = "formula"
+title = "Prefixes from subscripts"
+step = [
+  { formula = "N2O4", caption = "N2O4: {each.N} nitrogen atoms take {prefix.N}- and {each.O} oxygen atoms take {prefix.O}-. Dinitrogen tetroxide." },
+  { formula = "SF6", caption = "SF6: no mono- on the first element, and {each.F} fluorine atoms take {prefix.F}-. Sulfur hexafluoride." },
+  { formula = "CO", caption = "CO: one oxygen takes {prefix.O}-, and monooxide shortens to carbon monoxide." },
+  { formula = "CO2", caption = "CO2: {each.O} oxygen atoms take {prefix.O}-. Carbon dioxide." },
+]

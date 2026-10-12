@@ -1,0 +1,9 @@
+kind = "energy"
+title = "What a catalyst changes"
+reactants = 50
+products = 20
+step = [
+  { barrier = 100, caption = "Colliding particles need {Ea} kJ to react. Few collisions have that much." },
+  { barrier = 100, catalyst = true, caption = "A catalyst offers an easier path: {Ea} kJ. Many more collisions succeed, so the reaction is faster." },
+  { barrier = 100, catalyst = true, caption = "The start and the end did not move. \u0394H is still {dH} kJ and the same products form." },
+]

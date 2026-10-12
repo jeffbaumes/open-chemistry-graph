@@ -1,0 +1,8 @@
+kind = "sigfigs"
+title = "Which digits count?"
+step = [
+  { number = "1002", caption = "Zeros between non-zero digits count: {count} significant figures." },
+  { number = "0.0052", caption = "Leading zeros only locate the decimal point. They never count: {count} significant figures." },
+  { number = "2.50", caption = "With a decimal point, trailing zeros count: {count}." },
+  { number = "2500", caption = "With no decimal point, trailing zeros do not count: {count}." },
+]

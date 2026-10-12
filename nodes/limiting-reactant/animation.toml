@@ -1,0 +1,15 @@
+kind = "calculation"
+title = "Which reactant runs out?"
+quantity = [
+  { name = "h2", label = "H2 available", expr = "3.0", unit = "mol" },
+  { name = "o2", label = "O2 available", expr = "2.0", unit = "mol" },
+  { name = "fromh", label = "H2O the H2 allows", expr = "h2 * 2 / 2", unit = "mol", sig = 2 },
+  { name = "fromo", label = "H2O the O2 allows", expr = "o2 * 2 / 1", unit = "mol", sig = 2 },
+  { name = "made", label = "H2O formed", expr = "min(fromh, fromo)", unit = "mol", sig = 2 },
+]
+step = [
+  { show = 2, caption = "For 2 H2 + O2 -> 2 H2O, mix {h2} mol of H2 with {o2} mol of O2." },
+  { show = 3, caption = "The hydrogen alone could make {fromh} mol of water." },
+  { show = 4, caption = "The oxygen alone could make {fromo} mol." },
+  { show = 5, caption = "The smaller amount is what forms: {made} mol. Hydrogen runs out first, so it is the limiting reactant." },
+]

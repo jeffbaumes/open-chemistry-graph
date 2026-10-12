@@ -1,0 +1,17 @@
+kind = "sort"
+title = "One example of each type"
+bins = ["Synthesis", "Decomposition", "Single replacement", "Double replacement", "Combustion"]
+items = [
+  { text = "2 Mg + O2 -> 2 MgO", bin = 0 },
+  { text = "2 H2O2 -> 2 H2O + O2", bin = 1 },
+  { text = "Zn + 2 HCl -> ZnCl2 + H2", bin = 2 },
+  { text = "AgNO3 + NaCl -> AgCl + NaNO3", bin = 3 },
+  { text = "CH4 + 2 O2 -> CO2 + 2 H2O", bin = 4 },
+]
+step = [
+  { placed = 1, caption = "Synthesis: two substances combine into one." },
+  { placed = 2, caption = "Decomposition: one substance breaks into simpler ones." },
+  { placed = 3, caption = "Single replacement: an element takes the place of another in a compound. Zinc replaces hydrogen." },
+  { placed = 4, caption = "Double replacement: two compounds swap partners. Silver ends up with chloride." },
+  { placed = 5, caption = "Combustion: a fuel with carbon and hydrogen burns in oxygen, giving carbon dioxide and water." },
+]

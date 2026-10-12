@@ -1,0 +1,9 @@
+kind = "ionic"
+title = "Balancing the charges"
+step = [
+  { metal = "Na", nonmetal = "Cl", caption = "Sodium gives up 1 electron and chlorine takes 1. One {metal_charge} and one {nonmetal_charge} cancel: {formula}." },
+  { metal = "Ca", nonmetal = "Cl", caption = "Calcium loses 2 electrons but a chlorine atom takes only 1. Overall {net}, not neutral." },
+  { metal = "Ca", nonmetal = "Cl", nonmetals = 2, caption = "A second chloride balances it: {plus}+ and {minus}\u2212. The formula is {formula}." },
+  { metal = "Al", nonmetal = "O", caption = "Aluminum is {metal_charge} and oxide is {nonmetal_charge}. One of each leaves {net}." },
+  { metal = "Al", nonmetal = "O", metals = 2, nonmetals = 3, caption = "Two aluminum and three oxide: {plus}+ and {minus}\u2212. The formula is {formula}." },
+]

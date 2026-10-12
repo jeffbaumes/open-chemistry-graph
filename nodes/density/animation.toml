@@ -1,0 +1,12 @@
+kind = "calculation"
+title = "Finding a density"
+quantity = [
+  { name = "mass", label = "mass", expr = "54.0", unit = "g" },
+  { name = "volume", label = "volume", expr = "20.0", unit = "cm^3" },
+  { name = "density", label = "density", expr = "mass / volume", unit = "g/cm^3" },
+]
+step = [
+  { show = 1, caption = "A metal block has a mass of {mass} g." },
+  { show = 2, caption = "It takes up {volume} cm^3." },
+  { show = 3, caption = "Density is mass divided by volume: {density} g/cm^3. That matches aluminum." },
+]

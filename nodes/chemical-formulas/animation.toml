@@ -1,0 +1,7 @@
+kind = "formula"
+title = "Subscripts, coefficients and parentheses"
+step = [
+  { formula = "H2O", caption = "A subscript counts the atom before it: {count.H} hydrogen atoms and {count.O} oxygen atom." },
+  { formula = "H2O", coefficient = 3, caption = "A coefficient in front multiplies the whole formula: {count.H} hydrogen and {count.O} oxygen atoms." },
+  { formula = "Ca(NO3)2", caption = "A subscript after parentheses multiplies everything inside: {count.N} nitrogen and {count.O} oxygen atoms, {total} atoms in all." },
+]

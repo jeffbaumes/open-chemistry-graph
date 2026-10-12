@@ -1,0 +1,17 @@
+kind = "sort"
+title = "Element, compound or mixture?"
+bins = ["Element", "Compound", "Mixture"]
+items = [
+  { text = "Gold, Au", bin = 0 },
+  { text = "Water, H2O", bin = 1 },
+  { text = "Air", bin = 2 },
+  { text = "Oxygen, O2", bin = 0 },
+  { text = "Carbon dioxide, CO2", bin = 1 },
+  { text = "Salt water", bin = 2 },
+]
+step = [
+  { placed = 1, caption = "Gold is one kind of atom, so it is an element." },
+  { placed = 2, caption = "Water is hydrogen and oxygen bonded in a fixed ratio: a compound." },
+  { placed = 3, caption = "Air is several gases mixed together, each keeping its own properties: a mixture." },
+  { placed = 6, caption = "Ask three questions. One kind of atom? Different atoms bonded in a fixed ratio? Or substances just mixed?" },
+]

@@ -1,0 +1,7 @@
+kind = "atom"
+title = "Reading an atom from two numbers"
+step = [
+  { symbol = "Na", caption = "Atomic number 11 means {protons} protons. Every atom with {protons} protons is sodium." },
+  { symbol = "Na", mass_number = 23, caption = "Mass number 23 counts protons plus neutrons, so there are 23 - {protons} = {neutrons} neutrons." },
+  { symbol = "Na", mass_number = 23, focus = "valence", caption = "A neutral atom has as many electrons as protons: {electrons}, in {levels} energy levels." },
+]

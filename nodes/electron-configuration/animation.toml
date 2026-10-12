@@ -1,0 +1,10 @@
+kind = "orbitals"
+title = "Filling the orbitals in order"
+step = [
+  { z = 1, caption = "Hydrogen's one electron goes in the lowest sublevel: {config}." },
+  { z = 2, caption = "Helium fills it: {config}. An orbital holds 2 electrons with opposite spins." },
+  { z = 3, caption = "Lithium's third electron starts the next sublevel: {config}." },
+  { z = 7, caption = "In 2p the electrons spread out, one per orbital, before any pair up: {config}." },
+  { z = 8, caption = "Oxygen's eighth electron has to pair up: {config}." },
+  { z = 11, caption = "Sodium, with 11 electrons: {config}." },
+]

@@ -1,0 +1,12 @@
+kind = "calculation"
+title = "Heat to warm water"
+quantity = [
+  { name = "mass", label = "mass of water", expr = "50.0", unit = "g" },
+  { name = "change", label = "temperature change", expr = "45.0 - 20.0", unit = "\u00b0C" },
+  { name = "heat", label = "heat needed", expr = "mass * c_water * change", unit = "J" },
+]
+step = [
+  { show = 1, caption = "Warm {mass} g of water." },
+  { show = 2, caption = "From 20.0 \u00b0C to 45.0 \u00b0C is a change of {change} \u00b0C. Only the change matters." },
+  { show = 3, caption = "Multiply mass, specific heat and temperature change: {heat} J." },
+]

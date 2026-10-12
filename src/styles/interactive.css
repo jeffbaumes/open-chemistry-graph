@@ -197,6 +197,22 @@
   cursor: pointer;
 }
 .a-controls button:disabled { color: var(--muted); border-color: var(--border); cursor: default; }
+/* Looks used by the animation kinds */
+.a-orbital { fill: none; stroke: var(--text); stroke-width: 1.5; }
+.a-spin { fill: var(--accent); font-weight: 700; }
+.a-digit { fill: var(--accent); font-family: var(--font-body); font-weight: 700; }
+.a-working { margin: 0.9rem 0 0; text-align: center; font: 1.05rem/1.5 var(--font-body); overflow-wrap: anywhere; }
+.a-working strong { color: var(--accent); }
+.a-wide { max-width: none; }
+.a-then { color: var(--muted); }
+.a-sort { display: grid; }
+.a-bin { display: grid; grid-template-columns: 9.5rem 1fr; align-items: center; gap: 0.6rem; min-height: 3.1rem; padding: 0.3rem 0; border-bottom: 1px solid var(--border); }
+.a-bin:last-child { border-bottom: 0; }
+.a-bin .i-chips { min-height: 0; margin: 0; }
+/* Text that arrives with a step fades in, as new sprites do. */
+.a-new { animation: a-appear 0.6s ease; }
+@keyframes a-appear { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .a-new { animation: none; } }
 .a-counter { min-width: 3.2rem; text-align: center; color: var(--muted); font-variant-numeric: tabular-nums; }
 
 @media (max-width: 480px) {

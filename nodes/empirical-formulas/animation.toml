@@ -1,0 +1,14 @@
+kind = "calculation"
+title = "From percentages to a formula"
+quantity = [
+  { name = "c", label = "moles of C", expr = "40.0 / M('C')", unit = "mol" },
+  { name = "h", label = "moles of H", expr = "6.7 / M('H')", unit = "mol" },
+  { name = "o", label = "moles of O", expr = "53.3 / M('O')", unit = "mol" },
+  { name = "ratio", label = "H atoms per C", expr = "h / c", unit = "" },
+]
+step = [
+  { show = 1, caption = "Take 100 g, so 40.0% carbon is 40.0 g. Convert to moles: {c} mol." },
+  { show = 2, caption = "6.7 g of hydrogen is {h} mol." },
+  { show = 3, caption = "53.3 g of oxygen is {o} mol, the same as carbon." },
+  { show = 4, caption = "Divide by the smallest. Hydrogen comes to {ratio} for each carbon, so the empirical formula is CH2O." },
+]

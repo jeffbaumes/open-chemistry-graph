@@ -1,0 +1,12 @@
+kind = "calculation"
+title = "From grams to moles"
+quantity = [
+  { name = "mass", label = "mass of water", expr = "36.0", unit = "g" },
+  { name = "molar", label = "molar mass of H2O", expr = "2 * M('H') + M('O')", unit = "g/mol", sig = 5 },
+  { name = "moles", label = "amount", expr = "mass / molar", unit = "mol" },
+]
+step = [
+  { show = 1, caption = "A balance reads {mass} g of water." },
+  { show = 2, caption = "One mole of H2O has a mass of {molar} g." },
+  { show = 3, caption = "Divide the mass by the molar mass. Grams cancel: {moles} mol." },
+]

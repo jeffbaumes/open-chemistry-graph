@@ -1,0 +1,8 @@
+kind = "formula"
+title = "Four molecules, four shapes"
+step = [
+  { formula = "CO2", caption = "CO2: the 2 electron groups on carbon get as far apart as they can. Linear, 180\u00b0." },
+  { formula = "H2O", caption = "H2O: 4 groups on oxygen, but 2 are lone pairs, which are not drawn. The atoms make a bent shape." },
+  { formula = "NH3", caption = "NH3: 4 groups, 1 of them a lone pair. The hydrogens sit below nitrogen: trigonal pyramidal." },
+  { formula = "CH4", caption = "CH4: 4 bonds and no lone pairs. Tetrahedral, 109.5\u00b0. It is drawn flat here; really the hydrogens point to four corners." },
+]

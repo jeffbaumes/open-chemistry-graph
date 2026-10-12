@@ -1,0 +1,15 @@
+kind = "sort"
+title = "Like dissolves like"
+bins = ["Dissolves in water", "Does not dissolve"]
+items = [
+  { text = "Salt, ionic", bin = 0 },
+  { text = "Oil, nonpolar", bin = 1 },
+  { text = "Sugar, polar", bin = 0 },
+  { text = "Wax, nonpolar", bin = 1 },
+  { text = "Ethanol, polar", bin = 0 },
+]
+step = [
+  { placed = 2, caption = "Water is polar. It pulls the ions of salt apart, but has no grip on nonpolar oil." },
+  { placed = 4, caption = "Sugar molecules are polar, so water surrounds them. Wax is nonpolar and stays whole." },
+  { placed = 5, caption = "Polar and ionic solutes dissolve in polar solvents. Nonpolar solutes need a nonpolar solvent." },
+]

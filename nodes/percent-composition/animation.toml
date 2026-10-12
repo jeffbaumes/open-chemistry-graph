@@ -1,0 +1,12 @@
+kind = "calculation"
+title = "How much of water's mass is hydrogen?"
+quantity = [
+  { name = "h", label = "H in 1 mol of H2O", expr = "2 * M('H')", unit = "g", sig = 4 },
+  { name = "total", label = "1 mol of H2O", expr = "h + M('O')", unit = "g", sig = 5 },
+  { name = "percent", label = "hydrogen by mass", expr = "100 * h / total", unit = "%", sig = 4 },
+]
+step = [
+  { show = 1, caption = "One mole of water contains 2 mol of hydrogen atoms: {h} g." },
+  { show = 2, caption = "The whole mole of water has a mass of {total} g." },
+  { show = 3, caption = "Divide and multiply by 100: {percent}% hydrogen, even though two of the three atoms are hydrogen." },
+]

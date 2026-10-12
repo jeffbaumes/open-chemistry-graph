@@ -1,0 +1,16 @@
+kind = "sort"
+title = "Did a new substance form?"
+bins = ["Physical change", "Chemical change"]
+items = [
+  { text = "Ice melting", bin = 0 },
+  { text = "Wood burning", bin = 1 },
+  { text = "Sugar dissolving", bin = 0 },
+  { text = "Iron rusting", bin = 1 },
+  { text = "Water boiling", bin = 0 },
+  { text = "Egg cooking", bin = 1 },
+]
+step = [
+  { placed = 2, caption = "Melted ice is still H2O. Burning wood makes new substances: carbon dioxide, water vapor and ash." },
+  { placed = 4, caption = "Dissolved sugar is still sugar. Rust is a new substance, iron oxide." },
+  { placed = 6, caption = "Steam is still H2O. A cooked egg cannot be uncooked. The test is always whether a new substance formed." },
+]

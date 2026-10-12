@@ -1,0 +1,8 @@
+kind = "atom"
+title = "What groups and periods mean"
+step = [
+  { symbol = "Li", focus = "valence", caption = "Lithium has {valence} valence electron and {levels} energy levels." },
+  { symbol = "Na", focus = "valence", caption = "Sodium, below it, still has {valence} valence electron but {levels} levels. Same group, next period." },
+  { symbol = "K", focus = "valence", caption = "Potassium: {valence} again, in {levels} levels. A group shares its valence count, so it reacts alike." },
+  { symbol = "S", focus = "valence", caption = "Sulfur has {levels} levels, so period 3, and {valence} valence electrons, so group 16." },
+]

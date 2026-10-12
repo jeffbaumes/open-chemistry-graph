@@ -1,0 +1,8 @@
+kind = "ph"
+title = "Moving along the pH scale"
+step = [
+  { ph = 7, caption = "In pure water [H^+] and [OH^-] are both {H} M. Neutral." },
+  { ph = 3, caption = "More hydrogen ions means a lower pH. At [H^+] = {H} M the pH is 3." },
+  { ph = 4, caption = "One step up the scale is ten times fewer hydrogen ions: {H} M." },
+  { ph = 9, caption = "Above 7, hydroxide outnumbers hydrogen ions: [OH^-] is {OH} M. The solution is {kind}." },
+]

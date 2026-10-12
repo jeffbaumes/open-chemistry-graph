@@ -1,0 +1,7 @@
+kind = "atom"
+title = "Beta decay of carbon-14"
+step = [
+  { symbol = "C", mass_number = 14, caption = "Carbon-14 has {protons} protons and {neutrons} neutrons. That nucleus is unstable." },
+  { symbol = "N", mass_number = 14, caption = "A neutron turns into a proton and an electron is thrown out. Now {protons} protons and {neutrons} neutrons." },
+  { symbol = "N", mass_number = 14, caption = "Seven protons means it is no longer carbon. It is nitrogen-14, and the mass number has not changed." },
+]

@@ -93,14 +93,6 @@ detail = "Keep per-exercise results in the browser's local storage and show prog
 
 [[task]]
 kind = "tooling"
-id = "animation-kinds"
-mode = "ai"
-title = "Add animation kinds"
-detail = "The kinds so far are equation, gas, atom and decay. Good next ones: a number line (pH), a beaker (molarity and dilution), an energy curve, and a step-by-step calculation."
-playbook = "ANIMATIONS.md"
-
-[[task]]
-kind = "tooling"
 id = "animation-export"
 mode = "ai"
 title = "Export an animation to a video file"

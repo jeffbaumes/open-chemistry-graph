@@ -1,0 +1,8 @@
+kind = "gas"
+title = "One equation for every case"
+max_volume = 46.0
+step = [
+  { moles = 1.0, temperature = 273, pressure = 1.0, caption = "At STP, {T} K and {P} atm, 1 mol of gas fills {V} L." },
+  { moles = 2.0, temperature = 273, pressure = 1.0, caption = "Add a second mole at the same temperature and pressure. The volume doubles to {V} L." },
+  { moles = 2.0, temperature = 273, volume = 22.4, caption = "Push it back to {V} L and the pressure doubles instead, to {P} atm." },
+]

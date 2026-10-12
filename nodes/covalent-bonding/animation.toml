@@ -1,0 +1,14 @@
+kind = "calculation"
+title = "Counting electrons for water's Lewis structure"
+quantity = [
+  { name = "total", label = "valence electrons", expr = "2 * valence('H') + valence('O')", unit = "", sig = 1 },
+  { name = "bonds", label = "in 2 single bonds", expr = "2 * 2", unit = "", sig = 1 },
+  { name = "left", label = "left over", expr = "total - bonds", unit = "", sig = 1 },
+  { name = "pairs", label = "lone pairs on O", expr = "left / 2", unit = "", sig = 1 },
+]
+step = [
+  { show = 1, caption = "For H2O, add up the valence electrons. Each hydrogen brings 1 and oxygen brings 6: {total}." },
+  { show = 2, caption = "A single bond joins each hydrogen to oxygen. Each bond is a shared pair, so that uses {bonds} electrons." },
+  { show = 3, caption = "{left} electrons are left over." },
+  { show = 4, caption = "They go on oxygen as {pairs} lone pairs. Oxygen now has 8 electrons around it and each hydrogen has 2." },
+]
