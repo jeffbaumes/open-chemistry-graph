@@ -1,25 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
 import { nodes, wanted, base, titleOf } from '../lib/nodes.js';
+import { toHtml } from '../lib/chem.js';
 ---
 <Base title="Lessons">
+  <p class="eyebrow">Contents</p>
   <h1>High school chemistry</h1>
   <p class="muted">Short lessons with practice problems, ordered so each builds on the ones before it.</p>
 
-  <ul class="node-list">
+  <ol class="contents">
     {nodes.map((node) => (
       <li>
         <a href={`${base}/${node.id}/`}>{node.title}</a>
-        <p class="muted">{node.summary}</p>
+        <p class="muted" set:html={toHtml(node.summary)} />
       </li>
     ))}
-  </ul>
+  </ol>
 
   {wanted.length > 0 && (
     <>
       <h2>Not written yet</h2>
       <p class="muted">Lessons above depend on these. They are the next ones to write.</p>
-      <ul>{wanted.map((id) => <li>{titleOf(id)}</li>)}</ul>
+      <ul class="wanted">{wanted.map((id) => <li>{titleOf(id)}</li>)}</ul>
     </>
   )}
 </Base>

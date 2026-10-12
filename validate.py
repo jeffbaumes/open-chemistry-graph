@@ -15,18 +15,7 @@ NODES = ROOT / "nodes"
 MIN_EXERCISES = 3
 DEFAULT_TOLERANCE = 0.005  # relative
 
-ATOMIC_MASS = {
-    "H": 1.008, "He": 4.0026, "Li": 6.94, "Be": 9.0122, "B": 10.81,
-    "C": 12.011, "N": 14.007, "O": 15.999, "F": 18.998, "Ne": 20.180,
-    "Na": 22.990, "Mg": 24.305, "Al": 26.982, "Si": 28.085, "P": 30.974,
-    "S": 32.06, "Cl": 35.45, "Ar": 39.95, "K": 39.098, "Ca": 40.078,
-    "Sc": 44.956, "Ti": 47.867, "V": 50.942, "Cr": 51.996, "Mn": 54.938,
-    "Fe": 55.845, "Co": 58.933, "Ni": 58.693, "Cu": 63.546, "Zn": 65.38,
-    "Ga": 69.723, "Ge": 72.630, "As": 74.922, "Se": 78.971, "Br": 79.904,
-    "Kr": 83.798, "Rb": 85.468, "Sr": 87.62, "Ag": 107.87, "Sn": 118.71,
-    "I": 126.90, "Xe": 131.29, "Cs": 132.91, "Ba": 137.33, "Pt": 195.08,
-    "Au": 196.97, "Hg": 200.59, "Pb": 207.2, "U": 238.03,
-}
+ATOMIC_MASS = tomllib.loads((ROOT / "conventions" / "elements.toml").read_text())["mass"]
 
 TOKEN = re.compile(r"([A-Z][a-z]?)|(\()|(\))|(\d+)")
 
@@ -138,6 +127,8 @@ LESSON_RULES = [
     ("must start with a '# ' title", lambda text: not text.startswith("# ")),
     ("no raw HTML or inline styling; presentation belongs in the templates",
      lambda text: re.search(r"<[a-zA-Z/][^>]*>", text) is not None),
+    ("write formulas and arrows plainly (H2O, ->); the site typesets them",
+     lambda text: re.search(r"[\u2080-\u2089\u2192]", text) is not None),
     (f"longer than {MAX_LESSON_WORDS} words; split it into two nodes",
      lambda text: len(text.split()) > MAX_LESSON_WORDS),
 ]

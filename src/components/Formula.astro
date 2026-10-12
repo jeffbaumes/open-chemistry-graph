@@ -1,13 +1,5 @@
 ---
-import { parse } from 'smol-toml';
-import raw from '../../conventions/elements.toml?raw';
-
-const colors = parse(raw).color;
+import { toHtml } from '../lib/chem.js';
 const { formula } = Astro.props;
-const tokens = [...formula.matchAll(/([A-Z][a-z]?)|(\d+)|([()])/g)];
 ---
-<span class="formula">{tokens.map(([, el, num, paren]) =>
-  el ? <span class="el" style={`--el: ${colors[el] ?? colors.default}`}>{el}</span>
-  : num ? <sub>{num}</sub>
-  : paren
-)}</span>
+<Fragment set:html={toHtml(formula)} />

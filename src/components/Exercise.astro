@@ -1,9 +1,10 @@
 ---
 import Formula from './Formula.astro';
+import { toHtml } from '../lib/chem.js';
 const { ex, n } = Astro.props;
 ---
 <section class="exercise" data-type={ex.type}>
-  <p class="prompt"><strong>{n}.</strong> {ex.prompt}</p>
+  <p class="prompt"><span class="number">{n}.</span> <Fragment set:html={toHtml(ex.prompt)} /></p>
 
   {ex.type === 'numeric' && (
     <label>
@@ -15,7 +16,7 @@ const { ex, n } = Astro.props;
   {ex.type === 'choice' && (
     <div class="options">
       {ex.options.map((option, i) => (
-        <label><input type="radio" name={`q${n}`} data-correct={String(i === ex.answer)} /> {option}</label>
+        <label><input type="radio" name={`q${n}`} data-correct={String(i === ex.answer)} /> <Fragment set:html={toHtml(option)} /></label>
       ))}
     </div>
   )}
@@ -24,10 +25,10 @@ const { ex, n } = Astro.props;
     <div class="equation">
       {['reactants', 'products'].map((side, s) => (
         <>
-          {s === 1 && <span>→</span>}
+          {s === 1 && <span class="op">→</span>}
           {ex[side].map((formula, i) => (
             <>
-              {i > 0 && <span>+</span>}
+              {i > 0 && <span class="op">+</span>}
               <span class="term">
                 <input type="text" inputmode="numeric" data-answer={ex.answer[side][i]} aria-label={`Coefficient for ${formula}`} />
                 <Formula formula={formula} />
@@ -39,7 +40,7 @@ const { ex, n } = Astro.props;
     </div>
   )}
 
-  <div><button type="button">Check</button><span class="feedback" role="status"></span></div>
+  <div class="actions"><button type="button">Check</button><span class="feedback" role="status"></span></div>
 </section>
 
 <script>

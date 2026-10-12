@@ -2,8 +2,8 @@
 
 Balances measure grams, but reactions happen in moles. Molar mass is the bridge between them.
 
-- grams → moles: **divide** by molar mass
-- moles → grams: **multiply** by molar mass
+- grams -> moles: **divide** by molar mass
+- moles -> grams: **multiply** by molar mass
 
 ## Worked example: grams to moles
 

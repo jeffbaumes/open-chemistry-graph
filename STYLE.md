@@ -18,8 +18,10 @@ Any rule can be changed. A change to a rule must update every existing node in t
 
 ## Presentation
 
-- Lessons describe chemistry, never appearance. Do not name colors, fonts or layout in a lesson; element colors live in `conventions/elements.toml` and everything else in `src/styles/site.css`.
-- Use the atomic masses the validator uses, so worked examples match the exercises.
+- Lessons describe chemistry, never appearance. Do not name colors, fonts or layout in a lesson; element data lives in `conventions/elements.toml` and everything else in `src/styles/site.css`.
+- Write formulas and arrows plainly: `H2O`, `Ca(OH)2`, `2 H2 + O2 -> 2 H2O`. The site adds subscripts and arrows, so every page typesets them the same way.
+- Title a section `## Worked example: ...` or `## Common mistake` to get the matching box. A paragraph that is only a bold line is displayed as a centered result.
+- Use the atomic masses in `conventions/elements.toml`, so worked examples match the exercises.
 
 ## Exercises
 

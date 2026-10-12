@@ -27,7 +27,8 @@ Pushing to `main` validates, builds and publishes the site to GitHub Pages.
 |---|---|---|
 | Chemistry is correct | `validate.py` | CI |
 | Lesson format | `LESSON_RULES` in `validate.py` | CI |
-| Element colors | `conventions/elements.toml` | templates |
+| Atomic masses, element colors | `conventions/elements.toml` | CI and templates |
+| Formula typesetting, example boxes | `src/lib/chem.js`, `src/lib/rehype-lesson.js` | templates |
 | Page look and layout | `src/styles/site.css`, `src/` | templates |
 | Tone, level, pedagogy | `STYLE.md` | reviewers |
 

@@ -12,7 +12,7 @@ const { Content } = node;
 ---
 <Base title={node.title}>
   {node.prerequisites.length > 0 && (
-    <p class="muted">
+    <p class="prereqs">
       Before this: {node.prerequisites.map((id, i) => (
         <>
           {i > 0 && ', '}
@@ -22,8 +22,10 @@ const { Content } = node;
     </p>
   )}
 
-  <Content />
+  <article class="lesson"><Content /></article>
 
-  <h2>Practice</h2>
-  {node.exercises.map((ex, i) => <Exercise ex={ex} n={i + 1} />)}
+  <section class="practice">
+    <h2>Practice</h2>
+    {node.exercises.map((ex, i) => <Exercise ex={ex} n={i + 1} />)}
+  </section>
 </Base>

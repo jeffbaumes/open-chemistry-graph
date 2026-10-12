@@ -4,28 +4,28 @@ prerequisites = ["chemical-formulas", "conservation-of-mass"]
 
 [[exercise]]
 type = "balance"
-prompt = "Balance: H2 + O2 -> H2O"
+prompt = "Balance the equation."
 reactants = ["H2", "O2"]
 products = ["H2O"]
 answer = { reactants = [2, 1], products = [2] }
 
 [[exercise]]
 type = "balance"
-prompt = "Balance: CH4 + O2 -> CO2 + H2O"
+prompt = "Balance the equation."
 reactants = ["CH4", "O2"]
 products = ["CO2", "H2O"]
 answer = { reactants = [1, 2], products = [1, 2] }
 
 [[exercise]]
 type = "balance"
-prompt = "Balance: Fe + O2 -> Fe2O3"
+prompt = "Balance the equation."
 reactants = ["Fe", "O2"]
 products = ["Fe2O3"]
 answer = { reactants = [4, 3], products = [2] }
 
 [[exercise]]
 type = "balance"
-prompt = "Balance: Al + HCl -> AlCl3 + H2"
+prompt = "Balance the equation."
 reactants = ["Al", "HCl"]
 products = ["AlCl3", "H2"]
 answer = { reactants = [2, 6], products = [2, 3] }
