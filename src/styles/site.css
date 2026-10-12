@@ -1,0 +1,102 @@
+/* Every color, size and spacing value on the site comes from these tokens. */
+:root {
+  --bg: #fbfbf9;
+  --surface: #ffffff;
+  --text: #1c1f23;
+  --muted: #5d6570;
+  --border: #dcdfe4;
+  --accent: #1f5fbf;
+  --correct: #1e7d3c;
+  --wrong: #b3372c;
+  --font: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --measure: 42rem;
+  --radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171a;
+    --surface: #1d2024;
+    --text: #e8eaed;
+    --muted: #a0a7b1;
+    --border: #33383f;
+    --accent: #7fb0ff;
+    --correct: #5fcf85;
+    --wrong: #ff8a7d;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 1.0625rem/1.6 var(--font);
+}
+
+main, header.site {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+header.site a { color: var(--muted); text-decoration: none; font-weight: 600; }
+a { color: var(--accent); }
+h1 { line-height: 1.2; margin: 1rem 0 0.5rem; }
+h2 { margin-top: 2rem; }
+.muted { color: var(--muted); }
+
+table { border-collapse: collapse; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--border); padding: 0.3rem 0.7rem; text-align: left; }
+
+.node-list { list-style: none; padding: 0; }
+.node-list li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.6rem;
+}
+.node-list a { font-weight: 600; text-transform: none; }
+.node-list p { margin: 0.2rem 0 0; }
+
+.exercise {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.8rem;
+}
+.exercise[data-state='correct'] { border-left-color: var(--correct); }
+.exercise[data-state='wrong'] { border-left-color: var(--wrong); }
+.exercise[data-state='correct'] .feedback { color: var(--correct); }
+.exercise[data-state='wrong'] .feedback { color: var(--wrong); }
+.exercise .prompt { margin: 0 0 0.6rem; }
+.exercise .options label { display: block; }
+.exercise .equation { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; }
+.exercise .term { white-space: nowrap; }
+.exercise input[type='text'] {
+  font: inherit;
+  color: inherit;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+  width: 7rem;
+}
+.exercise .term input[type='text'] { width: 2.6rem; text-align: center; margin-right: 0.25rem; }
+.exercise button {
+  font: inherit;
+  margin-top: 0.4rem;
+  padding: 0.25rem 0.9rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+}
+.feedback { margin-left: 0.6rem; font-weight: 600; }
+
+.formula .el { border-bottom: 3px solid var(--el); }

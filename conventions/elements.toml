@@ -1,0 +1,24 @@
+# The one place element colors are defined. Lessons and exercises never name a
+# color; they name an element, and the templates look the color up here.
+# Based on the CPK convention, adjusted to stay visible on light and dark pages.
+
+[color]
+default = "#8a8f98"
+H = "#9aa5b1"
+C = "#4b5563"
+N = "#3b6fd4"
+O = "#d93a3a"
+F = "#3fa34d"
+Cl = "#2e9e44"
+Br = "#a0392b"
+I = "#7a3fb0"
+S = "#c9a400"
+P = "#e07b1a"
+Na = "#8a55d6"
+K = "#8a55d6"
+Mg = "#2f7d32"
+Ca = "#2f7d32"
+Al = "#b07f8f"
+Fe = "#d2691e"
+Cu = "#b87333"
+Zn = "#6f7f99"

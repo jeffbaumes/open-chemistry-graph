@@ -1,0 +1,24 @@
+title = "Converting between mass and moles"
+summary = "Use molar mass as a conversion factor between grams and moles."
+prerequisites = ["molar-mass"]
+
+[[exercise]]
+type = "numeric"
+prompt = "How many moles are in 36.0 g of water, H2O?"
+answer = 2.00
+unit = "mol"
+derive = { kind = "moles_from_mass", formula = "H2O", mass_g = 36.0 }
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the mass of 0.250 mol of sodium chloride, NaCl?"
+answer = 14.6
+unit = "g"
+derive = { kind = "mass_from_moles", formula = "NaCl", moles = 0.250 }
+
+[[exercise]]
+type = "numeric"
+prompt = "How many moles are in 10.0 g of calcium carbonate, CaCO3?"
+answer = 0.0999
+unit = "mol"
+derive = { kind = "moles_from_mass", formula = "CaCO3", mass_g = 10.0 }

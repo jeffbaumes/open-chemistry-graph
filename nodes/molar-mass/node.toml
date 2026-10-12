@@ -1,0 +1,30 @@
+title = "Molar mass"
+summary = "Find the mass of one mole of a compound from its formula."
+prerequisites = ["chemical-formulas", "the-mole"]
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the molar mass of water, H2O?"
+answer = 18.015
+unit = "g/mol"
+derive = { kind = "molar_mass", formula = "H2O" }
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the molar mass of calcium hydroxide, Ca(OH)2?"
+answer = 74.09
+unit = "g/mol"
+derive = { kind = "molar_mass", formula = "Ca(OH)2" }
+
+[[exercise]]
+type = "numeric"
+prompt = "What is the molar mass of glucose, C6H12O6?"
+answer = 180.16
+unit = "g/mol"
+derive = { kind = "molar_mass", formula = "C6H12O6" }
+
+[[exercise]]
+type = "choice"
+prompt = "In Al2(SO4)3, how many oxygen atoms are in one formula unit?"
+options = ["3", "4", "7", "12"]
+answer = 3

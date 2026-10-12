@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Exercise from '../components/Exercise.astro';
+import { nodes, getNode, base, titleOf } from '../lib/nodes.js';
+
+export function getStaticPaths() {
+  return nodes.map((node) => ({ params: { id: node.id } }));
+}
+
+const node = getNode(Astro.params.id);
+const { Content } = node;
+---
+<Base title={node.title}>
+  {node.prerequisites.length > 0 && (
+    <p class="muted">
+      Before this: {node.prerequisites.map((id, i) => (
+        <>
+          {i > 0 && ', '}
+          {getNode(id) ? <a href={`${base}/${id}/`}>{getNode(id).title}</a> : <span>{titleOf(id)} (not written yet)</span>}
+        </>
+      ))}
+    </p>
+  )}
+
+  <Content />
+
+  <h2>Practice</h2>
+  {node.exercises.map((ex, i) => <Exercise ex={ex} n={i + 1} />)}
+</Base>

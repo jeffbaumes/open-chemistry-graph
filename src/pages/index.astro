@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import { nodes, wanted, base, titleOf } from '../lib/nodes.js';
+---
+<Base title="Lessons">
+  <h1>High school chemistry</h1>
+  <p class="muted">Short lessons with practice problems, ordered so each builds on the ones before it.</p>
+
+  <ul class="node-list">
+    {nodes.map((node) => (
+      <li>
+        <a href={`${base}/${node.id}/`}>{node.title}</a>
+        <p class="muted">{node.summary}</p>
+      </li>
+    ))}
+  </ul>
+
+  {wanted.length > 0 && (
+    <>
+      <h2>Not written yet</h2>
+      <p class="muted">Lessons above depend on these. They are the next ones to write.</p>
+      <ul>{wanted.map((id) => <li>{titleOf(id)}</li>)}</ul>
+    </>
+  )}
+</Base>

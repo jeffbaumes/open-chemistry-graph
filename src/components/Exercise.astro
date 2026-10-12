@@ -1,0 +1,64 @@
+---
+import Formula from './Formula.astro';
+const { ex, n } = Astro.props;
+---
+<section class="exercise" data-type={ex.type}>
+  <p class="prompt"><strong>{n}.</strong> {ex.prompt}</p>
+
+  {ex.type === 'numeric' && (
+    <label>
+      <input type="text" inputmode="decimal" data-answer={ex.answer} data-tolerance={ex.tolerance ?? 0.01} aria-label="Your answer" />
+      {ex.unit}
+    </label>
+  )}
+
+  {ex.type === 'choice' && (
+    <div class="options">
+      {ex.options.map((option, i) => (
+        <label><input type="radio" name={`q${n}`} data-correct={String(i === ex.answer)} /> {option}</label>
+      ))}
+    </div>
+  )}
+
+  {ex.type === 'balance' && (
+    <div class="equation">
+      {['reactants', 'products'].map((side, s) => (
+        <>
+          {s === 1 && <span>→</span>}
+          {ex[side].map((formula, i) => (
+            <>
+              {i > 0 && <span>+</span>}
+              <span class="term">
+                <input type="text" inputmode="numeric" data-answer={ex.answer[side][i]} aria-label={`Coefficient for ${formula}`} />
+                <Formula formula={formula} />
+              </span>
+            </>
+          ))}
+        </>
+      ))}
+    </div>
+  )}
+
+  <div><button type="button">Check</button><span class="feedback" role="status"></span></div>
+</section>
+
+<script>
+  const checkers = {
+    choice: (ex) => ex.querySelector('input:checked')?.dataset.correct === 'true',
+    // A blank coefficient means 1, as it does when written by hand.
+    balance: (ex) => [...ex.querySelectorAll('input')].every((i) => Number(i.value.trim() || 1) === Number(i.dataset.answer)),
+    numeric: (ex) => {
+      const input = ex.querySelector('input');
+      const answer = Number(input.dataset.answer);
+      return Math.abs(parseFloat(input.value) - answer) <= Number(input.dataset.tolerance) * Math.abs(answer);
+    },
+  };
+
+  for (const ex of document.querySelectorAll('.exercise')) {
+    ex.querySelector('button').addEventListener('click', () => {
+      const ok = checkers[ex.dataset.type](ex);
+      ex.dataset.state = ok ? 'correct' : 'wrong';
+      ex.querySelector('.feedback').textContent = ok ? 'Correct' : 'Not yet, try again';
+    });
+  }
+</script>
