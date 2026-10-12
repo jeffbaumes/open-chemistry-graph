@@ -8,6 +8,7 @@ Each folder in `nodes/` is one concept:
 
 - `lesson.md` — a short explanation with a worked example and a common mistake
 - `node.toml` — title, summary, unit, prerequisites, any interactives, and exercises with machine-checkable answers
+- `animation.toml` — optionally, a step-through animation written as data and played in the browser
 
 Run the checks, then the site:
 
@@ -33,7 +34,8 @@ Pushing to `main` validates, builds and publishes the site to GitHub Pages.
 | Physical constants | `conventions/constants.toml` | CI |
 | Units of the course and their order | `conventions/units.toml` | CI and templates |
 | How interactives look and behave | `INTERACTIVES.md`, `src/interactives/lib.js`, `src/styles/interactive.css` | shared toolkit |
-| How videos look and sound | `videos/README.md`, `videos/lib.py` | shared toolkit |
+| How animations are written and played | `ANIMATIONS.md`, `src/animations/` | CI and shared player |
+| How molecules are drawn | `conventions/molecules.toml` | templates |
 | Who is trusted, and what a review is | `TRUST.md`, `conventions/reviewers.toml`, `ci/review_guard.py` | CI guard |
 | Tone, level, pedagogy | `STYLE.md` | reviewers |
 
@@ -64,7 +66,7 @@ Each task is either for an AI agent alone or for an agent guiding a person. Agen
 
 ## Trust
 
-Every part of every lesson (the text, each exercise, each interactive, the video) shows how many people and how many independent AI runs have reviewed that exact version, and whether CI recomputes its answer. Reviews are small records in `nodes/<id>/reviews.toml`. A review stops counting when its part changes, its author is checked against the pull request's GitHub account, and a human review counts only from someone on the reviewer list. [TRUST.md](TRUST.md) explains the rules and what they do not prove.
+Every part of every lesson (the text, each exercise, each interactive, the animation) shows how many people and how many independent AI runs have reviewed that exact version, and whether CI recomputes its answer. Reviews are small records in `nodes/<id>/reviews.toml`. A review stops counting when its part changes, its author is checked against the pull request's GitHub account, and a human review counts only from someone on the reviewer list. [TRUST.md](TRUST.md) explains the rules and what they do not prove.
 
 ## Contributing
 

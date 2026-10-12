@@ -1,0 +1,30 @@
+---
+// A step-through animation, described as data in the node's animation.toml.
+// The steps are also rendered here as a plain list, so the content is there
+// without JavaScript, for screen readers and in print. The player replaces it.
+import Trust from './Trust.astro';
+import { toHtml, parseFormula } from '../lib/chem.js';
+import { colors } from '../lib/elements.js';
+
+const kinds = import.meta.glob('../animations/kinds/*.js', { eager: true });
+const { scene, trust } = Astro.props;
+const kind = kinds[`../animations/kinds/${scene.kind}.js`].default;
+const ui = { chem: toHtml, parseFormula, colorOf: (symbol) => colors[symbol] ?? colors.default };
+const { step: steps, ...shared } = scene;
+const captions = steps.map((step) => {
+  const { vars = {} } = kind.render({ ...shared, ...step }, ui);
+  return toHtml(step.caption.replace(/\{([\w.]+)\}/g, (whole, name) => vars[name] ?? whole));
+});
+---
+<figure class="animation" data-scene={JSON.stringify(scene)}>
+  <figcaption><span class="i-tag">Watch</span> {scene.title}</figcaption>
+  <div class="a-body">
+    <ol class="a-fallback">{captions.map((caption) => <li set:html={caption} />)}</ol>
+  </div>
+  {trust && <Trust part={trust} />}
+</figure>
+
+<script>
+  import { mountAnimations } from '../animations/player.js';
+  mountAnimations();
+</script>

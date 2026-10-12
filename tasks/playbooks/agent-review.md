@@ -27,10 +27,10 @@ You may not review anything you wrote or changed in the same pull request. CI re
    - If you were wrong, say nothing and do not record a review of that exercise.
 5. Also flag, in the pull request, any exercise you got right but found unclear.
 
-## Lesson text, interactives and videos
+## Lesson text, interactives and animations
 
 1. Read the part closely. Check every factual claim, every number in a worked example, and that each term is explained before it is used.
-2. For an interactive, read its source in `src/interactives/kinds/` and check its formulas and data.
+2. For an interactive, read its source in `src/interactives/kinds/` and check its formulas and data. For an animation, read `animation.toml` and step through it on the page.
 3. If you find nothing wrong, record it:
 
    ```bash

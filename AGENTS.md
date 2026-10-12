@@ -53,11 +53,12 @@ Read `TRUST.md` before any review task. It explains what a review record is and 
 | Path | What |
 |---|---|
 | `nodes/<id>/lesson.md`, `node.toml` | One lesson and its exercises |
+| `nodes/<id>/animation.toml` | An optional step-through animation, as data |
 | `nodes/<id>/reviews.toml` | Review records for each part, void when that part changes |
 | `conventions/` | Element data, constants and course units, shared by everything |
 | `validate.py` | The gate: structure, house rules, recomputed answers |
 | `tasks.py`, `tasks/backlog.toml` | The task queue |
 | `TRUST.md`, `ci/`, `conventions/reviewers.toml` | How reviews are recorded, checked and trusted |
 | `tasks/playbooks/` | How to do each kind of task |
-| `STYLE.md`, `INTERACTIVES.md`, `videos/README.md` | The guides for lessons, interactives and videos |
+| `STYLE.md`, `INTERACTIVES.md`, `ANIMATIONS.md` | The guides for lessons, interactives and animations |
 | `src/` | The Astro site |

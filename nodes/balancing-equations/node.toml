@@ -1,7 +1,6 @@
 title = "Balancing chemical equations"
 summary = "Choose coefficients so every element has the same number of atoms on both sides."
 unit = "reactions"
-video = true
 prerequisites = ["chemical-formulas", "conservation-of-mass"]
 
 [[exercise]]

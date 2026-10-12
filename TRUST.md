@@ -4,7 +4,7 @@ Almost everything here was written by AI. This page explains how a reader can te
 
 ## What the site shows
 
-Every lesson is split into **parts**: the lesson text, each exercise, each interactive and the video. Each part shows three things.
+Every lesson is split into **parts**: the lesson text, each exercise, each interactive and the animation. Each part shows three things.
 
 | Signal | Means | How far to trust it |
 |---|---|---|

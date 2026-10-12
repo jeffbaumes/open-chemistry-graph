@@ -19,6 +19,7 @@ import trust  # noqa: E402
 NODES = ROOT / "nodes"
 CONVENTIONS = ROOT / "conventions"
 INTERACTIVES = ROOT / "src" / "interactives" / "kinds"
+ANIMATIONS = ROOT / "src" / "animations" / "kinds"
 MIN_EXERCISES = 3
 DEFAULT_TOLERANCE = 0.005  # relative
 
@@ -218,6 +219,66 @@ LESSON_RULES = [
 ]
 
 
+MAX_CAPTION = 160
+
+
+def check_equation_animation(scene):
+    """An equation animation may only change coefficients, and must end balanced."""
+    species = scene["reactants"] + scene["products"]
+    atoms = [parse_formula(f) for f in species]
+    known = {el for a in atoms for el in a}
+    errors = []
+    for i, step in enumerate(scene["step"], 1):
+        coefficients = step.get("coefficients", [])
+        if len(coefficients) != len(species) or not all(isinstance(c, int) and 1 <= c <= 6 for c in coefficients):
+            errors.append(f"step {i}: needs one coefficient from 1 to 6 for each of {species}")
+            continue
+        if "focus" in step and step["focus"] not in known:
+            errors.append(f"step {i}: focus {step['focus']!r} is not an element in this equation")
+        for side, el in re.findall(r"\{(\w+)\.(\w+)\}", step.get("caption", "")):
+            if side not in ("left", "right") or el not in known:
+                errors.append(f"step {i}: caption uses {{{side}.{el}}}, which this equation cannot supply")
+    if errors:
+        return errors
+    last = scene["step"][-1]["coefficients"]
+    n = len(scene["reactants"])
+    totals = [{}, {}]
+    for j, (a, c) in enumerate(zip(atoms, last)):
+        for el, count in a.items():
+            totals[j >= n][el] = totals[j >= n].get(el, 0) + count * c
+    if totals[0] != totals[1]:
+        errors.append(f"the last step is not balanced: {totals[0]} vs {totals[1]}")
+    return errors
+
+
+ANIMATION_CHECKS = {"equation": check_equation_animation}
+
+
+def check_animation(path):
+    """An optional animation.toml: a kind, a title and captioned steps. See ANIMATIONS.md."""
+    file = path / "animation.toml"
+    if not file.exists():
+        return []
+    scene = tomllib.loads(file.read_text())
+    kind = scene.get("kind")
+    if not kind or not (ANIMATIONS / f"{kind}.js").exists():
+        return [f"animation: unknown kind {kind!r}; see ANIMATIONS.md"]
+    errors = [] if scene.get("title") else ["animation: missing title"]
+    steps = scene.get("step", [])
+    if len(steps) < 2:
+        errors.append("animation: needs at least 2 steps")
+    for i, step in enumerate(steps, 1):
+        caption = step.get("caption", "")
+        if not caption or len(caption) > MAX_CAPTION or "<" in caption:
+            errors.append(f"animation step {i}: needs a plain caption of at most {MAX_CAPTION} characters")
+    if not errors and kind in ANIMATION_CHECKS:
+        try:
+            errors += [f"animation: {e}" for e in ANIMATION_CHECKS[kind](scene)]
+        except (KeyError, ValueError, TypeError) as e:
+            errors.append(f"animation: {e!r}")
+    return errors
+
+
 def check_reviews(nid):
     """Review records must be well formed. Who may add them is the CI guard's job."""
     errors = []
@@ -252,10 +313,7 @@ def check_node(path):
     else:
         text = lesson.read_text()
         errors += [f"lesson.md: {message}" for message, broken in LESSON_RULES if broken(text)]
-    if node.get("video"):
-        for needed in (ROOT / "videos" / f"{path.name}.py", ROOT / "public" / "videos" / f"{path.name}.mp4"):
-            if not needed.exists():
-                errors.append(f"video = true but {needed.relative_to(ROOT)} is missing; see videos/README.md")
+    errors += check_animation(path)
     for i, interactive in enumerate(node.get("interactive", []), 1):
         kind = interactive.get("kind")
         if not kind or not (INTERACTIVES / f"{kind}.js").exists():

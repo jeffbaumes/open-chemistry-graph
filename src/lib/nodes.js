@@ -4,6 +4,7 @@ import queue from '../generated/tasks.json';
 
 const tomls = import.meta.glob('/nodes/*/node.toml', { query: '?raw', import: 'default', eager: true });
 const lessons = import.meta.glob('/nodes/*/lesson.md', { eager: true });
+const animations = import.meta.glob('/nodes/*/animation.toml', { query: '?raw', import: 'default', eager: true });
 
 const idOf = (path) => path.split('/').at(-2);
 
@@ -15,7 +16,6 @@ for (const [path, raw] of Object.entries(tomls)) {
     title: data.title,
     summary: data.summary,
     unit: data.unit,
-    video: data.video ?? false,
     prerequisites: data.prerequisites ?? [],
     interactives: data.interactive ?? [],
     exercises: data.exercise ?? [],
@@ -24,6 +24,11 @@ for (const [path, raw] of Object.entries(tomls)) {
 for (const [path, mod] of Object.entries(lessons)) {
   const node = byId.get(idOf(path));
   if (node) node.Content = mod.Content;
+}
+
+for (const [path, raw] of Object.entries(animations)) {
+  const node = byId.get(idOf(path));
+  if (node) node.animation = parse(raw);
 }
 
 // Depth in the prerequisite graph, so foundations list first.
@@ -46,7 +51,7 @@ export const nodes = [...byId.values()].sort(
 export const getNode = (id) => byId.get(id);
 export const wanted = [...new Set(nodes.flatMap((n) => n.prerequisites))].filter((p) => !byId.has(p)).sort();
 export const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-/** Review standing of each part of a node, keyed by part: lesson, exercise-1, interactive-1, video. */
+/** Review standing of each part of a node, keyed by part: lesson, exercise-1, interactive-1, animation. */
 export const trustOf = (id) => Object.fromEntries((queue.trust[id] ?? []).map((part) => [part.key, part]));
 export const titleOf = (id) => id.replaceAll('-', ' ');
 

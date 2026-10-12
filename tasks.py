@@ -39,7 +39,7 @@ KINDS = {
     "variety": ("ai", "Add a different type of exercise", "tasks/playbooks/automated.md#add-exercises"),
     "exercises": ("ai", "Add practice problems", "tasks/playbooks/automated.md#add-exercises"),
     "interactive": ("ai", "Add an interactive model", "INTERACTIVES.md"),
-    "video": ("ai", "Add a short video", "videos/README.md"),
+    "animation": ("ai", "Add a step-through animation", "ANIMATIONS.md"),
     # The rest come from tasks/backlog.toml, where each task sets its own mode.
     "lesson": ("ai", "Write a new lesson", "tasks/playbooks/automated.md#write-a-lesson"),
     "tooling": ("ai", "Improve the tools", "tasks/playbooks/automated.md#tooling"),
@@ -118,8 +118,8 @@ def build():
             tasks.append(task("interactive", nid, f"\"{node['title']}\" has no interactive. Add one only if changing a quantity teaches the idea."))
 
     for nid, node in nodes.items():
-        if not node.get("video"):
-            tasks.append(task("video", nid, f"\"{node['title']}\" has no video. Add one only if motion helps."))
+        if not (NODES / nid / "animation.toml").exists():
+            tasks.append(task("animation", nid, f"\"{node['title']}\" has no animation. Add one only if seeing the steps in motion helps."))
 
     for item in trust.load(ROOT / "tasks" / "backlog.toml")["task"]:
         tasks.append(task(item["kind"], item["id"], item["detail"], title=item["title"], mode=item["mode"], playbook=item.get("playbook")))

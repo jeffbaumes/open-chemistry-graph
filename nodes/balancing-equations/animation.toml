@@ -1,0 +1,31 @@
+kind = "equation"
+title = "Balancing by adding coefficients"
+reactants = ["H2", "O2"]
+products = ["H2O"]
+
+[[step]]
+coefficients = [1, 1, 1]
+caption = "Count the atoms of each element on both sides."
+
+[[step]]
+coefficients = [1, 1, 1]
+focus = "O"
+caption = "Oxygen does not match: {left.O} on the left, {right.O} on the right."
+
+[[step]]
+coefficients = [1, 1, 1]
+caption = "Never change a subscript. Add a coefficient instead."
+
+[[step]]
+coefficients = [1, 1, 2]
+focus = "O"
+caption = "Two water molecules. Oxygen now matches: {left.O} and {right.O}."
+
+[[step]]
+coefficients = [1, 1, 2]
+focus = "H"
+caption = "But hydrogen does not: {left.H} on the left, {right.H} on the right."
+
+[[step]]
+coefficients = [2, 1, 2]
+caption = "Two hydrogen molecules. Balanced: {left.H} hydrogen atoms and {left.O} oxygen atoms on each side."

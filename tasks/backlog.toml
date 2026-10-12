@@ -81,8 +81,8 @@ detail = "Numeric exercises accept anything within 1%. Add an optional sig_figs 
 kind = "tooling"
 id = "more-molecule-drawings"
 mode = "ai"
-title = "Add molecule layouts for videos"
-detail = "videos/lib.py can draw only seven molecules. Add layouts for NaCl, HCl, CO, C2H6 and others as videos need them."
+title = "Add molecule drawings"
+detail = "conventions/molecules.toml has layouts for ten molecules; others are drawn as a plain row of atoms. Add layouts for C2H6, C3H8, H2O2, SO2 and others as animations need them."
 
 [[task]]
 kind = "tooling"
@@ -90,6 +90,21 @@ id = "student-progress"
 mode = "ai"
 title = "Remember which exercises a student has answered"
 detail = "Keep per-exercise results in the browser's local storage and show progress on the contents page. No accounts."
+
+[[task]]
+kind = "tooling"
+id = "animation-kinds"
+mode = "ai"
+title = "Add animation kinds"
+detail = "Only the equation kind exists. Good next ones: particles (states of matter, gas laws), a number line (pH, half-life) and a step-by-step calculation."
+playbook = "ANIMATIONS.md"
+
+[[task]]
+kind = "tooling"
+id = "animation-export"
+mode = "ai"
+title = "Export an animation to a video file"
+detail = "For sharing outside the site. Drive the player in a headless browser and record it, so the checked-in scene stays the only source."
 
 # --- Needs a classroom -------------------------------------------------------
 

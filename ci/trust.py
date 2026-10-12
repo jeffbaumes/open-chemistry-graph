@@ -53,9 +53,11 @@ def parts(root, nid):
         source = root / "src" / "interactives" / "kinds" / f"{block.get('kind')}.js"
         code = source.read_bytes() if source.exists() else b""
         out.append({"key": f"interactive-{i}", "label": f"Interactive: {block.get('title', '')}", "fingerprint": _fingerprint(_canonical(block), code)})
-    if node.get("video"):
-        files = [root / "videos" / f"{nid}.py", root / "public" / "videos" / f"{nid}.mp4"]
-        out.append({"key": "video", "label": "Video", "fingerprint": _fingerprint(*[f.read_bytes() for f in files if f.exists()])})
+    animation = node_dir / "animation.toml"
+    if animation.exists():
+        kind = load(animation).get("kind")
+        code = [root / "src" / "animations" / "kinds" / f"{kind}.js", root / "src" / "animations" / "player.js"]
+        out.append({"key": "animation", "label": "Animation", "fingerprint": _fingerprint(animation.read_bytes(), *[f.read_bytes() for f in code if f.exists()])})
     return out
 
 

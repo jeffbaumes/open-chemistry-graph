@@ -26,7 +26,7 @@ Go in this order. **Show one piece, ask, and wait for the answer before moving o
    - Ask whether the wording could be read another way.
    - For multiple choice, ask whether each wrong option is a mistake a student would actually make.
    - Exercises marked `recall = true` have no computed check at all. Take extra care with them.
-5. **The interactive and video**, if the lesson has them. Ask whether they show the idea correctly and whether anything is misleading.
+5. **The interactive and animation**, if the lesson has them. Ask whether they show the idea correctly and whether anything is misleading.
 6. **What is missing.** Ask what they would add if this were their own handout.
 
 ## How to ask
@@ -45,7 +45,7 @@ Go in this order. **Show one piece, ask, and wait for the answer before moving o
 
 ## Signing off
 
-A lesson has parts: the lesson text, each exercise, each interactive and the video. The person signs off on the parts they are satisfied with. It does not have to be all of them.
+A lesson has parts: the lesson text, each exercise, each interactive and the animation. The person signs off on the parts they are satisfied with. It does not have to be all of them.
 
 Ask plainly, part by part or for the whole lesson: **"Are you satisfied that this is correct and suitable for students?"**
 

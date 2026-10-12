@@ -5,7 +5,7 @@
 import { createChem } from '../lib/chem-core.js';
 import { masses, colors } from './data.js';
 
-const chem = createChem(masses);
+export const chem = createChem(masses);
 const SVG = 'http://www.w3.org/2000/svg';
 
 function make(ns, tag, attrs, children) {

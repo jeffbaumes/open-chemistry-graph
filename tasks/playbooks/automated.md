@@ -56,9 +56,9 @@ Task ids start with `wanted:` or `lesson:`.
 
 A new lesson starts unreviewed, which adds a `review:` task for it. That is expected.
 
-## Add an interactive or a video
+## Add an interactive or an animation
 
-Task ids start with `interactive:` or `video:`. These are optional: skip the task if the idea does not involve a quantity changing or something moving. Follow `INTERACTIVES.md` or `videos/README.md`.
+Task ids start with `interactive:` or `animation:`. These are optional: skip the task if the idea does not involve a quantity changing or steps worth seeing in motion. Follow `INTERACTIVES.md` or `ANIMATIONS.md`.
 
 ## Tooling
 

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Exercise from '../components/Exercise.astro';
+import Animation from '../components/Animation.astro';
 import Interactive from '../components/Interactive.astro';
 import Trust from '../components/Trust.astro';
 import { nodes, getNode, neighbors, trustOf, base, titleOf } from '../lib/nodes.js';
@@ -30,13 +31,7 @@ const trust = trustOf(node.id);
 
   <Trust part={trust.lesson} invite />
 
-  {node.video && (
-    <figure class="video">
-      <figcaption><span class="i-tag">Watch</span> {node.title}</figcaption>
-      <video controls playsinline preload="metadata" src={`${base}/videos/${node.id}.mp4`}></video>
-      <Trust part={trust.video} />
-    </figure>
-  )}
+  {node.animation && <Animation scene={node.animation} trust={trust.animation} />}
 
   {node.interactives.map((interactive, i) => <Interactive {...interactive} trust={trust[`interactive-${i + 1}`]} />)}
 
